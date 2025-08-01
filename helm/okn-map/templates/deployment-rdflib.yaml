@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "okn-map.fullname" . }}-rdflib
+  labels:
+    {{- include "okn-map.labels" . | nindent 4 }}
+    app: backend
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "okn-map.selectorLabels" . | nindent 6 }}
+      app: backend
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "okn-map.selectorLabels" . | nindent 8 }}
+        app: backend
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "okn-map.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.rdflib.image.repository }}:{{ .Values.rdflib.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.rdflib.image.pullPolicy }}
+          env:
+            - name: PUBLIC_URL
+              value: "/okn-map"
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.rdflib.resources | nindent 12 }}
+

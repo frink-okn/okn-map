@@ -11,8 +11,18 @@ import cytoscapeUndoRedo from 'https://cdn.jsdelivr.net/npm/cytoscape-undo-redo@
 
 cytoscapeUndoRedo(cytoscape)
 cytoscapeExpandCollapse(cytoscape)
+// Making the endpoint configurable by resolving it dynamically.
+const oknSparqlEndpoint = ref("http://localhost:8000")
+onMounted(
+    async ()=>{
+      try {
+        let response = await fetch("/okn-map/config.json");
+        const config = await response.json();
+        oknSparqlEndpoint.value = config.sparqlEndpoint;
+    } catch (e){
+    }
+})
 
-const oknSparqlEndpoint = 'http://localhost:8000'
 
 const myFetcher = new SparqlEndpointFetcher({
   defaultHeaders: new Headers({"User-Agent": "OKN Map <mmorshed@scripps.edu>"})
@@ -98,7 +108,7 @@ SELECT distinct ?class WHERE {
 } limit 10
 `
     console.log(definedClassesQuery)
-    const definedClassesBindings = await myFetcher.fetchBindings(oknSparqlEndpoint, definedClassesQuery)
+    const definedClassesBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, definedClassesQuery)
     definedClassesBindings.on('data', bindings => {
       console.log(bindings);
       let shrunkClass = prefixes.shrink(rdf.namedNode(bindings['class']['value']))
@@ -129,7 +139,7 @@ SELECT ?class ?graph WHERE {
 } limit 10
   `
   console.log(usedClassesQuery)
-    const definedClassesBindings = await myFetcher.fetchBindings(oknSparqlEndpoint, usedClassesQuery)
+    const definedClassesBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, usedClassesQuery)
     definedClassesBindings.on('data', bindings => {
       let shrunkGraph = prefixes.shrink(rdf.namedNode(bindings['graph']['value']))
       let shrunkClass = prefixes.shrink(rdf.namedNode(bindings['class']['value']))
@@ -160,7 +170,7 @@ SELECT ?graph ?class ?source WHERE {
   ?class a linkml:ClassDefinition ; linkml:class_uri ?class_ ; skos:inScheme ?source .
 } limit 10
   `
-    const definedClassesBindings = await myFetcher.fetchBindings(oknSparqlEndpoint, usedClassesQuery)
+    const definedClassesBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, usedClassesQuery)
     definedClassesBindings.on('data', bindings => {
       let shrunkClass = prefixes.shrink(rdf.namedNode(bindings['class']['value']))
       let nodeClass = node.id().replace(':','_')
@@ -191,7 +201,7 @@ SELECT ?s ?o WHERE {
 } limit 100
 `
 
-  const importsBindings = await myFetcher.fetchBindings(oknSparqlEndpoint, importsQuery)
+  const importsBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, importsQuery)
   importsBindings.on('data', bindings => {
     console.log(bindings)
     let shrunkS = prefixes.shrink(rdf.namedNode(bindings['s']['value']))
