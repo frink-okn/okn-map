@@ -63,6 +63,7 @@ export const prefixes = new PrefixMap([
  ['cidoc-crm', rdf.namedNode('http://www.cidoc-crm.org/cidoc-crm/')],
  ['vcard', rdf.namedNode('http://www.w3.org/2006/vcard/ns#')],
  ['mo', rdf.namedNode('http://purl.org/ontology/mo/')],
+ ['pav', rdf.namedNode('http://purl.org/pav/')],
  ['ao', rdf.namedNode('http://purl.org/ontology/ao/core#')],
  ['sim', rdf.namedNode('http://purl.org/ontology/similarity/')],
  ['rev', rdf.namedNode('http://purl.org/stuff/rev#')],

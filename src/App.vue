@@ -24,6 +24,8 @@ onMounted(
 })
 
 
+const currentEntityDetails = ref({})
+
 const myFetcher = new SparqlEndpointFetcher({
   defaultHeaders: new Headers({"User-Agent": "OKN Map <mmorshed@scripps.edu>"})
 });
@@ -35,15 +37,15 @@ const graphStyle = ref([ // the stylesheet for the graph
   {
     selector: 'node',
     style: {
-      'label': 'data(id)'
+      'label': 'data(label)'
     }
   },
   {
     selector: 'edge',
     style: {
       'width': 3,
-      'line-color': '#ccc',
-      'target-arrow-color': '#ccc',
+      'line-color': '#888',
+      'target-arrow-color': '#888',
       'target-arrow-shape': 'triangle',
       'curve-style': 'bezier'
     }
@@ -77,7 +79,8 @@ let klay_layout = {
   klay: {
     spacing: 40,
     direction: 'DOWN',
-    edgeRouting: 'POLYLINE'
+    edgeRouting: 'POLYLINE',
+    fixedAlignment: 'BALANCED'
   }
 }
 
@@ -90,6 +93,29 @@ let fcose_layout = {
   fit: true
 }
 
+function shrinkEntity(entity){
+  let currentShrunk = prefixes.shrink(rdf.namedNode(entity));
+  if(currentShrunk){
+    return currentShrunk.value;
+  }
+  return entity;
+}
+
+let singlefieldmappings = {
+  'dct:contributor': 'contributor',
+  'dct:title': 'title',
+  'dct:license': 'license',
+  'dct:source': 'source',
+  'rdf:type': 'type',
+  'pav:createdOn': 'created',
+  'pav:lastUpdatedOn': 'last_updated',
+}
+let multiplefieldmappings = {
+  'rdfs:seeAlso': 'external_links',
+  'skos:definition': 'comments',
+  'skos:note': 'notes',
+}
+
 async function getDefinedClasses(evt){
   let node = evt.target;
   console.log(node);
@@ -98,13 +124,15 @@ async function getDefinedClasses(evt){
   }
   else{
     let definedClassesQuery = `
+PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX linkml: <https://w3id.org/linkml/>
 PREFIX okn: <https://purl.org/okn/>
 PREFIX okns: <https://purl.org/okn/schema/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
-SELECT distinct ?class WHERE {
+SELECT distinct ?class ?classLabel WHERE {
   ?class a linkml:ClassDefinition ; skos:inScheme ${node.id().replace('_',':',1)} ; skos:exactMatch|skos:closeMatch|skos:broadMatch [].
+  optional { ?class dct:title ?classLabel }
 } limit 10
 `
     console.log(definedClassesQuery)
@@ -112,11 +140,13 @@ SELECT distinct ?class WHERE {
     definedClassesBindings.on('data', bindings => {
       console.log(bindings);
       let shrunkClass = prefixes.shrink(rdf.namedNode(bindings['class']['value']))
+      let shrunkClassId = shrunkClass.value.replace(':','_')
+      let classLabel = (bindings['classLabel'] ?? {'value': shrunkClass})['value']
       let nodeClass = node.id().replace(':','_')
-      if(cyc.value.getElementById(shrunkClass.value.replace(':','_')).length == 0){
+      if(cyc.value.getElementById(shrunkClassId).length == 0){
         node.removeClass('collapsed')
         node.addClass('expanded')
-        cyc.value.add({data: {id: shrunkClass.value.replace(':','_'), parent: node.id()}, classes: ['classDef', nodeClass]});
+        cyc.value.add({data: {id: shrunkClassId, label: classLabel, parent: node.id()}, classes: ['classDef', nodeClass]});
       }
     })
     definedClassesBindings.on('end', () => {
@@ -126,30 +156,38 @@ SELECT distinct ?class WHERE {
   }
 }
 
-async function getEquivalentClasses(evt){ // TODO FINISH
+async function getEquivalentClasses(evt){
   let node = evt.target;
   const usedClassesQuery = `
+PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX linkml: <https://w3id.org/linkml/>
 PREFIX okns: <https://purl.org/okn/schema/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
-SELECT ?class ?graph WHERE {
+SELECT ?class ?classLabel ?graph ?graphLabel WHERE {
   ${node.id().replace('_',':',1)} skos:exactMatch|skos:closeMatch|skos:broadMatch ?class .
   ?class_ linkml:class_uri ?class ; skos:inScheme ?graph .
+  optional { ?class dct:title ?classLabel }
+  optional { ?graph dct:title ?graphLabel }
 } limit 10
   `
   console.log(usedClassesQuery)
     const definedClassesBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, usedClassesQuery)
     definedClassesBindings.on('data', bindings => {
-      let shrunkGraph = prefixes.shrink(rdf.namedNode(bindings['graph']['value']))
-      let shrunkClass = prefixes.shrink(rdf.namedNode(bindings['class']['value']))
-      if(cyc.value.getElementById(shrunkGraph.value).length == 0){
-        cyc.value.add({data: {id: shrunkGraph.value.replace(':','_'), rank: -1}, classes: ['graph','collapsed']});
+      console.log(bindings);
+      let shrunkGraph = shrinkEntity(bindings['graph']['value'])
+      let shrunkClass = shrinkEntity(bindings['class']['value'])
+      let classLabel = (bindings['classLabel'] ?? {'value': shrunkClass})['value']
+      let graphLabel = (bindings['graphLabel'] ?? {'value': shrunkGraph})['value']
+      let shrunkGraphId = shrunkGraph.replace(':','_')
+      let shrunkClassId = shrunkClass.replace(':','_')
+      if(cyc.value.getElementById(shrunkGraphId).length == 0){
+        cyc.value.add({data: {id: shrunkGraphId, label: graphLabel, rank: -1}, classes: ['graph','collapsed']});
       }
-      if(cyc.value.getElementById(shrunkClass.value).length == 0){
-        cyc.value.add({data: {id: shrunkClass.value.replace(':','_'), parent: shrunkGraph.value.replace(':','_')}, classes: ['classDef']});
+      if(cyc.value.getElementById(shrunkClassId).length == 0){
+        cyc.value.add({data: {id: shrunkClassId, label: classLabel, parent: shrunkGraphId}, classes: ['classDef']});
       }
-      cyc.value.add({group: 'edges', data: {id: node.id() + '_' + shrunkClass.value.replace(':','_'), source: node.id(), target: shrunkClass.value.replace(':','_') }});
+      cyc.value.add({group: 'edges', data: {id: node.id() + '_' + shrunkClassId, source: node.id(), target: shrunkClassId }});
     })
     definedClassesBindings.on('end', () => {
       let currentLayout = cyc.value.$('.classDef.' + node.id().replace(':','_')).layout( {'name': 'circle'} );
@@ -160,24 +198,27 @@ SELECT ?class ?graph WHERE {
 async function addUsedClasses(evt){
   let node = evt.target;
   const usedClassesQuery = `
+PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX linkml: <https://w3id.org/linkml/>
 PREFIX okn: <https://purl.org/okn/>
 PREFIX okns: <https://purl.org/okn/schema/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
-SELECT ?graph ?class ?source WHERE {
+SELECT ?graph ?class ?classLabel ?source WHERE {
   ?graph linkml:annotations/skos:example/linkml:classes/skos:example [ ?class_ [] ] .
   ?class a linkml:ClassDefinition ; linkml:class_uri ?class_ ; skos:inScheme ?source .
+  optional { ?class dct:title ?classLabel }
 } limit 10
   `
     const definedClassesBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, usedClassesQuery)
     definedClassesBindings.on('data', bindings => {
-      let shrunkClass = prefixes.shrink(rdf.namedNode(bindings['class']['value']))
+      let shrunkClass = shrinkEntity(bindings['class']['value'])
+      let classLabel = (bindings['classLabel'] ?? {'value': shrunkClass})['value']
       let nodeClass = node.id().replace(':','_')
       if(cyc.value.getElementById(shrunkClass.value).length == 0){
         node.removeClass('collapsed')
         node.addClass('expanded')
-        cyc.value.add({data: {id: shrunkClass.value, parent: node.id()}, classes: ['classDef', nodeClass]});
+        cyc.value.add({data: {id: shrunkClass.value, label: classLabel, parent: node.id()}, classes: ['classDef', nodeClass]});
       }
     })
     definedClassesBindings.on('end', () => {
@@ -187,41 +228,77 @@ SELECT ?graph ?class ?source WHERE {
 
 }
 
+async function getEntityData(evt){
+  let node = evt.target;
+  console.log(node);
+  const entityDataQuery = `
+SELECT ?p ?o WHERE {
+  ${node.id().replace('_',':',1)} ?p ?o
+}
+  `
+  console.log(entityDataQuery);
+
+  currentEntityDetails.value = {};
+
+  const entityDataBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, entityDataQuery);
+  entityDataBindings.on('data', bindings => {
+    let shrunkP = shrinkEntity(bindings['p']['value'])
+    let shrunkO = shrinkEntity(bindings['o']['value'])
+    // console.log(shrunkP, shrunkO);
+    if(shrunkP in singlefieldmappings){
+      currentEntityDetails.value[singlefieldmappings[shrunkP]] = shrunkO;
+    }
+    else if(shrunkP in multiplefieldmappings){
+      if(multiplefieldmappings[shrunkP] in currentEntityDetails.value)
+        currentEntityDetails.value[multiplefieldmappings[shrunkP]].push(shrunkO);
+      else
+        currentEntityDetails.value[multiplefieldmappings[shrunkP]] = [shrunkO];
+    }
+  });
+  entityDataBindings.on('end', () => {
+    currentEntityDetails.value = currentEntityDetails.value;
+  })
+}
+
 async function getGraphImports(evt){
   let node = evt.target;
   console.log(node);
 const importsQuery = `
+PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX linkml: <https://w3id.org/linkml/>
 PREFIX okn: <https://purl.org/okn/>
 PREFIX okns: <https://purl.org/okn/schema/>
 
-SELECT ?s ?o WHERE {
+SELECT ?s ?sLabel ?o ?oLabel WHERE {
   VALUES ?s { ${node.id().replace('_',':',1)} }
   ?s linkml:imports ?o .
+  optional { ?s dct:title ?sLabel }
+  optional { ?o dct:title ?oLabel }
 } limit 100
 `
 
   const importsBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, importsQuery)
   importsBindings.on('data', bindings => {
     console.log(bindings)
-    let shrunkS = prefixes.shrink(rdf.namedNode(bindings['s']['value']))
-    let shrunkO = prefixes.shrink(rdf.namedNode(bindings['o']['value']))
-    if(! shrunkO){
-      shrunkO = rdf.namedNode(bindings['o']['value'])
+    let shrunkS = shrinkEntity(bindings['s']['value'])
+    let shrunkO = shrinkEntity(bindings['o']['value'])
+    let sLabel = (bindings['sLabel'] ?? {'value': shrunkS})['value']
+    let oLabel = (bindings['oLabel'] ?? {'value': shrunkO})['value']
+    let shrunkSId = shrunkS.replace(':','_')
+    let shrunkOId = shrunkO.replace(':','_')
+    if(cyc.value.getElementById(shrunkSId).length == 0){
+      cyc.value.add({group: 'nodes', data: {id: shrunkSId, label: sLabel, rank: -1}, classes: ['graph','collapsed']});
     }
-    if(cyc.value.getElementById(shrunkS.value.replace(':','_')).length == 0){
-      cyc.value.add({group: 'nodes', data: {id: shrunkS.value.replace(':','_'), rank: -1}, classes: ['graph','collapsed']});
-    }
-    cyc.value.$("#" + shrunkS.value.replace(':','_')).removeClass('importsMissing')
-    cyc.value.$("#" + shrunkS.value.replace(':','_')).addClass('importsAdded')
-    let previousRank = cyc.value.$("#" + shrunkS.value.replace(':','_')).data('rank');
-    if(cyc.value.getElementById(shrunkO.value.replace(':','_')).length == 0){
-      cyc.value.add({group: 'nodes', data: {id: shrunkO.value.replace(':','_'), rank: previousRank - 1}, classes: ['graph','collapsed','importsMissing']});
+    cyc.value.$("#" + shrunkSId).removeClass('importsMissing')
+    cyc.value.$("#" + shrunkSId).addClass('importsAdded')
+    let previousRank = cyc.value.$("#" + shrunkSId).data('rank');
+    if(cyc.value.getElementById(shrunkOId).length == 0){
+      cyc.value.add({group: 'nodes', data: {id: shrunkOId, label: oLabel, rank: previousRank - 1}, classes: ['graph','collapsed','importsMissing']});
     }
     else{
-      cyc.value.$("#" + shrunkO.value.replace(':','_')).removeClass('importsMissing')
+      cyc.value.$("#" + shrunkOId).removeClass('importsMissing')
     }
-    cyc.value.add({group: 'edges', data: {id: shrunkS.value.replace(':','_') + '_' + shrunkO.value.replace(':','_'), source: shrunkS.value.replace(':','_'), target: shrunkO.value.replace(':','_') }});
+    cyc.value.add({group: 'edges', data: {id: shrunkSId + '_' + shrunkOId, source: shrunkSId, target: shrunkOId }});
   });
   importsBindings.on('end', () => {
     cyc.value.$('.graph').layout(
@@ -234,13 +311,13 @@ onMounted(async () => {
   cyc.value = cytoscape({
     container: document.getElementById('cy-wrapper'),
     elements: [ // TODO: currently hardcoding T1s
-      {group: 'nodes', data: {id: 'okns_biobricks-ice', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_biobricks-ice']},
-      {group: 'nodes', data: {id: 'okns_climatemodelskg', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_climatemodelskg']},
-      {group: 'nodes', data: {id: 'okns_dreamkg', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_dreamkg']},
-      {group: 'nodes', data: {id: 'okns_ruralkg', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_ruralkg']},
-      {group: 'nodes', data: {id: 'okns_sockg', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_sockg']},
-      {group: 'nodes', data: {id: 'okns_sudokn', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_sudokn']},
-      {group: 'nodes', data: {id: 'okns_wildlifekn', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_wildlifekn']},
+      {group: 'nodes', data: {id: 'okns_biobricks-ice', label: 'BioBricks-ICE', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_biobricks-ice']},
+      {group: 'nodes', data: {id: 'okns_climatemodelskg', label: 'ClimateModels-KG', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_climatemodelskg']},
+      {group: 'nodes', data: {id: 'okns_dreamkg', label: 'DREAM-KG', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_dreamkg']},
+      {group: 'nodes', data: {id: 'okns_ruralkg', label: 'Rural-KG', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_ruralkg']},
+      {group: 'nodes', data: {id: 'okns_sockg', label: 'SOC-KG', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_sockg']},
+      {group: 'nodes', data: {id: 'okns_sudokn', label: 'SUD-OKN', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_sudokn']},
+      {group: 'nodes', data: {id: 'okns_wildlifekn', label: 'KN-Wildlife', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_wildlifekn']},
     ],
     style: graphStyle.value
   });
@@ -254,6 +331,7 @@ onMounted(async () => {
     // collapseCueImage: "icon-minus.png"
   })
 
+  cyc.value.on('click', 'node', getEntityData);
   cyc.value.on('click', '.graph.importsMissing', getGraphImports)
   cyc.value.on('click', '.graph.importsAdded', getDefinedClasses)
   cyc.value.on('click', '.classDef', getEquivalentClasses)
@@ -268,20 +346,34 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div id="cy-wrapper" style="height:75vh;width:80vw;border:1px solid white;"></div>
+  <div class="app-wrapper" style="display: grid; grid-template-columns: 8fr 2fr; align-items: center">
+    <div id="cy-wrapper" style="height:75vh;width:70vw;border:1px solid white;"></div>
+    <div id="entity-details" style="height:75vh;width:20vw;border:1px solid black;overflow:scroll">
+      <h5 style="text-align:center">Entity details</h5>
+      <table class="entity-details-table">
+        <tr v-for="(value, key) in currentEntityDetails">
+          <td style="border-right: 1px solid pink;">{{ key }}</td>
+          <td style="border-bottom: 1px solid pink;">
+            <template v-if="Array.isArray(value)">
+              <template v-for="element in value">
+                {{element}} <br/>
+              </template>
+            </template>
+            <template v-else>
+              {{ value }}
+            </template>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.entity-details-table td:nth-child(1){
+  text-align: right;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.entity-details-table td:nth-child(2){
+  text-align: left;
 }
 </style>
