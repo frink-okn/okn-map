@@ -37,15 +37,28 @@ const graphStyle = ref([ // the stylesheet for the graph
   {
     selector: 'node',
     style: {
-      'label': 'data(label)'
+      'label': 'data(label)',
+      'text-margin-y': '-5px'
     }
   },
   {
-    selector: 'edge',
+    selector: 'edge.import',
     style: {
       'width': 3,
-      'line-color': '#888',
-      'target-arrow-color': '#888',
+      'line-color': '#00ff00',
+      'target-arrow-color': '#00ff00',
+      'target-arrow-shape': 'triangle',
+      'curve-style': 'bezier'
+    }
+  },
+  {
+    selector: 'edge.equivalent',
+    style: {
+      'width': 3,
+      'line-color': '#87ceeb',
+      'source-arrow-color': '#87ceeb',
+      'source-arrow-shape': 'triangle',
+      'target-arrow-color': '#87ceeb',
       'target-arrow-shape': 'triangle',
       'curve-style': 'bezier'
     }
@@ -114,6 +127,18 @@ let multiplefieldmappings = {
   'rdfs:seeAlso': 'external_links',
   'skos:definition': 'comments',
   'skos:note': 'notes',
+}
+let mappinglabels = {
+  'title': 'Title',
+  'contributor': 'Contributors',
+  'license': 'License',
+  'source': 'Source',
+  'type': 'Entity type',
+  'created': 'Creation date',
+  'last_updated': 'Last updated date',
+  'external_links': 'See also',
+  'comments': 'External comments',
+  'notes': 'Internal comments'
 }
 
 async function getDefinedClasses(evt){
@@ -187,7 +212,7 @@ SELECT ?class ?classLabel ?graph ?graphLabel WHERE {
       if(cyc.value.getElementById(shrunkClassId).length == 0){
         cyc.value.add({data: {id: shrunkClassId, label: classLabel, parent: shrunkGraphId}, classes: ['classDef']});
       }
-      cyc.value.add({group: 'edges', data: {id: node.id() + '_' + shrunkClassId, source: node.id(), target: shrunkClassId }});
+      cyc.value.add({group: 'edges', classes: ['equivalent'], data: {id: node.id() + '_' + shrunkClassId, source: node.id(), target: shrunkClassId }});
     })
     definedClassesBindings.on('end', () => {
       let currentLayout = cyc.value.$('.classDef.' + node.id().replace(':','_')).layout( {'name': 'circle'} );
@@ -298,7 +323,7 @@ SELECT ?s ?sLabel ?o ?oLabel WHERE {
     else{
       cyc.value.$("#" + shrunkOId).removeClass('importsMissing')
     }
-    cyc.value.add({group: 'edges', data: {id: shrunkSId + '_' + shrunkOId, source: shrunkSId, target: shrunkOId }});
+    cyc.value.add({group: 'edges', classes: ['import'], data: {id: shrunkSId + '_' + shrunkOId, source: shrunkSId, target: shrunkOId }});
   });
   importsBindings.on('end', () => {
     cyc.value.$('.graph').layout(
@@ -309,7 +334,7 @@ SELECT ?s ?sLabel ?o ?oLabel WHERE {
 
 onMounted(async () => {
   cyc.value = cytoscape({
-    container: document.getElementById('cy-wrapper'),
+    container: document.getElementsByClassName('cy-wrapper')[0],
     elements: [ // TODO: currently hardcoding T1s
       {group: 'nodes', data: {id: 'okns_biobricks-ice', label: 'BioBricks-ICE', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_biobricks-ice']},
       {group: 'nodes', data: {id: 'okns_climatemodelskg', label: 'ClimateModels-KG', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_climatemodelskg']},
@@ -342,29 +367,83 @@ onMounted(async () => {
     cyc.value.center()
     console.log(cyc.value.elements().boundingBox())
   })
+
+  cyc.value.on('tap', function(event){
+    // target holds a reference to the originator
+    // of the event (core or element)
+    var evtTarget = event.target;
+    cyc.value.fit()
+    if( evtTarget === cyc.value ){
+      console.log('tap on background');
+    }
+    else{
+      cyc.value.$("*").not(event.target).style('opacity', '0.5')
+    }
+  });
+  cyc.value.on('mouseover', function(){})
+  cyc.value.on('mouseout', function(){})
 });
+
+const visibleTab = ref('help')
 </script>
 
 <template>
-  <div class="app-wrapper" style="display: grid; grid-template-columns: 8fr 2fr; align-items: center">
-    <div id="cy-wrapper" style="height:75vh;width:70vw;border:1px solid white;"></div>
-    <div id="entity-details" style="height:75vh;width:20vw;border:1px solid black;overflow:scroll">
-      <h5 style="text-align:center">Entity details</h5>
-      <table class="entity-details-table">
-        <tr v-for="(value, key) in currentEntityDetails">
-          <td style="border-right: 1px solid pink;">{{ key }}</td>
-          <td style="border-bottom: 1px solid pink;">
-            <template v-if="Array.isArray(value)">
-              <template v-for="element in value">
-                {{element}} <br/>
-              </template>
-            </template>
-            <template v-else>
-              {{ value }}
-            </template>
-          </td>
-        </tr>
-      </table>
+  <div class="app-wrapper">
+    <div class="main-content">
+      <div class="cy-wrapper"></div>
+    </div>
+    <div class="sidebar">
+      <div class="tab-controls">
+        <span class="control-icon" @click="visibleTab='key'" title="Key to symbols">𓃑</span>
+        <span class="control-icon" @click="visibleTab='details'" title="Entity details">📖</span>
+        <span class="control-icon" @click="visibleTab='help'" title="About the map">ℹ️</span>
+      </div>
+      <div class="tab-content">
+        <template v-if="visibleTab == 'key'">
+          <h5>Key to symbols</h5>
+          <ul>
+            <li>Green dot: Theme 1 graphs</li>
+            <li>Gray dot: External ontologies (referred to by Theme 1 graphs)</li>
+            <li>Gray square: External ontology with classes defined in it</li>
+            <li>Red dot: Class (entity type)</li>
+          </ul>
+        </template>
+        <template v-else-if="visibleTab == 'details'">
+          <h5>Entity details</h5>
+          <table class="entity-details-table">
+            <tr v-for="(value, key) in currentEntityDetails">
+              <td style="border-right: 1px solid pink;">{{ mappinglabels[key] }}</td>
+              <td style="border-bottom: 1px solid pink;">
+                <template v-if="Array.isArray(value)">
+                  <template v-for="element in value">
+                    <template v-if="['external_links'].includes(key)"><a :href='element'>{{ element }}</a></template>
+                    <template v-else>{{element}}</template>
+                    <br/>
+                  </template>
+                </template>
+                <template v-else-if="['license','contributor'].includes(key)">
+                  <a :href='value'>{{ value }}</a>
+                </template>
+                <template v-else>
+                  {{ value }}
+                </template>
+              </td>
+            </tr>
+          </table>
+        </template>
+        <template v-else>
+          <h5>About the OKN Map</h5>
+          <section>
+            <p>This is a prototype of the Proto-OKN Map.</p>
+            <p>It is generated through the following series of steps:</p>
+            <ul>
+              <li>RDF data is processed into a LinkML schema using <a href="https://github.com/frink-okn/schema-gen" target="_blank">a set of scripts</a>.</li>
+              <li>This schema is then itself turned into RDF using <a href="https://linkml.io/linkml/generators/rdf.html" target="_blank">the LinkML runtime's RDF generator</a>.</li>
+              <li>The RDF representation of that schema is then directly queried with SPARQL using this interface.</li>
+            </ul>
+          </section>
+        </template>
+      </div>
     </div>
   </div>
 </template>
