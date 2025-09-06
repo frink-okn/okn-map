@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, toRaw } from 'vue';
 import rdf from '@rdfjs/data-model'
 import cytoscape from 'cytoscape';
 import fcose from 'cytoscape-fcose';
 import klay from 'cytoscape-klay'
 import { SparqlEndpointFetcher } from 'fetch-sparql-endpoint';
 import { prefixes } from './prefixes.js'
-import cytoscapeExpandCollapse from 'https://cdn.jsdelivr.net/npm/cytoscape-expand-collapse@4.1.1/+esm'
 import cytoscapeUndoRedo from 'https://cdn.jsdelivr.net/npm/cytoscape-undo-redo@1.3.3/+esm'
+import contextMenus from 'cytoscape-context-menus';
 
 cytoscapeUndoRedo(cytoscape)
-cytoscapeExpandCollapse(cytoscape)
+cytoscape.use(contextMenus)
 // Making the endpoint configurable by resolving it dynamically.
 const oknSparqlEndpoint = ref("http://localhost:8000")
 onMounted(
@@ -30,8 +30,50 @@ const myFetcher = new SparqlEndpointFetcher({
   defaultHeaders: new Headers({"User-Agent": "OKN Map <mmorshed@scripps.edu>"})
 });
 const cyc = ref()
-const ecApi = ref()
-const graphLayout = ref()
+
+let usecases = [
+  // TODO: set positions relative to size of initial viewport?
+  {group: 'nodes', data: {id: 'usecase_bio', label: 'Biology and Health'}, classes: ['usecase','usecase_bio'], position: {x: -100, y: 0}, locked: true},
+  {group: 'nodes', data: {id: 'usecase_env', label: 'Environment'}, classes: ['usecase','usecase_env'], position: {x: 550, y: 0}, locked: true},
+  // {group: 'nodes', data: {id: 'usecase_help', label: 'Help!'}, classes: ['usecase','usecase_help'], position: {x: 225, y: 125}, locked: true},
+  {group: 'nodes', data: {id: 'usecase_jus', label: 'Justice'}, classes: ['usecase','usecase_jus'], position: {x: -100, y: 250}, locked: true},
+  {group: 'nodes', data: {id: 'usecase_tam', label: 'Technology and Manufacturing'}, classes: ['usecase','usecase_tam'], position: {x: 550, y: 250}, locked: true},
+]
+
+let t1graphs = {
+    // TODO: currently hardcoding T1s; move to configuration file?
+  // TODO: set positions relative to use case location
+  'usecase_bio': [
+    {group: 'nodes', data: {id: 'okns_biobricks-ice', label: 'BioBricks-ICE', rank: 0}, classes: ['graph','collapsed','t1','t1_bio','importsMissing','okns_biobricks-ice'], position: {x: -150, y: -50}},
+    {group: 'nodes', data: {id: 'okns_spoke', label: 'SPOKE', rank: 0}, classes: ['graph','collapsed','t1','t1_bio','importsMissing','okns_spoke'], position: {x: -50, y: -50}}
+  ],
+  'usecase_env': [
+    {group: 'nodes', data: {id: 'okns_climatemodelskg', label: 'ClimateModels-KG', rank: 0}, classes: ['graph','collapsed','t1_env','importsMissing','okns_climatemodelskg'], position: {x: 500, y: -50}},
+    {group: 'nodes', data: {id: 'okns_fiokg', label: 'SAWGRAPH FIO', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_fiokg'], position: {x: 625, y: 75}},
+    {group: 'nodes', data: {id: 'okns_hydrologykg', label: 'SAWGRAPH Hydrology', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_hydrologykg'], position: {x: 550, y: 75}},
+    {group: 'nodes', data: {id: 'okns_sawgraph', label: 'SAWGRAPH', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_sawgraph'], position: {x: 487, y: 25}},
+    {group: 'nodes', data: {id: 'okns_sockg', label: 'SOC-KG', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_sockg'], position: {x: 575, y: 0}},
+    // {group: 'nodes', data: {id: 'okns_spatialkg', label: 'SAWGRAPH Spatial', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_spatialkg'], position: {x: 625, y: 75}},
+    {group: 'nodes', data: {id: 'okns_ufokn', label: 'WEN-OKN', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_ufokn'], position: {x: 475, y: 75}},
+    {group: 'nodes', data: {id: 'okns_wildlifekn', label: 'KN-Wildlife', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_wildlifekn'], position: {x:625, y: -50}},
+  ],
+  'usecase_jus': [
+    {group: 'nodes', data: {id: 'okns_dreamkg', label: 'DREAM-KG', rank: 0}, classes: ['graph','collapsed','t1','t1_jus','importsMissing','okns_dreamkg'], position: {x: -25, y: 225}},
+  // {group: 'nodes', data: {id: 'okns_nikg', label: 'NIKG', rank: 0}, classes: ['graph','collapsed','t1','t1_jus','importsMissing','okns_nikg'], position: {x: 625, y: 75}},
+    {group: 'nodes', data: {id: 'okns_ruralkg', label: 'Rural-KG', rank: 0}, classes: ['graph','collapsed','t1','t1_jus','importsMissing','okns_ruralkg'], position: {x: -175, y: 325}},
+    {group: 'nodes', data: {id: 'okns_scales', label: 'SCALES', rank: 0}, classes: ['graph','collapsed','t1','t1_jus','importsMissing','okns_scales'], position: {x: -175, y: 250}},
+  ],
+  'usecase_tam': [
+    {group: 'nodes', data: {id: 'okns_securechainkg', label: 'Secure Chain', rank: 0}, classes: ['graph','collapsed','t1','t1_tam','importsMissing','okns_securechainkg'], position: {x: 625, y: 200}},
+    {group: 'nodes', data: {id: 'okns_sudokn', label: 'SUD-OKN', rank: 0}, classes: ['graph','collapsed','t1','t1_tam','importsMissing','okns_sudokn'], position: {x: 475, y: 200}}
+  ]
+}
+
+const initialElements = ref(usecases)
+
+// TODO: 
+// - start point: the four use cases
+// - click on one: use case goes to background and component graphs show up
 
 const graphStyle = ref([ // the stylesheet for the graph
   {
@@ -41,6 +83,25 @@ const graphStyle = ref([ // the stylesheet for the graph
       'text-margin-y': '-5px'
     }
   },
+  // starting region styling
+  {
+    selector: '.usecase',
+    style: {
+      'width': '15em',
+      'height': '12.5em',
+      'background-width': '80%',
+      'background-height': '100%',
+      'background-color': '#e8e4ef',
+      'shape': 'round-rectangle',
+      'text-opacity': '0'
+    }
+  },
+  {selector: '.usecase_bio', style: {'background-image': 'static/Biology-Health-1.png'}},
+  {selector: '.usecase_jus', style: {'background-image': 'static/Biology-Health-2.png'}},
+  {selector: '.usecase_env', style: {'background-image': 'static/Biology-Health-3.png'}},
+  {selector: '.usecase_tam', style: {'background-image': 'static/Biology-Health-4.png'}},
+  {selector: '.usecase_help', style: {'z-index': -5, 'opacity': 0.25, 'width': '25em', 'height': '25em'}},
+  // edge styling
   {
     selector: 'edge.import',
     style: {
@@ -63,31 +124,31 @@ const graphStyle = ref([ // the stylesheet for the graph
       'curve-style': 'bezier'
     }
   },
-  {
-    selector: ".t1",
-    style: {
-      'background-color': 'green'
-    }
-  },
+  // entity node styling
+  {selector: ".t1_bio", style: {'background-color': 'khaki'}},
+  {selector: ".t1_env", style: {'background-color': 'chartreuse'}},
+  {selector: ".t1_jus", style: {'background-color': 'dodgerblue'}},
+  {selector: ".t1_tam", style: {'background-color': 'indianred'}},
+  {selector: ".classDef", style: {'background-color': 'red', 'border-color': 'black', 'border-width': '3px'}},
   {
     selector: ".graph",
     style: {
       'border-color': 'black',
       'border-width': '3px',
+      'border-opacity': '0.5'
     }
   },
   {
-    selector: ".classDef",
-    style: {
-      'background-color': 'red'
-    }
-  },
+    selector: ".hovered",
+    style: {'border-opacity': '1'}
+  }
 ]);
 
 cytoscape.use(klay);
 let klay_layout = {
   name: "klay",
   animate: true,
+  fit: false,
   nodeDimensionsIncludeLabels: true,
   klay: {
     spacing: 40,
@@ -103,7 +164,7 @@ let fcose_layout = {
   nodeDimensionsIncludeLabels: true,
   animate: true,
   randomize: false,
-  fit: true
+  fit: false
 }
 
 function shrinkEntity(entity){
@@ -148,6 +209,7 @@ async function getDefinedClasses(evt){
     return;
   }
   else{
+    let {x: nodex, y: nodey} = node.position();
     let definedClassesQuery = `
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX linkml: <https://w3id.org/linkml/>
@@ -156,7 +218,8 @@ PREFIX okns: <https://purl.org/okn/schema/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 SELECT distinct ?class ?classLabel WHERE {
-  ?class a linkml:ClassDefinition ; skos:inScheme ${node.id().replace('_',':',1)} ; skos:exactMatch|skos:closeMatch|skos:broadMatch [].
+  ?class a linkml:ClassDefinition ; skos:inScheme ${node.id().replace('_',':',1)} ; linkml:class_uri ?classuri .
+  [] linkml:tag okns:counts ; skos:example [ linkml:classes [ skos:example [ ?classuri [] ] ] ]
   optional { ?class dct:title ?classLabel }
 } limit 10
 `
@@ -164,8 +227,8 @@ SELECT distinct ?class ?classLabel WHERE {
     const definedClassesBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, definedClassesQuery)
     definedClassesBindings.on('data', bindings => {
       console.log(bindings);
-      let shrunkClass = prefixes.shrink(rdf.namedNode(bindings['class']['value']))
-      let shrunkClassId = shrunkClass.value.replace(':','_')
+      let shrunkClass = shrinkEntity(bindings['class']['value'])
+      let shrunkClassId = shrunkClass.replace(':','_')
       let classLabel = (bindings['classLabel'] ?? {'value': shrunkClass})['value']
       let nodeClass = node.id().replace(':','_')
       if(cyc.value.getElementById(shrunkClassId).length == 0){
@@ -175,7 +238,13 @@ SELECT distinct ?class ?classLabel WHERE {
       }
     })
     definedClassesBindings.on('end', () => {
-      let currentLayout = cyc.value.$('.classDef.' + node.id().replace(':','_')).layout( fcose_layout );
+      console.log(nodex, nodey)
+      let currentLayout = cyc.value.$('.classDef.' + node.id().replace(':','_')).layout( {
+        // fcose_layout,
+          name: 'random',
+          fit: false,
+          boundingBox: {x1: nodex, y1: nodey, w: 100, h: 100},
+      } );
       currentLayout.run();
     })
   }
@@ -247,14 +316,16 @@ SELECT ?graph ?class ?classLabel ?source WHERE {
       }
     })
     definedClassesBindings.on('end', () => {
-      let currentLayout = cyc.value.$('.classDef.' + node.id().replace(':','_')).layout( {'name': 'circle'} );
-      currentLayout.run();
+      // let currentLayout = cyc.value.$('.classDef.' + node.id().replace(':','_')).layout( {'name': 'circle'} );
+      // currentLayout.run();
     })
 
 }
 
 async function getEntityData(evt){
   let node = evt.target;
+  if(node === toRaw(cyc.value) || node.classes().includes('usecase'))
+    return;
   console.log(node);
   const entityDataQuery = `
 SELECT ?p ?o WHERE {
@@ -283,7 +354,11 @@ SELECT ?p ?o WHERE {
   entityDataBindings.on('end', () => {
     currentEntityDetails.value = currentEntityDetails.value;
   })
+  cyc.value.$('#'+node.id()).style('opacity', '1');
 }
+
+const nodesToFocus = ref([])
+const nodesAdded = ref([])
 
 async function getGraphImports(evt){
   let node = evt.target;
@@ -297,11 +372,11 @@ PREFIX okns: <https://purl.org/okn/schema/>
 SELECT ?s ?sLabel ?o ?oLabel WHERE {
   VALUES ?s { ${node.id().replace('_',':',1)} }
   ?s linkml:imports ?o .
+  # minus { ?s linkml:imports ?p . ?p linkml:imports+ ?o }
   optional { ?s dct:title ?sLabel }
   optional { ?o dct:title ?oLabel }
 } limit 100
 `
-
   const importsBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, importsQuery)
   importsBindings.on('data', bindings => {
     console.log(bindings)
@@ -313,75 +388,171 @@ SELECT ?s ?sLabel ?o ?oLabel WHERE {
     let shrunkOId = shrunkO.replace(':','_')
     if(cyc.value.getElementById(shrunkSId).length == 0){
       cyc.value.add({group: 'nodes', data: {id: shrunkSId, label: sLabel, rank: -1}, classes: ['graph','collapsed']});
+      nodesAdded.value.push('#'+shrunkSId)
     }
-    cyc.value.$("#" + shrunkSId).removeClass('importsMissing')
-    cyc.value.$("#" + shrunkSId).addClass('importsAdded')
-    let previousRank = cyc.value.$("#" + shrunkSId).data('rank');
+    nodesToFocus.value.push('#'+shrunkSId)
+    cyc.value.getElementById(shrunkSId).removeClass('importsMissing')
+    cyc.value.getElementById(shrunkSId).addClass('importsAdded')
+    let previousRank = cyc.value.getElementById(shrunkSId).data('rank');
     if(cyc.value.getElementById(shrunkOId).length == 0){
       cyc.value.add({group: 'nodes', data: {id: shrunkOId, label: oLabel, rank: previousRank - 1}, classes: ['graph','collapsed','importsMissing']});
+      nodesAdded.value.push('#'+shrunkOId)
     }
     else{
-      cyc.value.$("#" + shrunkOId).removeClass('importsMissing')
+      cyc.value.getElementById(shrunkOId).removeClass('importsMissing')
     }
+    nodesToFocus.value.push('#'+shrunkOId)
     cyc.value.add({group: 'edges', classes: ['import'], data: {id: shrunkSId + '_' + shrunkOId, source: shrunkSId, target: shrunkOId }});
   });
   importsBindings.on('end', () => {
-    cyc.value.$('.graph').layout(
-      klay_layout
-    ).run();
+    console.log(nodesToFocus.value, nodesAdded.value);
+    cyc.value.$(nodesToFocus.value.join(', ')).style('opacity', '1');
+    cyc.value.$("*").not(nodesToFocus.value.join(', ')).style('opacity', '0.25');
+    if(nodesAdded.value.length > 1){
+      cyc.value.$(nodesAdded.value.join(', ')).layout(
+        {
+          name: 'random',
+          fit: false,
+          boundingBox: {x1: 50, y1: -50, x2: 375, y2: 300},
+        }
+      ).run();
+      nodesAdded.value = [];
+    }
   })
+  cyc.value.$('#'+node.id()).style('opacity', '1');
+  nodesToFocus.value = [];
 }
 
 onMounted(async () => {
   cyc.value = cytoscape({
     container: document.getElementsByClassName('cy-wrapper')[0],
-    elements: [ // TODO: currently hardcoding T1s
-      {group: 'nodes', data: {id: 'okns_biobricks-ice', label: 'BioBricks-ICE', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_biobricks-ice']},
-      {group: 'nodes', data: {id: 'okns_climatemodelskg', label: 'ClimateModels-KG', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_climatemodelskg']},
-      {group: 'nodes', data: {id: 'okns_dreamkg', label: 'DREAM-KG', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_dreamkg']},
-      {group: 'nodes', data: {id: 'okns_ruralkg', label: 'Rural-KG', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_ruralkg']},
-      {group: 'nodes', data: {id: 'okns_sockg', label: 'SOC-KG', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_sockg']},
-      {group: 'nodes', data: {id: 'okns_sudokn', label: 'SUD-OKN', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_sudokn']},
-      {group: 'nodes', data: {id: 'okns_wildlifekn', label: 'KN-Wildlife', rank: 0}, classes: ['graph','collapsed','t1','importsMissing','okns_wildlifekn']},
-    ],
+    elements: initialElements.value,
+    layout: {name:'preset'},
     style: graphStyle.value
   });
   console.log('Starting!')
+  
+  var instance = cyc.value.contextMenus({
+    menuItems: [
+      {
+        id: 'showImports',
+        content: 'Show graph dependencies',
+        tooltipText: 'Show all graphs that this graph depends on',
+        selector: '.graph',
+        onClickFunction: getGraphImports,
+      },
+      {
+        id: 'showClasses',
+        content: 'Show defined classes',
+        tooltipText: 'Show all classes defined in this graph',
+        selector: '.graph:childless[^removed]',
+        onClickFunction: getDefinedClasses,
+      },
+      {
+        id: 'showEquivalents',
+        content: 'Show equivalent classes',
+        tooltipText: 'Add links to equivalent classes from other graphs',
+        selector: '.classDef',
+        onClickFunction: getEquivalentClasses
+      },
+      {
+        id: 'collapseNodes',
+        content: 'Collapse defined classes',
+        tooltipText: 'Display only a single dot for this graph',
+        selector: '.graph:parent',
+        onClickFunction: function(evt){ // modified from https://github.com/CamFlow/cytoscape.js-prov/blob/master/cytoscape-prov-core.js
+          let node = evt.target;
+          console.log('Asked for collapse!', evt.target);
+						if(node.data('removed')!=null){ // the node has already been collapsed
+							return;
+						}
+						var nodes = node.children();
+						if(nodes.empty()){
+							return;
+						}
+						var added = new Array();
 
-  ecApi.value = cyc.value.expandCollapse({
-    layoutBy: fcose_layout,
-    fisheye: true,
-    animate: true,
-    // expandCueImage: "icon-plus.png",
-    // collapseCueImage: "icon-minus.png"
+						cyc.value.startBatch();
+						nodes.each(function(n, i){
+							n.outgoers().each(function(e, i){
+								if(e.target().id()!=undefined){
+									e = cyc.value.add([{ group: "edges",  data: { source: node.id(), target: e.target().id(), color: e.data('color'), label: e.data('label')}}]);
+									if(!added.includes(e))
+										added.push(e);
+								}
+							});
+							n.incomers().each(function(e, i){
+								if(e.source().id()!=undefined){
+									e = cyc.value.add([{ group: "edges",  data: { source: e.source().id(), target: node.id(), color: e.data('color'), label: e.data('label')}}]);
+									if(!added.includes(e))
+										added.push(e);
+								}
+							});
+						});
+						var removed = nodes.remove();
+						node.data('removed', removed);
+						node.data('added', added);
+						node.edgesTo(node).remove();
+						cyc.value.endBatch();
+        }
+      },
+      {
+        id: 'uncollapseNodes',
+        content: 'Expand defined classes',
+        tooltipText: 'Display classes defined by this graph',
+        selector: '.graph:childless[removed]',
+        onClickFunction: function(evt){ // modified from https://github.com/CamFlow/cytoscape.js-prov/blob/master/cytoscape-prov-core.js
+          let node = evt.target;
+          console.log('Asked for collapse!', evt.target);
+						cyc.value.startBatch();
+						var removed = node.data('removed');
+						if(removed==undefined || removed==null){
+							return;
+						}
+						var added = node.data('added');
+						removed.restore();
+						added.forEach(function(i, e){e.remove()});
+						node.edgesTo(node.children()).remove();
+						node.children().edgesTo(node).remove();
+						node.data('removed', null);
+						node.data('added', null);
+						cyc.value.endBatch();
+        }
+      }
+    ]
+  });
+
+  cyc.value.on('click', getEntityData);
+
+  cyc.value.on('click', '.usecase', function(evt){
+    let node = evt.target;
+    let nodeId = node.id();
+    for(let newNode of t1graphs[nodeId]){
+      cyc.value.add(newNode);
+    }
+    cyc.value.$('#'+nodeId).style({'opacity': 0.25});
+    cyc.value.$('#'+nodeId).style({'events': 'no'});
   })
 
-  cyc.value.on('click', 'node', getEntityData);
-  cyc.value.on('click', '.graph.importsMissing', getGraphImports)
-  cyc.value.on('click', '.graph.importsAdded', getDefinedClasses)
-  cyc.value.on('click', '.classDef', getEquivalentClasses)
-  cyc.value.$('.graph').layout(
-    klay_layout
-  ).run();
   cyc.value.on('ready', function(){
     cyc.value.center()
     console.log(cyc.value.elements().boundingBox())
   })
 
-  cyc.value.on('tap', function(event){
+  cyc.value.on('dbltap', function(event){
     // target holds a reference to the originator
     // of the event (core or element)
     var evtTarget = event.target;
     cyc.value.fit()
-    if( evtTarget === cyc.value ){
+    if( evtTarget === toRaw(cyc.value) ){
       console.log('tap on background');
     }
     else{
       cyc.value.$("*").not(event.target).style('opacity', '0.5')
     }
   });
-  cyc.value.on('mouseover', function(){})
-  cyc.value.on('mouseout', function(){})
+  cyc.value.on('mouseover', 'node', function(evt){let node = evt.target; cyc.value.$("#"+node.id()).toggleClass('hovered')})
+  cyc.value.on('mouseout', 'node', function(evt){let node = evt.target; cyc.value.$("#"+node.id()).toggleClass('hovered')})
 });
 
 const visibleTab = ref('help')
@@ -402,10 +573,17 @@ const visibleTab = ref('help')
         <template v-if="visibleTab == 'key'">
           <h5>Key to symbols</h5>
           <ul>
-            <li>Green dot: Theme 1 graphs</li>
-            <li>Gray dot: External ontologies (referred to by Theme 1 graphs)</li>
+            <li>Dots:</li>
+            <ul>
+              <li>Green: Theme 1 graphs</li>
+              <li>Gray: External ontologies (referred to by Theme 1 graphs)</li>
+              <li>Red: Class (entity type)</li>
+            </ul>
+            <li>Arrows:</li>
+            <ul>
+              <li>Green: Import relationship</li>
+            </ul>
             <li>Gray square: External ontology with classes defined in it</li>
-            <li>Red dot: Class (entity type)</li>
           </ul>
         </template>
         <template v-else-if="visibleTab == 'details'">
@@ -441,6 +619,7 @@ const visibleTab = ref('help')
               <li>This schema is then itself turned into RDF using <a href="https://linkml.io/linkml/generators/rdf.html" target="_blank">the LinkML runtime's RDF generator</a>.</li>
               <li>The RDF representation of that schema is then directly queried with SPARQL using this interface.</li>
             </ul>
+            <p>This map was built using Vue 3 and Cytoscape.js.</p>
           </section>
         </template>
       </div>
