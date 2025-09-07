@@ -80,6 +80,9 @@ h1 {
 .cy-wrapper, .tab-content{
    border:5px solid white;
 }
+.tab-content h4{
+  text-align:center;
+}
 .tab-content h5{
   background-color: #e8e4ef;
   border-radius: 1em;

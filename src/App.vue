@@ -53,7 +53,7 @@ let t1graphs = {
     {group: 'nodes', data: {id: 'okns_hydrologykg', label: 'SAWGRAPH Hydrology', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_hydrologykg'], position: {x: 550, y: 75}},
     {group: 'nodes', data: {id: 'okns_sawgraph', label: 'SAWGRAPH', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_sawgraph'], position: {x: 487, y: 25}},
     {group: 'nodes', data: {id: 'okns_sockg', label: 'SOC-KG', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_sockg'], position: {x: 575, y: 0}},
-    // {group: 'nodes', data: {id: 'okns_spatialkg', label: 'SAWGRAPH Spatial', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_spatialkg'], position: {x: 625, y: 75}},
+    {group: 'nodes', data: {id: 'okns_spatialkg', label: 'SAWGRAPH Spatial', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_spatialkg'], position: {x: 625, y: 75}},
     {group: 'nodes', data: {id: 'okns_ufokn', label: 'WEN-OKN', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_ufokn'], position: {x: 475, y: 75}},
     {group: 'nodes', data: {id: 'okns_wildlifekn', label: 'KN-Wildlife', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_wildlifekn'], position: {x:625, y: -50}},
   ],
@@ -70,10 +70,6 @@ let t1graphs = {
 }
 
 const initialElements = ref(usecases)
-
-// TODO: 
-// - start point: the four use cases
-// - click on one: use case goes to background and component graphs show up
 
 const graphStyle = ref([ // the stylesheet for the graph
   {
@@ -124,6 +120,17 @@ const graphStyle = ref([ // the stylesheet for the graph
       'curve-style': 'bezier'
     }
   },
+  {
+    selector: 'edge.classuse',
+    style: {
+      'width': 3,
+      'label': 'data(label)',
+      'line-color': '#f4a460',
+      'target-arrow-color': '#f4a460',
+      'target-arrow-shape': 'triangle',
+      'curve-style': 'bezier'
+    }
+  },
   // entity node styling
   {selector: ".t1_bio", style: {'background-color': 'khaki'}},
   {selector: ".t1_env", style: {'background-color': 'chartreuse'}},
@@ -135,12 +142,13 @@ const graphStyle = ref([ // the stylesheet for the graph
     style: {
       'border-color': 'black',
       'border-width': '3px',
-      'border-opacity': '0.5'
+      'border-opacity': '0.5',
+      'text-opacity': '0.5'
     }
   },
   {
-    selector: ".hovered",
-    style: {'border-opacity': '1'}
+    selector: ".graph.hovered",
+    style: {'border-opacity': '1', 'text-opacity': '1'}
   }
 ]);
 
@@ -167,6 +175,9 @@ let fcose_layout = {
   fit: false
 }
 
+const nodesToFocus = ref([])
+const nodesAdded = ref([])
+
 function shrinkEntity(entity){
   let currentShrunk = prefixes.shrink(rdf.namedNode(entity));
   if(currentShrunk){
@@ -183,11 +194,18 @@ let singlefieldmappings = {
   'rdf:type': 'type',
   'pav:createdOn': 'created',
   'pav:lastUpdatedOn': 'last_updated',
+  'linkml:uri': 'uri',
+  'linkml:class_uri': 'uri',
+  'linkml:slot_uri': 'uri'
 }
 let multiplefieldmappings = {
   'rdfs:seeAlso': 'external_links',
   'skos:definition': 'comments',
   'skos:note': 'notes',
+  'linkml:slots': 'slots',
+  'linkml:domain': 'domain',
+  'linkml:domain_of': 'domain',
+  'linkml:range': 'range'
 }
 let mappinglabels = {
   'title': 'Title',
@@ -199,7 +217,10 @@ let mappinglabels = {
   'last_updated': 'Last updated date',
   'external_links': 'See also',
   'comments': 'External comments',
-  'notes': 'Internal comments'
+  'notes': 'Internal comments',
+  'slots': 'Predicates',
+  'domain': 'Domain',
+  'range': 'Range'
 }
 
 async function getDefinedClasses(evt){
@@ -238,16 +259,63 @@ SELECT distinct ?class ?classLabel WHERE {
       }
     })
     definedClassesBindings.on('end', () => {
-      console.log(nodex, nodey)
       let currentLayout = cyc.value.$('.classDef.' + node.id().replace(':','_')).layout( {
         // fcose_layout,
-          name: 'random',
+          name: 'grid',
           fit: false,
           boundingBox: {x1: nodex, y1: nodey, w: 100, h: 100},
       } );
       currentLayout.run();
     })
   }
+}
+
+async function getAllEquivalentClasses(evt){
+  let node = evt.target;
+  const usedClassesQuery = `
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX linkml: <https://w3id.org/linkml/>
+PREFIX okns: <https://purl.org/okn/schema/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?c1 ?c1Label ?class ?classLabel ?graph ?graphLabel WHERE {
+  ?c1 skos:inScheme ${node.id().replace('_',':',1)} .
+  { ?c1 skos:exactMatch|skos:closeMatch|skos:broadMatch ?class_ }
+  union
+  { ?c1 linkml:class_uri ?c1_ . ?c1_ ^skos:exactMatch/skos:exactMatch ?class_  }
+  ?class linkml:class_uri ?class_ ; skos:inScheme ?graph . filter(?graph != ${node.id().replace('_',':',1)})
+  optional { ?class dct:title ?classLabel }
+  optional { ?graph dct:title ?graphLabel }
+} limit 10
+  `
+  console.log(usedClassesQuery)
+    const definedClassesBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, usedClassesQuery)
+    definedClassesBindings.on('data', bindings => {
+      console.log(bindings);
+      let shrunkC1 = shrinkEntity(bindings['c1']['value'])
+      let shrunkGraph = shrinkEntity(bindings['graph']['value'])
+      let shrunkClass = shrinkEntity(bindings['class']['value'])
+      let c1Label = (bindings['c1Label'] ?? {'value': shrunkC1})['value']
+      let classLabel = (bindings['classLabel'] ?? {'value': shrunkClass})['value']
+      let graphLabel = (bindings['graphLabel'] ?? {'value': shrunkGraph})['value']
+      let shrunkC1Id = shrunkC1.replace(':','_')
+      let shrunkGraphId = shrunkGraph.replace(':','_')
+      let shrunkClassId = shrunkClass.replace(':','_')
+      if(cyc.value.getElementById(shrunkC1Id).length == 0){
+        cyc.value.add({data: {id: shrunkC1Id, label: c1Label, parent: node.id()}, classes: ['classDef']});
+      }
+      if(cyc.value.getElementById(shrunkGraphId).length == 0){
+        cyc.value.add({data: {id: shrunkGraphId, label: graphLabel, rank: -1}, classes: ['graph','collapsed']});
+      }
+      if(cyc.value.getElementById(shrunkClassId).length == 0){
+        cyc.value.add({data: {id: shrunkClassId, label: classLabel, parent: shrunkGraphId}, classes: ['classDef']});
+      }
+      cyc.value.add({group: 'edges', classes: ['equivalent'], data: {id: shrunkC1Id + '_' + shrunkClassId, source: shrunkC1Id, target: shrunkClassId }});
+    })
+    definedClassesBindings.on('end', () => {
+      let currentLayout = cyc.value.$('.classDef.' + node.id().replace(':','_')).layout( {'name': 'circle'} );
+      currentLayout.run();
+    })
 }
 
 async function getEquivalentClasses(evt){
@@ -259,8 +327,10 @@ PREFIX okns: <https://purl.org/okn/schema/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 SELECT ?class ?classLabel ?graph ?graphLabel WHERE {
-  ${node.id().replace('_',':',1)} skos:exactMatch|skos:closeMatch|skos:broadMatch ?class .
-  ?class_ linkml:class_uri ?class ; skos:inScheme ?graph .
+  { ${node.id().replace('_',':',1)} skos:exactMatch|skos:closeMatch|skos:broadMatch ?class_ }
+  union
+  { ${node.id().replace('_',':',1)} linkml:class_uri ?c1_ . ?c1_ ^skos:exactMatch/skos:exactMatch ?class_  }
+  ?class linkml:class_uri ?class_ ; skos:inScheme ?graph . filter(?class != ${node.id().replace('_',':',1)})
   optional { ?class dct:title ?classLabel }
   optional { ?graph dct:title ?graphLabel }
 } limit 10
@@ -289,7 +359,7 @@ SELECT ?class ?classLabel ?graph ?graphLabel WHERE {
     })
 }
 
-async function addUsedClasses(evt){
+async function getAllUsedClasses(evt){
   let node = evt.target;
   const usedClassesQuery = `
 PREFIX dct: <http://purl.org/dc/terms/>
@@ -298,67 +368,98 @@ PREFIX okn: <https://purl.org/okn/>
 PREFIX okns: <https://purl.org/okn/schema/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
-SELECT ?graph ?class ?classLabel ?source WHERE {
-  ?graph linkml:annotations/skos:example/linkml:classes/skos:example [ ?class_ [] ] .
-  ?class a linkml:ClassDefinition ; linkml:class_uri ?class_ ; skos:inScheme ?source .
+SELECT ?graph ?graphLabel ?class ?classLabel ?count WHERE {
+  ${node.id().replace('_',':',1)} linkml:annotations [ linkml:tag okns:counts ; skos:example/linkml:classes/skos:example [ ?class_ ?s ] ] .
+  ?class a linkml:ClassDefinition ; linkml:class_uri ?class_ ; skos:inScheme ?graph .
+  optional { ?graph dct:title ?graphLabel }
   optional { ?class dct:title ?classLabel }
+  ?s ?p ?count .
+  filter(?p = skos:example)
 } limit 10
-  `
+`
     const definedClassesBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, usedClassesQuery)
     definedClassesBindings.on('data', bindings => {
+      let shrunkGraph = shrinkEntity(bindings['graph']['value'])
       let shrunkClass = shrinkEntity(bindings['class']['value'])
       let classLabel = (bindings['classLabel'] ?? {'value': shrunkClass})['value']
-      let nodeClass = node.id().replace(':','_')
-      if(cyc.value.getElementById(shrunkClass.value).length == 0){
-        node.removeClass('collapsed')
-        node.addClass('expanded')
-        cyc.value.add({data: {id: shrunkClass.value, label: classLabel, parent: node.id()}, classes: ['classDef', nodeClass]});
+      let graphLabel = (bindings['graphLabel'] ?? {'value': shrunkGraph})['value']
+      let shrunkGraphId = shrunkGraph.replace(':','_')
+      let shrunkClassId = shrunkClass.replace(':','_')
+      if(cyc.value.getElementById(shrunkGraphId).length == 0){
+        cyc.value.add({data: {id: shrunkGraphId, label: graphLabel, rank: -1}, classes: ['graph','collapsed']});
+      }
+      nodesToFocus.value.push('#'+shrunkGraphId)
+      if(cyc.value.getElementById(shrunkClassId).length == 0){
+        cyc.value.add({data: {id: shrunkClassId, label: classLabel, parent: shrunkGraphId}, classes: ['classDef']});
+        nodesAdded.value.push('#'+shrunkClassId)
+      }
+      nodesToFocus.value.push('#'+shrunkClassId)
+      if(shrunkGraphId != node.id()){
+        cyc.value.add({group: 'edges', classes: ['classuse'], data: {label: bindings['count']['value'] ?? '', id: node.id() + '_' + shrunkClassId, source: node.id(), target: shrunkClassId }});
       }
     })
     definedClassesBindings.on('end', () => {
-      // let currentLayout = cyc.value.$('.classDef.' + node.id().replace(':','_')).layout( {'name': 'circle'} );
-      // currentLayout.run();
+      console.log(nodesToFocus.value, nodesAdded.value);
+      cyc.value.$(nodesToFocus.value.join(', ')).style('opacity', '1');
+      cyc.value.$("*").not(nodesToFocus.value.join(', ')).style('opacity', '0.25');
+      if(nodesAdded.value.length > 1){
+        cyc.value.$(nodesAdded.value.join(', ')).layout(
+          {
+            name: 'grid',
+            fit: false,
+            boundingBox: {x1: 50, y1: -50, x2: 375, y2: 300},
+          }
+        ).run();
+        nodesAdded.value = [];
+      }
     })
-
+  cyc.value.$('#'+node.id()).style('opacity', '1');
+  nodesToFocus.value = [];
 }
 
-async function getEntityData(evt){
+async function showEntityData(evt){
   let node = evt.target;
   if(node === toRaw(cyc.value) || node.classes().includes('usecase'))
     return;
   console.log(node);
+  await getEntityData(node.id(), node.id().replace('_',':',1), node.classes())
+}
+
+async function getEntityData(nodeid, nodeidreplaced, nodeclasses){
   const entityDataQuery = `
 SELECT ?p ?o WHERE {
-  ${node.id().replace('_',':',1)} ?p ?o
+  { ${nodeidreplaced} ?p ?o }
+   union
+  { ${nodeidreplaced} linkml:any_of/linkml:range ?o . bind(linkml:range as ?p) }
 }
   `
   console.log(entityDataQuery);
 
-  currentEntityDetails.value = {};
+  currentEntityDetails.value = {}
 
   const entityDataBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, entityDataQuery);
   entityDataBindings.on('data', bindings => {
     let shrunkP = shrinkEntity(bindings['p']['value'])
     let shrunkO = shrinkEntity(bindings['o']['value'])
-    // console.log(shrunkP, shrunkO);
+    console.log(shrunkP, shrunkO);
+    if(['linkml:slots'].includes(shrunkP) && nodeclasses.includes('graph'))
+      return;
     if(shrunkP in singlefieldmappings){
       currentEntityDetails.value[singlefieldmappings[shrunkP]] = shrunkO;
     }
     else if(shrunkP in multiplefieldmappings){
       if(multiplefieldmappings[shrunkP] in currentEntityDetails.value)
-        currentEntityDetails.value[multiplefieldmappings[shrunkP]].push(shrunkO);
+        currentEntityDetails.value[multiplefieldmappings[shrunkP]].add(shrunkO);
       else
-        currentEntityDetails.value[multiplefieldmappings[shrunkP]] = [shrunkO];
+        currentEntityDetails.value[multiplefieldmappings[shrunkP]] = new Set([shrunkO]);
     }
   });
   entityDataBindings.on('end', () => {
     currentEntityDetails.value = currentEntityDetails.value;
+    visibleTab.value = 'details'
   })
-  cyc.value.$('#'+node.id()).style('opacity', '1');
+  cyc.value.$('#'+nodeid).style('opacity', '1');
 }
-
-const nodesToFocus = ref([])
-const nodesAdded = ref([])
 
 async function getGraphImports(evt){
   let node = evt.target;
@@ -423,6 +524,59 @@ SELECT ?s ?sLabel ?o ?oLabel WHERE {
   nodesToFocus.value = [];
 }
 
+function collapseNodes(evt){ // modified from https://github.com/CamFlow/cytoscape.js-prov/blob/master/cytoscape-prov-core.js
+  let node = evt.target;
+  if(node.data('removed')!=null){ // the node has already been collapsed
+    return;
+  }
+  var nodes = node.children();
+  if(nodes.empty()){
+    return;
+  }
+  var added = new Array();
+
+  cyc.value.startBatch();
+  nodes.each(function(n, i){
+    n.outgoers().each(function(e, i){
+      if(e.target().id()!=undefined){
+        e = cyc.value.add([{ group: "edges",  data: { source: node.id(), target: e.target().id(), color: e.data('color'), label: e.data('label')}}]);
+        if(!added.includes(e))
+          added.push(e);
+      }
+    });
+    n.incomers().each(function(e, i){
+      if(e.source().id()!=undefined){
+        e = cyc.value.add([{ group: "edges",  data: { source: e.source().id(), target: node.id(), color: e.data('color'), label: e.data('label')}}]);
+        if(!added.includes(e))
+          added.push(e);
+      }
+    });
+  });
+  var removed = nodes.remove();
+  node.data('removed', removed);
+  node.data('added', added);
+  node.edgesTo(node).remove();
+  cyc.value.endBatch();
+}
+
+function uncollapseNodes(evt){ // modified from https://github.com/CamFlow/cytoscape.js-prov/blob/master/cytoscape-prov-core.js
+  let node = evt.target;
+  console.log('Asked for collapse!', evt.target);
+  cyc.value.startBatch();
+  var removed = node.data('removed');
+  if(removed==undefined || removed==null){
+    return;
+  }
+  var added = node.data('added');
+  removed.restore();
+  added.forEach(function(e, i){e.remove()});
+  node.edgesTo(node.children()).remove();
+  node.children().edgesTo(node).remove();
+  node.data('removed', null);
+  node.data('added', null);
+  cyc.value.endBatch();
+}
+
 onMounted(async () => {
   cyc.value = cytoscape({
     container: document.getElementsByClassName('cy-wrapper')[0],
@@ -449,6 +603,20 @@ onMounted(async () => {
         onClickFunction: getDefinedClasses,
       },
       {
+        id: 'showAllUsedClasses',
+        content: 'Show used classes',
+        tooltipText: 'Show those classes of which entities instantiated in this graph are types',
+        selector: '.graph:childless[^removed]',
+        onClickFunction: getAllUsedClasses,
+      },
+      {
+        id: 'showAllEquivalentClasses',
+        content: 'Show equivalent classes',
+        tooltipText: 'Show those classes defined in this graph that are linked to classes in other graphs',
+        selector: '.graph:childless[^removed]',
+        onClickFunction: getAllEquivalentClasses,
+      },
+      {
         id: 'showEquivalents',
         content: 'Show equivalent classes',
         tooltipText: 'Add links to equivalent classes from other graphs',
@@ -460,69 +628,19 @@ onMounted(async () => {
         content: 'Collapse defined classes',
         tooltipText: 'Display only a single dot for this graph',
         selector: '.graph:parent',
-        onClickFunction: function(evt){ // modified from https://github.com/CamFlow/cytoscape.js-prov/blob/master/cytoscape-prov-core.js
-          let node = evt.target;
-          console.log('Asked for collapse!', evt.target);
-						if(node.data('removed')!=null){ // the node has already been collapsed
-							return;
-						}
-						var nodes = node.children();
-						if(nodes.empty()){
-							return;
-						}
-						var added = new Array();
-
-						cyc.value.startBatch();
-						nodes.each(function(n, i){
-							n.outgoers().each(function(e, i){
-								if(e.target().id()!=undefined){
-									e = cyc.value.add([{ group: "edges",  data: { source: node.id(), target: e.target().id(), color: e.data('color'), label: e.data('label')}}]);
-									if(!added.includes(e))
-										added.push(e);
-								}
-							});
-							n.incomers().each(function(e, i){
-								if(e.source().id()!=undefined){
-									e = cyc.value.add([{ group: "edges",  data: { source: e.source().id(), target: node.id(), color: e.data('color'), label: e.data('label')}}]);
-									if(!added.includes(e))
-										added.push(e);
-								}
-							});
-						});
-						var removed = nodes.remove();
-						node.data('removed', removed);
-						node.data('added', added);
-						node.edgesTo(node).remove();
-						cyc.value.endBatch();
-        }
+        onClickFunction: collapseNodes
       },
       {
         id: 'uncollapseNodes',
         content: 'Expand defined classes',
         tooltipText: 'Display classes defined by this graph',
         selector: '.graph:childless[removed]',
-        onClickFunction: function(evt){ // modified from https://github.com/CamFlow/cytoscape.js-prov/blob/master/cytoscape-prov-core.js
-          let node = evt.target;
-          console.log('Asked for collapse!', evt.target);
-						cyc.value.startBatch();
-						var removed = node.data('removed');
-						if(removed==undefined || removed==null){
-							return;
-						}
-						var added = node.data('added');
-						removed.restore();
-						added.forEach(function(i, e){e.remove()});
-						node.edgesTo(node.children()).remove();
-						node.children().edgesTo(node).remove();
-						node.data('removed', null);
-						node.data('added', null);
-						cyc.value.endBatch();
-        }
+        onClickFunction: uncollapseNodes
       }
     ]
   });
 
-  cyc.value.on('click', getEntityData);
+  cyc.value.on('click', showEntityData);
 
   cyc.value.on('click', '.usecase', function(evt){
     let node = evt.target;
@@ -551,6 +669,7 @@ onMounted(async () => {
       cyc.value.$("*").not(event.target).style('opacity', '0.5')
     }
   });
+
   cyc.value.on('mouseover', 'node', function(evt){let node = evt.target; cyc.value.$("#"+node.id()).toggleClass('hovered')})
   cyc.value.on('mouseout', 'node', function(evt){let node = evt.target; cyc.value.$("#"+node.id()).toggleClass('hovered')})
 });
@@ -565,9 +684,9 @@ const visibleTab = ref('help')
     </div>
     <div class="sidebar">
       <div class="tab-controls">
-        <span class="control-icon" @click="visibleTab='key'" title="Key to symbols">𓃑</span>
-        <span class="control-icon" @click="visibleTab='details'" title="Entity details">📖</span>
-        <span class="control-icon" @click="visibleTab='help'" title="About the map">ℹ️</span>
+        <span class="control-icon control-icon-key" @click="visibleTab='key'" title="Key to symbols">𓃑</span>
+        <span class="control-icon control-icon-details" @click="visibleTab='details'" title="Entity details">📖</span>
+        <span class="control-icon control-icon-help" @click="visibleTab='help'" title="About the map">ℹ️</span>
       </div>
       <div class="tab-content">
         <template v-if="visibleTab == 'key'">
@@ -575,25 +694,37 @@ const visibleTab = ref('help')
           <ul>
             <li>Dots:</li>
             <ul>
-              <li>Green: Theme 1 graphs</li>
+              <li>Yellow/green/blue/crimson: Theme 1 graphs (colored by use case)</li>
               <li>Gray: External ontologies (referred to by Theme 1 graphs)</li>
               <li>Red: Class (entity type)</li>
             </ul>
             <li>Arrows:</li>
             <ul>
               <li>Green: Import relationship</li>
+              <li>Sky blue: Equivalence relationship</li>
+              <li>Light brown: Usage relationship (labeled with number of uses)</li>
             </ul>
-            <li>Gray square: External ontology with classes defined in it</li>
+            <li>Rectangle: graph or external ontology with classes defined in it</li>
           </ul>
         </template>
         <template v-else-if="visibleTab == 'details'">
           <h5>Entity details</h5>
+          <h4>{{ currentEntityDetails['title'] ?? currentEntityDetails['uri'] }}</h4>
+          <p style="text-align: center;"><a :href="prefixes.resolve(rdf.namedNode(currentEntityDetails['uri'] ?? '')) ?? ''">{{ currentEntityDetails['uri'] }}</a></p>
           <table class="entity-details-table">
-            <tr v-for="(value, key) in currentEntityDetails">
+            <template v-for="(value, key) in currentEntityDetails">
+            <template v-if="!['title','uri'].includes(key)">
+            <tr>
               <td style="border-right: 1px solid pink;">{{ mappinglabels[key] }}</td>
               <td style="border-bottom: 1px solid pink;">
-                <template v-if="Array.isArray(value)">
+                <template v-if="['slots','domain','range'].includes(key)">
                   <template v-for="element in value">
+                    <a @click="getEntityData(element.replace(':','_',1), element, [])">{{ element }}</a>
+                    <br/>
+                  </template>
+                </template>
+                <template v-else-if="value instanceof Set">
+                  <template v-for="element of value">
                     <template v-if="['external_links'].includes(key)"><a :href='element'>{{ element }}</a></template>
                     <template v-else>{{element}}</template>
                     <br/>
@@ -607,6 +738,8 @@ const visibleTab = ref('help')
                 </template>
               </td>
             </tr>
+            </template>
+            </template>
           </table>
         </template>
         <template v-else>
@@ -618,6 +751,11 @@ const visibleTab = ref('help')
               <li>RDF data is processed into a LinkML schema using <a href="https://github.com/frink-okn/schema-gen" target="_blank">a set of scripts</a>.</li>
               <li>This schema is then itself turned into RDF using <a href="https://linkml.io/linkml/generators/rdf.html" target="_blank">the LinkML runtime's RDF generator</a>.</li>
               <li>The RDF representation of that schema is then directly queried with SPARQL using this interface.</li>
+            </ul>
+            <p><em><strong>Is there something wrong with the data in this map?</strong></em></p>
+            <ul>
+              <li>If it relates to a graph you control, then try adding or modifying information about it according to <a href="https://github.com/frink-okn/graph-descriptions/blob/main/README.md">this page</a> and let <a href="mailto:mmorshed@scripps.edu">Mahir Morshed</a> know about the additions or changes.</li>
+              <li>If it relates to an external ontology, then just let <a href="mailto:mmorshed@scripps.edu">Mahir Morshed</a> in any case.</li>
             </ul>
             <p>This map was built using Vue 3 and Cytoscape.js.</p>
           </section>
