@@ -59,7 +59,7 @@ let t1graphs = {
   ],
   'usecase_jus': [
     {group: 'nodes', data: {id: 'okns_dreamkg', label: 'DREAM-KG', rank: 0}, classes: ['graph','collapsed','t1','t1_jus','importsMissing','okns_dreamkg'], position: {x: -25, y: 225}},
-  // {group: 'nodes', data: {id: 'okns_nikg', label: 'NIKG', rank: 0}, classes: ['graph','collapsed','t1','t1_jus','importsMissing','okns_nikg'], position: {x: 625, y: 75}},
+    {group: 'nodes', data: {id: 'okns_nikg', label: 'NIKG', rank: 0}, classes: ['graph','collapsed','t1','t1_jus','importsMissing','okns_nikg'], position: {x: -25, y: 300}},
     {group: 'nodes', data: {id: 'okns_ruralkg', label: 'Rural-KG', rank: 0}, classes: ['graph','collapsed','t1','t1_jus','importsMissing','okns_ruralkg'], position: {x: -175, y: 325}},
     {group: 'nodes', data: {id: 'okns_scales', label: 'SCALES', rank: 0}, classes: ['graph','collapsed','t1','t1_jus','importsMissing','okns_scales'], position: {x: -175, y: 250}},
   ],
