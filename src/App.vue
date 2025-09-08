@@ -288,6 +288,7 @@ SELECT ?c1 ?c1Label ?class ?classLabel ?graph ?graphLabel WHERE {
   optional { ?graph dct:title ?graphLabel }
 } limit 10
   `
+nodesToFocus.value.push('#'+node.id())
   console.log(usedClassesQuery)
     const definedClassesBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, usedClassesQuery)
     definedClassesBindings.on('data', bindings => {
@@ -303,19 +304,37 @@ SELECT ?c1 ?c1Label ?class ?classLabel ?graph ?graphLabel WHERE {
       let shrunkClassId = shrunkClass.replace(':','_')
       if(cyc.value.getElementById(shrunkC1Id).length == 0){
         cyc.value.add({data: {id: shrunkC1Id, label: c1Label, parent: node.id()}, classes: ['classDef']});
+        nodesAdded.value.push('#'+shrunkC1Id)
       }
+      nodesToFocus.value.push('#'+shrunkC1Id)
       if(cyc.value.getElementById(shrunkGraphId).length == 0){
         cyc.value.add({data: {id: shrunkGraphId, label: graphLabel, rank: -1}, classes: ['graph','collapsed']});
+        nodesAdded.value.push('#'+shrunkGraphId)
       }
+      nodesToFocus.value.push('#'+shrunkGraphId)
       if(cyc.value.getElementById(shrunkClassId).length == 0){
         cyc.value.add({data: {id: shrunkClassId, label: classLabel, parent: shrunkGraphId}, classes: ['classDef']});
+        nodesAdded.value.push('#'+shrunkClassId)
       }
+      nodesToFocus.value.push('#'+shrunkClassId)
       cyc.value.add({group: 'edges', classes: ['equivalent'], data: {id: shrunkC1Id + '_' + shrunkClassId, source: shrunkC1Id, target: shrunkClassId }});
     })
     definedClassesBindings.on('end', () => {
-      let currentLayout = cyc.value.$('.classDef.' + node.id().replace(':','_')).layout( {'name': 'circle'} );
-      currentLayout.run();
+      cyc.value.$(nodesToFocus.value.join(', ')).style('opacity', '1');
+      cyc.value.$("*").not(nodesToFocus.value.join(', ')).style('opacity', '0.25');
+      if(nodesAdded.value.length > 1){
+        cyc.value.$(nodesAdded.value.join(', ')).layout(
+          {
+            name: 'grid',
+            fit: false,
+            boundingBox: {x1: 50, y1: -50, x2: 375, y2: 300},
+          }
+        ).run();
+        nodesAdded.value = [];
+      }
     })
+  cyc.value.$('#'+node.id()).style('opacity', '1');
+  nodesToFocus.value = [];
 }
 
 async function getEquivalentClasses(evt){
@@ -335,6 +354,7 @@ SELECT ?class ?classLabel ?graph ?graphLabel WHERE {
   optional { ?graph dct:title ?graphLabel }
 } limit 10
   `
+nodesToFocus.value.push('#'+node.id())
   console.log(usedClassesQuery)
     const definedClassesBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, usedClassesQuery)
     definedClassesBindings.on('data', bindings => {
@@ -347,16 +367,32 @@ SELECT ?class ?classLabel ?graph ?graphLabel WHERE {
       let shrunkClassId = shrunkClass.replace(':','_')
       if(cyc.value.getElementById(shrunkGraphId).length == 0){
         cyc.value.add({data: {id: shrunkGraphId, label: graphLabel, rank: -1}, classes: ['graph','collapsed']});
+        nodesAdded.value.push('#'+shrunkGraphId)
       }
+      nodesToFocus.value.push('#'+shrunkGraphId)
       if(cyc.value.getElementById(shrunkClassId).length == 0){
         cyc.value.add({data: {id: shrunkClassId, label: classLabel, parent: shrunkGraphId}, classes: ['classDef']});
+        nodesAdded.value.push('#'+shrunkClassId)
       }
+      nodesToFocus.value.push('#'+shrunkClassId)
       cyc.value.add({group: 'edges', classes: ['equivalent'], data: {id: node.id() + '_' + shrunkClassId, source: node.id(), target: shrunkClassId }});
     })
     definedClassesBindings.on('end', () => {
-      let currentLayout = cyc.value.$('.classDef.' + node.id().replace(':','_')).layout( {'name': 'circle'} );
-      currentLayout.run();
+      cyc.value.$(nodesToFocus.value.join(', ')).style('opacity', '1');
+      cyc.value.$("*").not(nodesToFocus.value.join(', ')).style('opacity', '0.25');
+      if(nodesAdded.value.length > 1){
+        cyc.value.$(nodesAdded.value.join(', ')).layout(
+          {
+            name: 'grid',
+            fit: false,
+            boundingBox: {x1: 50, y1: -50, x2: 375, y2: 300},
+          }
+        ).run();
+        nodesAdded.value = [];
+      }
     })
+  cyc.value.$('#'+node.id()).style('opacity', '1');
+  nodesToFocus.value = [];
 }
 
 async function getAllUsedClasses(evt){
@@ -377,7 +413,8 @@ SELECT ?graph ?graphLabel ?class ?classLabel ?count WHERE {
   filter(?p = skos:example)
 } limit 10
 `
-    const definedClassesBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, usedClassesQuery)
+nodesToFocus.value.push('#'+node.id())
+const definedClassesBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, usedClassesQuery)
     definedClassesBindings.on('data', bindings => {
       let shrunkGraph = shrinkEntity(bindings['graph']['value'])
       let shrunkClass = shrinkEntity(bindings['class']['value'])
@@ -422,6 +459,7 @@ async function showEntityData(evt){
   if(node === toRaw(cyc.value) || node.classes().includes('usecase'))
     return;
   console.log(node);
+  cyc.value.$('#'+node.id()).style('opacity', '1');
   await getEntityData(node.id(), node.id().replace('_',':',1), node.classes())
 }
 
@@ -710,7 +748,7 @@ const visibleTab = ref('help')
         <template v-else-if="visibleTab == 'details'">
           <h5>Entity details</h5>
           <h4>{{ currentEntityDetails['title'] ?? currentEntityDetails['uri'] }}</h4>
-          <p style="text-align: center;"><a :href="prefixes.resolve(rdf.namedNode(currentEntityDetails['uri'] ?? '')) ?? ''">{{ currentEntityDetails['uri'] }}</a></p>
+          <p style="text-align: center;"><a :href="(prefixes.resolve(rdf.namedNode(currentEntityDetails['uri'] ?? '')) ?? {'value': ''}).value">{{ currentEntityDetails['uri'] }}</a></p>
           <table class="entity-details-table">
             <template v-for="(value, key) in currentEntityDetails">
             <template v-if="!['title','uri'].includes(key)">
