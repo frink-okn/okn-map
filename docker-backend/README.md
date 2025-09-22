@@ -9,5 +9,5 @@ They are intended to be used all together, although in some cases there may be s
 Most of these files are created using the LinkML runtime's RDF generator, based on [schema definitions](https://github.com/frink-okn/schema-gen/tree/main/schema) assembled from Theme 1 graphs or external ontologies.
 There are two exceptions, however:
 
-* '_equivalentclasses.ttl' holds skos:exactMatch mappings based on Wikidata ['equivalent class'](https://www.wikidata.org/entity/P1709) and ['exact match'](https://www.wikidata.org/entity/P1709) statements, among others.
+* '_equivalentclasses.ttl' holds skos:exactMatch mappings based on Wikidata ['equivalent class'](https://www.wikidata.org/entity/P1709) and ['exact match'](https://www.wikidata.org/entity/P2888) statements, among others.
 * '_manualequivalents.ttl' holds similar mappings to Wikidata entities added after manual inspection of the Theme 1 graph schemas.
