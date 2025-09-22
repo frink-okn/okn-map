@@ -1,0 +1,24 @@
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+# RURAL-KG
+wd:Q515 skos:exactMatch <http://sail.ua.edu/ruralkg/administrativearea/City> .
+# SOC-KG
+wd:Q515 skos:exactMatch <https://idir.uta.edu/sockg-ontology/docs/City> .
+# SUDOKN
+wd:Q515 skos:exactMatch <http://asu.edu/semantics/SUDOKN/City> .
+# KN-Wildlife
+wd:Q17334923 skos:exactMatch <https://wildlife.proto-okn.net/kg/Location> .
+# BioBricks-ICE
+wd:Q43460564	skos:exactMatch <http://purl.obolibrary.org/obo/CHEMINF_000000> .
+wd:Q102507	skos:exactMatch <http://purl.obolibrary.org/obo/CHEMINF_000446> .
+wd:Q54774134	skos:exactMatch <http://purl.obolibrary.org/obo/CHEMINF_000568> .
+# SPOKE
+wd:Q17334923 skos:exactMatch <neo4j://graph.schema#Location> .
+wd:Q12136	skos:exactMatch	<neo4j://graph.schema#Disease> .
+wd:Q7239	skos:exactMatch	<neo4j://graph.schema#Organism> .
+wd:Q3045352 skos:exactMatch	<neo4j://graph.schema#SDoH> .
+wd:Q43460564	skos:exactMatch	<neo4j://graph.schema#Compound> .
+wd:Q2249676	skos:exactMatch	<neo4j://graph.schema#Environment> .
+# NIKG
+wd:Q17334923 skos:exactMatch <https://metadata.phila.gov/Location> .

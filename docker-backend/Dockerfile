@@ -18,17 +18,13 @@ COPY requirements.txt .
 # Install the Python dependencies specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Create a directory to hold the TTL data
+RUN mkdir /data
+
 # Copy your RDF data file into the container.
 # This is the file that the SPARQL endpoint will serve.
 # You should replace 'data.ttl' with the name of your actual RDF file.
-COPY *.zip .
-
-# Create a directory to hold the unzipped data
-RUN mkdir /data
-
-# Unzip the file(s) into the /data directory
-RUN unzip \*.zip -d /data
-
+COPY *.ttl /data
 
 # Expose the port the endpoint will run on.
 # The default port for rdflib-endpoint is 8000.

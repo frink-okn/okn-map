@@ -1,0 +1,2289 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix linkml: <https://w3id.org/linkml/> .
+@prefix ns1: <http://sail.ua.edu/ruralkg/mentalhealthservice/> .
+@prefix ns2: <http://sail.ua.edu/ruralkg/administrativearea/> .
+@prefix ns3: <http://sail.ua.edu/ruralkg/substanceabuse/> .
+@prefix ns4: <http://sail.ua.edu/ruralkg/treatmentprovider/> .
+@prefix ns5: <http://sail.ua.edu/ruralkg/settlementtype/> .
+@prefix okn: <https://purl.org/okn/> .
+@prefix okns: <https://purl.org/okn/schema/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pav: <http://purl.org/pav/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema1: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shex: <http://www.w3.org/ns/shex#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://purl.org/okn/schema/ruralkg> a linkml:SchemaDefinition ;
+    dcterms:contributor <mailto:jiaqi.gong@ua.edu> ;
+    dcterms:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
+    dcterms:title "Rural Resilience KG" ;
+    pav:createdOn "2025-07-16T09:37:34.627060"^^xsd:dateTime ;
+    pav:lastUpdatedOn "2025-07-16T09:37:34.627060"^^xsd:dateTime ;
+    pav:version "0.1.1" ;
+    rdfs:seeAlso <https://frink.apps.renci.org/ldf/ruralkg>,
+        <https://frink.apps.renci.org/ruralkg/sparql>,
+        <https://frink.renci.org/kg-stats/rural-kg>,
+        <https://www.nsf.gov/awardsearch/showAward?AWD_ID=2333836> ;
+    skos:definition "Rural Resilience KG is a cross-domain knowledge graph to integrate health and justice for rural resilience." ;
+    skos:note "created_on: 2025-01-30T12:00:00",
+        "description: An ontology which serves the schema for the cross-domain knowledge graph (Rural-KG) to integrate health and justice data for rural resilience.",
+        "title: RuralKG Ontology" ;
+    sh:declare [ sh:namespace owl: ;
+            sh:prefix "owl" ],
+        [ sh:namespace <http://sail.ua.edu/ruralkg/> ;
+            sh:prefix "rural" ],
+        [ sh:namespace <https://purl.org/okn/schema/> ;
+            sh:prefix "okns" ],
+        [ sh:namespace rdfs: ;
+            sh:prefix "rdfs" ],
+        [ sh:namespace <https://purl.org/okn/> ;
+            sh:prefix "okn" ],
+        [ sh:namespace linkml: ;
+            sh:prefix "linkml" ] ;
+    linkml:annotations [ skos:example [ linkml:classes [ skos:example [ ns2:City [ skos:example 31120 ;
+                                            linkml:tag ns2:City ] ;
+                                    ns2:County [ skos:example 3253 ;
+                                            linkml:tag ns2:County ] ;
+                                    ns2:State [ skos:example 56 ;
+                                            linkml:tag ns2:State ] ;
+                                    ns1:MentalHealthService [ skos:example 176 ;
+                                            linkml:tag ns1:MentalHealthService ] ;
+                                    ns1:MentalHealthServiceCategory [ skos:example 21 ;
+                                            linkml:tag ns1:MentalHealthServiceCategory ] ;
+                                    ns5:CountyStatus [ skos:example 3234 ;
+                                            linkml:tag ns5:CountyStatus ] ;
+                                    ns5:RUCC [ skos:example 10 ;
+                                            linkml:tag ns5:RUCC ] ;
+                                    ns3:Substance [ skos:example 23 ;
+                                            linkml:tag ns3:Substance ] ;
+                                    ns3:SubstanceRelatedIncident [ skos:example 17 ;
+                                            linkml:tag ns3:SubstanceRelatedIncident ] ;
+                                    ns4:TreatmentProvider [ skos:example 9037 ;
+                                            linkml:tag ns4:TreatmentProvider ] ] ;
+                            linkml:tag <https://purl.org/okn/schema/classes> ] ;
+                    linkml:pairs [ skos:example [ ns2:abbreviation [ skos:example [ ns2:State [ skos:example [ linkml:string [ skos:example 56 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns2:State ] ] ;
+                                            linkml:tag ns2:abbreviation ] ;
+                                    ns2:containsPlace [ skos:example [ ns2:State [ skos:example [ ns2:County [ skos:example 3253 ;
+                                                                            linkml:tag ns2:County ] ] ;
+                                                            linkml:tag ns2:State ] ] ;
+                                            linkml:tag ns2:containsPlace ] ;
+                                    ns2:fips [ skos:example [ ns2:County [ skos:example [ linkml:string [ skos:example 3253 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns2:County ] ;
+                                                    ns2:State [ skos:example [ linkml:string [ skos:example 56 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns2:State ] ] ;
+                                            linkml:tag ns2:fips ] ;
+                                    ns2:latitude [ skos:example [ ns2:City [ skos:example [ linkml:float [ skos:example 31120 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/float> ] ] ;
+                                                            linkml:tag ns2:City ] ] ;
+                                            linkml:tag ns2:latitude ] ;
+                                    ns2:longitude [ skos:example [ ns2:City [ skos:example [ linkml:float [ skos:example 31120 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/float> ] ] ;
+                                                            linkml:tag ns2:City ] ] ;
+                                            linkml:tag ns2:longitude ] ;
+                                    ns2:name [ skos:example [ ns2:City [ skos:example [ linkml:string [ skos:example 31120 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns2:City ] ;
+                                                    ns2:County [ skos:example [ linkml:string [ skos:example 3253 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns2:County ] ;
+                                                    ns2:State [ skos:example [ linkml:string [ skos:example 56 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns2:State ] ] ;
+                                            linkml:tag ns2:name ] ;
+                                    ns2:primaryCounty [ skos:example [ ns2:City [ skos:example [ ns2:County [ skos:example 31120 ;
+                                                                            linkml:tag ns2:County ] ] ;
+                                                            linkml:tag ns2:City ] ] ;
+                                            linkml:tag ns2:primaryCounty ] ;
+                                    ns2:ranking [ skos:example [ ns2:City [ skos:example [ linkml:integer [ skos:example 31120 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/integer> ] ] ;
+                                                            linkml:tag ns2:City ] ] ;
+                                            linkml:tag ns2:ranking ] ;
+                                    ns1:code [ skos:example [ ns1:MentalHealthService [ skos:example [ linkml:string [ skos:example 176 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns1:MentalHealthService ] ;
+                                                    ns1:MentalHealthServiceCategory [ skos:example [ linkml:string [ skos:example 21 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns1:MentalHealthServiceCategory ] ] ;
+                                            linkml:tag ns1:code ] ;
+                                    ns1:containsService [ skos:example [ ns1:MentalHealthServiceCategory [ skos:example [ ns1:MentalHealthService [ skos:example 176 ;
+                                                                            linkml:tag ns1:MentalHealthService ] ] ;
+                                                            linkml:tag ns1:MentalHealthServiceCategory ] ] ;
+                                            linkml:tag ns1:containsService ] ;
+                                    ns1:description [ skos:example [ ns1:MentalHealthService [ skos:example [ linkml:string [ skos:example 176 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns1:MentalHealthService ] ] ;
+                                            linkml:tag ns1:description ] ;
+                                    ns1:name [ skos:example [ ns1:MentalHealthService [ skos:example [ linkml:string [ skos:example 176 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns1:MentalHealthService ] ;
+                                                    ns1:MentalHealthServiceCategory [ skos:example [ linkml:string [ skos:example 21 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns1:MentalHealthServiceCategory ] ] ;
+                                            linkml:tag ns1:name ] ;
+                                    ns1:year [ skos:example [ ns1:MentalHealthService [ skos:example [ linkml:integer [ skos:example 176 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/integer> ] ] ;
+                                                            linkml:tag ns1:MentalHealthService ] ;
+                                                    ns1:MentalHealthServiceCategory [ skos:example [ linkml:integer [ skos:example 21 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/integer> ] ] ;
+                                                            linkml:tag ns1:MentalHealthServiceCategory ] ] ;
+                                            linkml:tag ns1:year ] ;
+                                    ns5:censusCounty [ skos:example [ ns5:CountyStatus [ skos:example [ ns2:County [ skos:example 3234 ;
+                                                                            linkml:tag ns2:County ] ] ;
+                                                            linkml:tag ns5:CountyStatus ] ] ;
+                                            linkml:tag ns5:censusCounty ] ;
+                                    ns5:code [ skos:example [ ns5:RUCC [ skos:example [ linkml:string [ skos:example 10 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns5:RUCC ] ] ;
+                                            linkml:tag ns5:code ] ;
+                                    ns5:description [ skos:example [ ns5:RUCC [ skos:example [ linkml:string [ skos:example 10 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns5:RUCC ] ] ;
+                                            linkml:tag ns5:description ] ;
+                                    ns5:hasRUCC [ skos:example [ ns5:CountyStatus [ skos:example [ ns5:RUCC [ skos:example 3234 ;
+                                                                            linkml:tag ns5:RUCC ] ] ;
+                                                            linkml:tag ns5:CountyStatus ] ] ;
+                                            linkml:tag ns5:hasRUCC ] ;
+                                    ns5:population [ skos:example [ ns5:CountyStatus [ skos:example [ linkml:integer [ skos:example 3234 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/integer> ] ] ;
+                                                            linkml:tag ns5:CountyStatus ] ] ;
+                                            linkml:tag ns5:population ] ;
+                                    ns5:year [ skos:example [ ns5:CountyStatus [ skos:example [ linkml:integer [ skos:example 3234 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/integer> ] ] ;
+                                                            linkml:tag ns5:CountyStatus ] ;
+                                                    ns5:RUCC [ skos:example [ linkml:integer [ skos:example 10 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/integer> ] ] ;
+                                                            linkml:tag ns5:RUCC ] ] ;
+                                            linkml:tag ns5:year ] ;
+                                    ns3:code [ skos:example [ ns3:Substance [ skos:example [ linkml:string [ skos:example 23 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns3:Substance ] ] ;
+                                            linkml:tag ns3:code ] ;
+                                    ns3:description [ skos:example [ ns3:Substance [ skos:example [ linkml:string [ skos:example 23 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns3:Substance ] ] ;
+                                            linkml:tag ns3:description ] ;
+                                    ns3:identifier [ skos:example [ ns3:Substance [ skos:example [ linkml:string [ skos:example 23 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns3:Substance ] ] ;
+                                            linkml:tag ns3:identifier ] ;
+                                    ns3:name [ skos:example [ ns3:Substance [ skos:example [ linkml:string [ skos:example 23 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns3:Substance ] ;
+                                                    ns3:SubstanceRelatedIncident [ skos:example [ linkml:string [ skos:example 17 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns3:SubstanceRelatedIncident ] ] ;
+                                            linkml:tag ns3:name ] ;
+                                    ns3:sourceDataset [ skos:example [ ns3:Substance [ skos:example [ linkml:string [ skos:example 23 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns3:Substance ] ;
+                                                    ns3:SubstanceRelatedIncident [ skos:example [ linkml:string [ skos:example 17 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns3:SubstanceRelatedIncident ] ] ;
+                                            linkml:tag ns3:sourceDataset ] ;
+                                    ns3:year [ skos:example [ ns3:Substance [ skos:example [ linkml:integer [ skos:example 23 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/integer> ] ] ;
+                                                            linkml:tag ns3:Substance ] ;
+                                                    ns3:SubstanceRelatedIncident [ skos:example [ linkml:integer [ skos:example 17 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/integer> ] ] ;
+                                                            linkml:tag ns3:SubstanceRelatedIncident ] ] ;
+                                            linkml:tag ns3:year ] ;
+                                    ns4:address [ skos:example [ ns4:TreatmentProvider [ skos:example [ linkml:string [ skos:example 9037 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns4:TreatmentProvider ] ] ;
+                                            linkml:tag ns4:address ] ;
+                                    ns4:alias [ skos:example [ ns4:TreatmentProvider [ skos:example [ linkml:string [ skos:example 9037 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns4:TreatmentProvider ] ] ;
+                                            linkml:tag ns4:alias ] ;
+                                    ns4:inCity [ skos:example [ ns4:TreatmentProvider [ skos:example [ linkml:uri [ skos:example 920 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/uri> ] ;
+                                                                    ns2:City [ skos:example 8117 ;
+                                                                            linkml:tag ns2:City ] ] ;
+                                                            linkml:tag ns4:TreatmentProvider ] ] ;
+                                            linkml:tag ns4:inCity ] ;
+                                    ns4:name [ skos:example [ ns4:TreatmentProvider [ skos:example [ linkml:string [ skos:example 9037 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns4:TreatmentProvider ] ] ;
+                                            linkml:tag ns4:name ] ;
+                                    ns4:phone [ skos:example [ ns4:TreatmentProvider [ skos:example [ linkml:string [ skos:example 9037 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns4:TreatmentProvider ] ] ;
+                                            linkml:tag ns4:phone ] ;
+                                    ns4:providesService [ skos:example [ ns4:TreatmentProvider [ skos:example [ ns1:MentalHealthService [ skos:example 442841 ;
+                                                                            linkml:tag ns1:MentalHealthService ] ] ;
+                                                            linkml:tag ns4:TreatmentProvider ] ] ;
+                                            linkml:tag ns4:providesService ] ;
+                                    ns4:zipcode [ skos:example [ ns4:TreatmentProvider [ skos:example [ linkml:string [ skos:example 9037 ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns4:TreatmentProvider ] ] ;
+                                            linkml:tag ns4:zipcode ] ] ;
+                            linkml:tag <https://purl.org/okn/schema/pairs> ] ;
+                    linkml:slots [ skos:example [ ns2:abbreviation [ skos:example 56 ;
+                                            linkml:tag ns2:abbreviation ] ;
+                                    ns2:containsPlace [ skos:example 3253 ;
+                                            linkml:tag ns2:containsPlace ] ;
+                                    ns2:fips [ skos:example 3309 ;
+                                            linkml:tag ns2:fips ] ;
+                                    ns2:latitude [ skos:example 31120 ;
+                                            linkml:tag ns2:latitude ] ;
+                                    ns2:longitude [ skos:example 31120 ;
+                                            linkml:tag ns2:longitude ] ;
+                                    ns2:name [ skos:example 34429 ;
+                                            linkml:tag ns2:name ] ;
+                                    ns2:primaryCounty [ skos:example 31120 ;
+                                            linkml:tag ns2:primaryCounty ] ;
+                                    ns2:ranking [ skos:example 31120 ;
+                                            linkml:tag ns2:ranking ] ;
+                                    ns1:code [ skos:example 197 ;
+                                            linkml:tag ns1:code ] ;
+                                    ns1:containsService [ skos:example 176 ;
+                                            linkml:tag ns1:containsService ] ;
+                                    ns1:description [ skos:example 176 ;
+                                            linkml:tag ns1:description ] ;
+                                    ns1:name [ skos:example 197 ;
+                                            linkml:tag ns1:name ] ;
+                                    ns1:year [ skos:example 197 ;
+                                            linkml:tag ns1:year ] ;
+                                    ns5:censusCounty [ skos:example 3234 ;
+                                            linkml:tag ns5:censusCounty ] ;
+                                    ns5:code [ skos:example 10 ;
+                                            linkml:tag ns5:code ] ;
+                                    ns5:description [ skos:example 10 ;
+                                            linkml:tag ns5:description ] ;
+                                    ns5:hasRUCC [ skos:example 3234 ;
+                                            linkml:tag ns5:hasRUCC ] ;
+                                    ns5:population [ skos:example 3234 ;
+                                            linkml:tag ns5:population ] ;
+                                    ns5:year [ skos:example 3244 ;
+                                            linkml:tag ns5:year ] ;
+                                    ns3:code [ skos:example 23 ;
+                                            linkml:tag ns3:code ] ;
+                                    ns3:description [ skos:example 23 ;
+                                            linkml:tag ns3:description ] ;
+                                    ns3:identifier [ skos:example 23 ;
+                                            linkml:tag ns3:identifier ] ;
+                                    ns3:name [ skos:example 40 ;
+                                            linkml:tag ns3:name ] ;
+                                    ns3:sourceDataset [ skos:example 40 ;
+                                            linkml:tag ns3:sourceDataset ] ;
+                                    ns3:year [ skos:example 40 ;
+                                            linkml:tag ns3:year ] ;
+                                    ns4:address [ skos:example 9037 ;
+                                            linkml:tag ns4:address ] ;
+                                    ns4:alias [ skos:example 9037 ;
+                                            linkml:tag ns4:alias ] ;
+                                    ns4:inCity [ skos:example 9037 ;
+                                            linkml:tag ns4:inCity ] ;
+                                    ns4:name [ skos:example 9037 ;
+                                            linkml:tag ns4:name ] ;
+                                    ns4:phone [ skos:example 9037 ;
+                                            linkml:tag ns4:phone ] ;
+                                    ns4:providesService [ skos:example 442841 ;
+                                            linkml:tag ns4:providesService ] ;
+                                    ns4:zipcode [ skos:example 9037 ;
+                                            linkml:tag ns4:zipcode ] ] ;
+                            linkml:tag <https://purl.org/okn/schema/slots> ] ] ;
+            linkml:tag <https://purl.org/okn/schema/counts> ],
+        [ skos:example [ linkml:classes [ skos:example [ ns2:City [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/City_1840153164" ;
+                                            linkml:tag ns2:City ] ;
+                                    ns2:County [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/County_78030" ;
+                                            linkml:tag ns2:County ] ;
+                                    ns2:State [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/State_WY" ;
+                                            linkml:tag ns2:State ] ;
+                                    ns1:MentalHealthService [ skos:example "http://sail.ua.edu/ruralkg/mentalhealthservice/MHS_ZIPRA" ;
+                                            linkml:tag ns1:MentalHealthService ] ;
+                                    ns1:MentalHealthServiceCategory [ skos:example "http://sail.ua.edu/ruralkg/mentalhealthservice/MHSC_TC" ;
+                                            linkml:tag ns1:MentalHealthServiceCategory ] ;
+                                    ns5:CountyStatus [ skos:example "http://sail.ua.edu/ruralkg/settlementtype/CountyStatus_78030_2013" ;
+                                            linkml:tag ns5:CountyStatus ] ;
+                                    ns5:RUCC [ skos:example "http://sail.ua.edu/ruralkg/settlementtype/RUCC_2013_9" ;
+                                            linkml:tag ns5:RUCC ] ;
+                                    ns3:Substance [ skos:example "http://sail.ua.edu/ruralkg/substanceabuse/Substance_f0efa50d-775f-418d-96f4-5ed0a393d3d2" ;
+                                            linkml:tag ns3:Substance ] ;
+                                    ns3:SubstanceRelatedIncident [ skos:example "http://sail.ua.edu/ruralkg/substanceabuse/SIT_f751b795-a570-41d5-974a-bd0dea99f158" ;
+                                            linkml:tag ns3:SubstanceRelatedIncident ] ;
+                                    ns4:TreatmentProvider [ skos:example "http://sail.ua.edu/ruralkg/treatmentprovider/TP_999" ;
+                                            linkml:tag ns4:TreatmentProvider ] ] ;
+                            linkml:tag <https://purl.org/okn/schema/classes> ] ;
+                    linkml:pairs [ skos:example [ ns2:abbreviation [ skos:example [ ns2:State [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/abbreviation" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "AK" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/State_AK" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns2:State ] ] ;
+                                            linkml:tag ns2:abbreviation ] ;
+                                    ns2:containsPlace [ skos:example [ ns2:State [ skos:example [ ns2:County [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/containsPlace" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/County_02013" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/State_AK" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag ns2:County ] ] ;
+                                                            linkml:tag ns2:State ] ] ;
+                                            linkml:tag ns2:containsPlace ] ;
+                                    ns2:fips [ skos:example [ ns2:County [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/fips" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "01001" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/County_01001" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns2:County ] ;
+                                                    ns2:State [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/fips" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "02" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/State_AK" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns2:State ] ] ;
+                                            linkml:tag ns2:fips ] ;
+                                    ns2:latitude [ skos:example [ ns2:City [ skos:example [ linkml:float [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/latitude" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "18.2319" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/City_1630023540" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/float> ] ] ;
+                                                            linkml:tag ns2:City ] ] ;
+                                            linkml:tag ns2:latitude ] ;
+                                    ns2:longitude [ skos:example [ ns2:City [ skos:example [ linkml:float [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/longitude" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "-66.0388" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/City_1630023540" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/float> ] ] ;
+                                                            linkml:tag ns2:City ] ] ;
+                                            linkml:tag ns2:longitude ] ;
+                                    ns2:name [ skos:example [ ns2:City [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/name" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "Caguas" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/City_1630023540" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns2:City ] ;
+                                                    ns2:County [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/name" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "Autauga" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/County_01001" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns2:County ] ;
+                                                    ns2:State [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/name" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "Alaska" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/State_AK" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns2:State ] ] ;
+                                            linkml:tag ns2:name ] ;
+                                    ns2:primaryCounty [ skos:example [ ns2:City [ skos:example [ ns2:County [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/primaryCounty" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/County_72025" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/City_1630023540" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag ns2:County ] ] ;
+                                                            linkml:tag ns2:City ] ] ;
+                                            linkml:tag ns2:primaryCounty ] ;
+                                    ns2:ranking [ skos:example [ ns2:City [ skos:example [ linkml:integer [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/ranking" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "2" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/City_1630023540" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/integer> ] ] ;
+                                                            linkml:tag ns2:City ] ] ;
+                                            linkml:tag ns2:ranking ] ;
+                                    ns1:code [ skos:example [ ns1:MentalHealthService [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/mentalhealthservice/code" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "ACT" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/mentalhealthservice/MHS_ACT" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns1:MentalHealthService ] ;
+                                                    ns1:MentalHealthServiceCategory [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/mentalhealthservice/code" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "AGE" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/mentalhealthservice/MHSC_AGE" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns1:MentalHealthServiceCategory ] ] ;
+                                            linkml:tag ns1:code ] ;
+                                    ns1:containsService [ skos:example [ ns1:MentalHealthServiceCategory [ skos:example [ ns1:MentalHealthService [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/mentalhealthservice/containsService" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "http://sail.ua.edu/ruralkg/mentalhealthservice/MHS_ADLT" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/mentalhealthservice/MHSC_AGE" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag ns1:MentalHealthService ] ] ;
+                                                            linkml:tag ns1:MentalHealthServiceCategory ] ] ;
+                                            linkml:tag ns1:containsService ] ;
+                                    ns1:description [ skos:example [ ns1:MentalHealthService [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/mentalhealthservice/description" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "A multi-disciplinary clinical team approach, helps those with serious mental illness live in the community by providing 24-hour intensive community services in the individual's natural setting." ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/mentalhealthservice/MHS_ACT" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns1:MentalHealthService ] ] ;
+                                            linkml:tag ns1:description ] ;
+                                    ns1:name [ skos:example [ ns1:MentalHealthService [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/mentalhealthservice/name" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "Assertive community treatment" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/mentalhealthservice/MHS_ACT" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns1:MentalHealthService ] ;
+                                                    ns1:MentalHealthServiceCategory [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/mentalhealthservice/name" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "Age Groups Accepted" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/mentalhealthservice/MHSC_AGE" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns1:MentalHealthServiceCategory ] ] ;
+                                            linkml:tag ns1:name ] ;
+                                    ns1:year [ skos:example [ ns1:MentalHealthService [ skos:example [ linkml:integer [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/mentalhealthservice/year" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "2022" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/mentalhealthservice/MHS_ACT" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/integer> ] ] ;
+                                                            linkml:tag ns1:MentalHealthService ] ;
+                                                    ns1:MentalHealthServiceCategory [ skos:example [ linkml:integer [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/mentalhealthservice/year" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "2022" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/mentalhealthservice/MHSC_AGE" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/integer> ] ] ;
+                                                            linkml:tag ns1:MentalHealthServiceCategory ] ] ;
+                                            linkml:tag ns1:year ] ;
+                                    ns5:censusCounty [ skos:example [ ns5:CountyStatus [ skos:example [ ns2:County [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/settlementtype/censusCounty" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/County_01001" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/settlementtype/CountyStatus_01001_2013" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag ns2:County ] ] ;
+                                                            linkml:tag ns5:CountyStatus ] ] ;
+                                            linkml:tag ns5:censusCounty ] ;
+                                    ns5:code [ skos:example [ ns5:RUCC [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/settlementtype/code" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "0" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/settlementtype/RUCC_2013_0" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns5:RUCC ] ] ;
+                                            linkml:tag ns5:code ] ;
+                                    ns5:description [ skos:example [ ns5:RUCC [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/settlementtype/description" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "Not Applicable" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/settlementtype/RUCC_2013_0" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns5:RUCC ] ] ;
+                                            linkml:tag ns5:description ] ;
+                                    ns5:hasRUCC [ skos:example [ ns5:CountyStatus [ skos:example [ ns5:RUCC [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/settlementtype/hasRUCC" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "http://sail.ua.edu/ruralkg/settlementtype/RUCC_2013_2" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/settlementtype/CountyStatus_01001_2013" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag ns5:RUCC ] ] ;
+                                                            linkml:tag ns5:CountyStatus ] ] ;
+                                            linkml:tag ns5:hasRUCC ] ;
+                                    ns5:population [ skos:example [ ns5:CountyStatus [ skos:example [ linkml:integer [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/settlementtype/population" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "54571" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/settlementtype/CountyStatus_01001_2013" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/integer> ] ] ;
+                                                            linkml:tag ns5:CountyStatus ] ] ;
+                                            linkml:tag ns5:population ] ;
+                                    ns5:year [ skos:example [ ns5:CountyStatus [ skos:example [ linkml:integer [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/settlementtype/year" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "2013" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/settlementtype/CountyStatus_01001_2013" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/integer> ] ] ;
+                                                            linkml:tag ns5:CountyStatus ] ;
+                                                    ns5:RUCC [ skos:example [ linkml:integer [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/settlementtype/year" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "2013" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/settlementtype/RUCC_2013_0" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/integer> ] ] ;
+                                                            linkml:tag ns5:RUCC ] ] ;
+                                            linkml:tag ns5:year ] ;
+                                    ns3:code [ skos:example [ ns3:Substance [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/substanceabuse/code" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "None" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/substanceabuse/Substance_135de041-4e4c-457b-ae79-e0d912bb5e65" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns3:Substance ] ] ;
+                                            linkml:tag ns3:code ] ;
+                                    ns3:description [ skos:example [ ns3:Substance [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/substanceabuse/description" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "Crack is a chemically altered, smokeable form of cocaine base, characterized by its rapid onset and intense effects." ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/substanceabuse/Substance_135de041-4e4c-457b-ae79-e0d912bb5e65" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns3:Substance ] ] ;
+                                            linkml:tag ns3:description ] ;
+                                    ns3:identifier [ skos:example [ ns3:Substance [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/substanceabuse/identifier" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "Q330694" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/substanceabuse/Substance_135de041-4e4c-457b-ae79-e0d912bb5e65" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns3:Substance ] ] ;
+                                            linkml:tag ns3:identifier ] ;
+                                    ns3:name [ skos:example [ ns3:Substance [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/substanceabuse/name" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "Crack" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/substanceabuse/Substance_135de041-4e4c-457b-ae79-e0d912bb5e65" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns3:Substance ] ;
+                                                    ns3:SubstanceRelatedIncident [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/substanceabuse/name" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "High Frequency Substance Usage" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/substanceabuse/SIT_0a4420e8-a255-4baa-b67b-8f165fead0a4" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns3:SubstanceRelatedIncident ] ] ;
+                                            linkml:tag ns3:name ] ;
+                                    ns3:sourceDataset [ skos:example [ ns3:Substance [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/substanceabuse/sourceDataset" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "NSDUH" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/substanceabuse/Substance_135de041-4e4c-457b-ae79-e0d912bb5e65" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns3:Substance ] ;
+                                                    ns3:SubstanceRelatedIncident [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/substanceabuse/sourceDataset" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "NSDUH" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/substanceabuse/SIT_0a4420e8-a255-4baa-b67b-8f165fead0a4" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns3:SubstanceRelatedIncident ] ] ;
+                                            linkml:tag ns3:sourceDataset ] ;
+                                    ns3:year [ skos:example [ ns3:Substance [ skos:example [ linkml:integer [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/substanceabuse/year" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "2022" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/substanceabuse/Substance_135de041-4e4c-457b-ae79-e0d912bb5e65" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/integer> ] ] ;
+                                                            linkml:tag ns3:Substance ] ;
+                                                    ns3:SubstanceRelatedIncident [ skos:example [ linkml:integer [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/substanceabuse/year" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "2022" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/substanceabuse/SIT_0a4420e8-a255-4baa-b67b-8f165fead0a4" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/integer> ] ] ;
+                                                            linkml:tag ns3:SubstanceRelatedIncident ] ] ;
+                                            linkml:tag ns3:year ] ;
+                                    ns4:address [ skos:example [ ns4:TreatmentProvider [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/treatmentprovider/address" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "219 Dothan Road, NaN" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/treatmentprovider/TP_1" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns4:TreatmentProvider ] ] ;
+                                            linkml:tag ns4:address ] ;
+                                    ns4:alias [ skos:example [ ns4:TreatmentProvider [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/treatmentprovider/alias" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "Henry County Clinic" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/treatmentprovider/TP_1" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns4:TreatmentProvider ] ] ;
+                                            linkml:tag ns4:alias ] ;
+                                    ns4:inCity [ skos:example [ ns4:TreatmentProvider [ skos:example [ linkml:uri [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/treatmentprovider/inCity" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/City_None" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/treatmentprovider/TP_1107" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/uri> ] ;
+                                                                    ns2:City [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/treatmentprovider/inCity" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "http://sail.ua.edu/ruralkg/administrativearea/City_1840000552" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/treatmentprovider/TP_1" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag ns2:City ] ] ;
+                                                            linkml:tag ns4:TreatmentProvider ] ] ;
+                                            linkml:tag ns4:inCity ] ;
+                                    ns4:name [ skos:example [ ns4:TreatmentProvider [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/treatmentprovider/name" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "SpectraCare Health Systems" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/treatmentprovider/TP_1" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns4:TreatmentProvider ] ] ;
+                                            linkml:tag ns4:name ] ;
+                                    ns4:phone [ skos:example [ ns4:TreatmentProvider [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/treatmentprovider/phone" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "800-951-4357" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/treatmentprovider/TP_1" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns4:TreatmentProvider ] ] ;
+                                            linkml:tag ns4:phone ] ;
+                                    ns4:providesService [ skos:example [ ns4:TreatmentProvider [ skos:example [ ns1:MentalHealthService [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/treatmentprovider/providesService" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "http://sail.ua.edu/ruralkg/mentalhealthservice/MHS_ACT" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/treatmentprovider/TP_1" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag ns1:MentalHealthService ] ] ;
+                                                            linkml:tag ns4:TreatmentProvider ] ] ;
+                                            linkml:tag ns4:providesService ] ;
+                                    ns4:zipcode [ skos:example [ ns4:TreatmentProvider [ skos:example [ linkml:string [ skos:example [ rdf:predicate [ skos:example "http://sail.ua.edu/ruralkg/treatmentprovider/zipcode" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/predicate> ] ;
+                                                                                    linkml:object [ skos:example "36310" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/object> ] ;
+                                                                                    linkml:subject [ skos:example "http://sail.ua.edu/ruralkg/treatmentprovider/TP_1" ;
+                                                                                            linkml:tag <https://purl.org/okn/schema/subject> ] ] ;
+                                                                            linkml:tag <https://purl.org/okn/schema/string> ] ] ;
+                                                            linkml:tag ns4:TreatmentProvider ] ] ;
+                                            linkml:tag ns4:zipcode ] ] ;
+                            linkml:tag <https://purl.org/okn/schema/pairs> ] ] ;
+            linkml:tag <https://purl.org/okn/schema/examples> ] ;
+    linkml:classes <https://purl.org/okn/schema/Any>,
+        <https://purl.org/okn/schema/RuralAdministrativeareaAdministrativeArea>,
+        <https://purl.org/okn/schema/RuralAdministrativeareaCity>,
+        <https://purl.org/okn/schema/RuralAdministrativeareaCounty>,
+        <https://purl.org/okn/schema/RuralAdministrativeareaState>,
+        <https://purl.org/okn/schema/RuralJusticeAdditionalJustifiableHomicideCircumstances>,
+        <https://purl.org/okn/schema/RuralJusticeAdministrativeSegment>,
+        <https://purl.org/okn/schema/RuralJusticeAge>,
+        <https://purl.org/okn/schema/RuralJusticeAggravatedAssaultHomicideCircumstances>,
+        <https://purl.org/okn/schema/RuralJusticeArrestDate>,
+        <https://purl.org/okn/schema/RuralJusticeArrestTransactionNumber>,
+        <https://purl.org/okn/schema/RuralJusticeArresteeSegment>,
+        <https://purl.org/okn/schema/RuralJusticeArresteeSequenceNumber>,
+        <https://purl.org/okn/schema/RuralJusticeArresteeWasArmedWith>,
+        <https://purl.org/okn/schema/RuralJusticeAutomaticWeaponIndicator>,
+        <https://purl.org/okn/schema/RuralJusticeBiasMotivation>,
+        <https://purl.org/okn/schema/RuralJusticeCargoTheft>,
+        <https://purl.org/okn/schema/RuralJusticeClearedExceptionally>,
+        <https://purl.org/okn/schema/RuralJusticeDateRecovered>,
+        <https://purl.org/okn/schema/RuralJusticeEstimatedDrugQuantity>,
+        <https://purl.org/okn/schema/RuralJusticeEthnicity>,
+        <https://purl.org/okn/schema/RuralJusticeExceptionalClearanceDate>,
+        <https://purl.org/okn/schema/RuralJusticeIncidentDateHour>,
+        <https://purl.org/okn/schema/RuralJusticeIncidentNumber>,
+        <https://purl.org/okn/schema/RuralJusticeJustice>,
+        <https://purl.org/okn/schema/RuralJusticeLocationType>,
+        <https://purl.org/okn/schema/RuralJusticeMethodofEntry>,
+        <https://purl.org/okn/schema/RuralJusticeMultipleArresteeSegmentsIndicator>,
+        <https://purl.org/okn/schema/RuralJusticeNumberofPremisesEntered>,
+        <https://purl.org/okn/schema/RuralJusticeNumberofRecoveredMotorVehicles>,
+        <https://purl.org/okn/schema/RuralJusticeNumberofStolenMotorVehicles>,
+        <https://purl.org/okn/schema/RuralJusticeORI(OriginatingAgencyIdentifier)>,
+        <https://purl.org/okn/schema/RuralJusticeOffenderNumber(s)toBeRelated>,
+        <https://purl.org/okn/schema/RuralJusticeOffenderSegment>,
+        <https://purl.org/okn/schema/RuralJusticeOffenderSequenceNumber>,
+        <https://purl.org/okn/schema/RuralJusticeOffendersSuspectedofUsing>,
+        <https://purl.org/okn/schema/RuralJusticeOffenseAttemptedCompleted>,
+        <https://purl.org/okn/schema/RuralJusticeOffenseSegment>,
+        <https://purl.org/okn/schema/RuralJusticeOfficerAssignmentType>,
+        <https://purl.org/okn/schema/RuralJusticeOfficerORI>,
+        <https://purl.org/okn/schema/RuralJusticePropertyDescription>,
+        <https://purl.org/okn/schema/RuralJusticePropertySegment>,
+        <https://purl.org/okn/schema/RuralJusticeRace>,
+        <https://purl.org/okn/schema/RuralJusticeRelationshipofVictimtoOffender>,
+        <https://purl.org/okn/schema/RuralJusticeResidentStatus>,
+        <https://purl.org/okn/schema/RuralJusticeSex>,
+        <https://purl.org/okn/schema/RuralJusticeSuspectedDrugType>,
+        <https://purl.org/okn/schema/RuralJusticeTypeofArrest>,
+        <https://purl.org/okn/schema/RuralJusticeTypeofCriminalActivity>,
+        <https://purl.org/okn/schema/RuralJusticeTypeofDrugMeasurement>,
+        <https://purl.org/okn/schema/RuralJusticeTypeofInjury>,
+        <https://purl.org/okn/schema/RuralJusticeTypeofOfficerActivityCircumstance>,
+        <https://purl.org/okn/schema/RuralJusticeTypeofPropertyLossEtc.>,
+        <https://purl.org/okn/schema/RuralJusticeTypeofVictim>,
+        <https://purl.org/okn/schema/RuralJusticeTypeofWeaponForceInvolved>,
+        <https://purl.org/okn/schema/RuralJusticeUCRArrestOffenseCode>,
+        <https://purl.org/okn/schema/RuralJusticeUCROffenseCode>,
+        <https://purl.org/okn/schema/RuralJusticeValueofProperty>,
+        <https://purl.org/okn/schema/RuralJusticeVictimConnectedtoUCROffenseCode>,
+        <https://purl.org/okn/schema/RuralJusticeVictimSegment>,
+        <https://purl.org/okn/schema/RuralJusticeVictimSequenceNumber>,
+        <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealth>,
+        <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealthService>,
+        <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealthServiceCategory>,
+        <https://purl.org/okn/schema/RuralSettlementtypeCountyStatus>,
+        <https://purl.org/okn/schema/RuralSettlementtypeRUCC>,
+        <https://purl.org/okn/schema/RuralSettlementtypeSettlementType>,
+        <https://purl.org/okn/schema/RuralSubstanceabuseSubstance>,
+        <https://purl.org/okn/schema/RuralSubstanceabuseSubstanceAbuse>,
+        <https://purl.org/okn/schema/RuralSubstanceabuseSubstanceRelatedIncident>,
+        <https://purl.org/okn/schema/RuralTreatmentproviderTreatmentProvider> ;
+    linkml:default_prefix "okns" ;
+    linkml:default_range <https://purl.org/okn/schema/string> ;
+    linkml:generation_date "2025-07-18T08:27:10"^^xsd:dateTime ;
+    linkml:id okns:ruralkg ;
+    linkml:imports linkml:types,
+        okns:extended_types ;
+    linkml:metamodel_version "1.7.0" ;
+    linkml:slots <https://purl.org/okn/schema/rural_administrativearea_abbreviation>,
+        <https://purl.org/okn/schema/rural_administrativearea_containsPlace>,
+        <https://purl.org/okn/schema/rural_administrativearea_fips>,
+        <https://purl.org/okn/schema/rural_administrativearea_latitude>,
+        <https://purl.org/okn/schema/rural_administrativearea_longitude>,
+        <https://purl.org/okn/schema/rural_administrativearea_name>,
+        <https://purl.org/okn/schema/rural_administrativearea_primaryCounty>,
+        <https://purl.org/okn/schema/rural_administrativearea_ranking>,
+        <https://purl.org/okn/schema/rural_mentalhealthservice_code>,
+        <https://purl.org/okn/schema/rural_mentalhealthservice_containsService>,
+        <https://purl.org/okn/schema/rural_mentalhealthservice_description>,
+        <https://purl.org/okn/schema/rural_mentalhealthservice_name>,
+        <https://purl.org/okn/schema/rural_mentalhealthservice_year>,
+        <https://purl.org/okn/schema/rural_settlementtype_censusCounty>,
+        <https://purl.org/okn/schema/rural_settlementtype_code>,
+        <https://purl.org/okn/schema/rural_settlementtype_description>,
+        <https://purl.org/okn/schema/rural_settlementtype_hasRUCC>,
+        <https://purl.org/okn/schema/rural_settlementtype_population>,
+        <https://purl.org/okn/schema/rural_settlementtype_year>,
+        <https://purl.org/okn/schema/rural_substanceabuse_code>,
+        <https://purl.org/okn/schema/rural_substanceabuse_description>,
+        <https://purl.org/okn/schema/rural_substanceabuse_identifier>,
+        <https://purl.org/okn/schema/rural_substanceabuse_name>,
+        <https://purl.org/okn/schema/rural_substanceabuse_sourceDataset>,
+        <https://purl.org/okn/schema/rural_substanceabuse_year>,
+        <https://purl.org/okn/schema/rural_treatmentprovider_address>,
+        <https://purl.org/okn/schema/rural_treatmentprovider_alias>,
+        <https://purl.org/okn/schema/rural_treatmentprovider_inCity>,
+        <https://purl.org/okn/schema/rural_treatmentprovider_name>,
+        <https://purl.org/okn/schema/rural_treatmentprovider_phone>,
+        <https://purl.org/okn/schema/rural_treatmentprovider_providesService>,
+        <https://purl.org/okn/schema/rural_treatmentprovider_zipcode> ;
+    linkml:source_file "ruralkg.yaml" ;
+    linkml:source_file_date "2025-07-18T05:46:27"^^xsd:dateTime ;
+    linkml:source_file_size 78119 ;
+    linkml:types <https://purl.org/okn/schema/boolean>,
+        <https://purl.org/okn/schema/curie>,
+        <https://purl.org/okn/schema/date>,
+        <https://purl.org/okn/schema/date_or_datetime>,
+        <https://purl.org/okn/schema/datetime>,
+        <https://purl.org/okn/schema/decimal>,
+        <https://purl.org/okn/schema/double>,
+        <https://purl.org/okn/schema/float>,
+        <https://purl.org/okn/schema/float16>,
+        <https://purl.org/okn/schema/float32>,
+        <https://purl.org/okn/schema/float64>,
+        <https://purl.org/okn/schema/int16>,
+        <https://purl.org/okn/schema/int32>,
+        <https://purl.org/okn/schema/int64>,
+        <https://purl.org/okn/schema/int8>,
+        <https://purl.org/okn/schema/integer>,
+        <https://purl.org/okn/schema/jsonpath>,
+        <https://purl.org/okn/schema/jsonpointer>,
+        <https://purl.org/okn/schema/ncname>,
+        <https://purl.org/okn/schema/nodeidentifier>,
+        <https://purl.org/okn/schema/objectidentifier>,
+        <https://purl.org/okn/schema/signedinteger>,
+        <https://purl.org/okn/schema/sparqlpath>,
+        <https://purl.org/okn/schema/string>,
+        <https://purl.org/okn/schema/time>,
+        <https://purl.org/okn/schema/uint16>,
+        <https://purl.org/okn/schema/uint32>,
+        <https://purl.org/okn/schema/uint64>,
+        <https://purl.org/okn/schema/uint8>,
+        <https://purl.org/okn/schema/unsignedinteger>,
+        <https://purl.org/okn/schema/uri>,
+        <https://purl.org/okn/schema/uriorcurie> .
+
+<https://purl.org/okn/schema/boolean> a linkml:TypeDefinition ;
+    skos:definition "A binary (true or false) value" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"boolean\"." ;
+    skos:exactMatch schema1:Boolean ;
+    skos:inScheme linkml:types ;
+    linkml:base "Bool" ;
+    linkml:definition_uri linkml:Boolean ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "bool" ;
+    linkml:uri xsd:boolean .
+
+<https://purl.org/okn/schema/curie> a linkml:TypeDefinition ;
+    dcterms:conformsTo "https://www.w3.org/TR/curie/" ;
+    skos:definition "a compact URI" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"curie\"." ;
+    skos:inScheme linkml:types ;
+    skos:note "in RDF serializations this MUST be expanded to a URI",
+        "in non-RDF serializations MAY be serialized as the compact representation" ;
+    linkml:base "Curie" ;
+    linkml:definition_uri linkml:Curie ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri xsd:string .
+
+<https://purl.org/okn/schema/date> a linkml:TypeDefinition ;
+    skos:definition "a date (year, month and day) in an idealized calendar" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date\".",
+        "URI is dateTime because OWL reasoners don't work with straight date or time" ;
+    skos:exactMatch schema1:Date ;
+    skos:inScheme linkml:types ;
+    linkml:base "XSDDate" ;
+    linkml:definition_uri linkml:Date ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri xsd:date .
+
+<https://purl.org/okn/schema/date_or_datetime> a linkml:TypeDefinition ;
+    skos:definition "Either a date or a datetime" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date_or_datetime\"." ;
+    skos:inScheme linkml:types ;
+    linkml:base "str" ;
+    linkml:definition_uri linkml:DateOrDatetime ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri linkml:DateOrDatetime .
+
+<https://purl.org/okn/schema/datetime> a linkml:TypeDefinition ;
+    skos:definition "The combination of a date and time" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"datetime\"." ;
+    skos:exactMatch schema1:DateTime ;
+    skos:inScheme linkml:types ;
+    linkml:base "XSDDateTime" ;
+    linkml:definition_uri linkml:Datetime ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri xsd:dateTime .
+
+<https://purl.org/okn/schema/decimal> a linkml:TypeDefinition ;
+    skos:broadMatch schema1:Number ;
+    skos:definition "A real number with arbitrary precision that conforms to the xsd:decimal specification" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"decimal\"." ;
+    skos:inScheme linkml:types ;
+    linkml:base "Decimal" ;
+    linkml:definition_uri linkml:Decimal ;
+    linkml:imported_from "linkml:types" ;
+    linkml:uri xsd:decimal .
+
+<https://purl.org/okn/schema/double> a linkml:TypeDefinition ;
+    skos:closeMatch schema1:Float ;
+    skos:definition "A real number that conforms to the xsd:double specification" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"double\"." ;
+    skos:inScheme linkml:types ;
+    linkml:base "float" ;
+    linkml:definition_uri linkml:Double ;
+    linkml:imported_from "linkml:types" ;
+    linkml:uri xsd:double .
+
+<https://purl.org/okn/schema/float16> a linkml:TypeDefinition ;
+    rdfs:seeAlso <https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.half> ;
+    skos:altLabel "e",
+        "half" ;
+    skos:definition "A 16-bit floating point number" ;
+    skos:inScheme linkml:extended_types ;
+    linkml:base "float" ;
+    linkml:definition_uri linkml:Float16 ;
+    linkml:typeof <https://purl.org/okn/schema/float> ;
+    linkml:uri xsd:float .
+
+<https://purl.org/okn/schema/float32> a linkml:TypeDefinition ;
+    rdfs:seeAlso <https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float32> ;
+    skos:altLabel "f" ;
+    skos:definition "A 32-bit floating point number" ;
+    skos:inScheme linkml:extended_types ;
+    linkml:base "float" ;
+    linkml:definition_uri linkml:Float32 ;
+    linkml:typeof <https://purl.org/okn/schema/float> ;
+    linkml:uri xsd:float .
+
+<https://purl.org/okn/schema/float64> a linkml:TypeDefinition ;
+    rdfs:seeAlso <https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64> ;
+    skos:altLabel "d" ;
+    skos:definition "A 64-bit floating point number" ;
+    skos:inScheme linkml:extended_types ;
+    linkml:base "float" ;
+    linkml:definition_uri linkml:Float64 ;
+    linkml:typeof <https://purl.org/okn/schema/float> ;
+    linkml:uri xsd:float .
+
+<https://purl.org/okn/schema/int16> a linkml:TypeDefinition ;
+    rdfs:seeAlso <https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.short> ;
+    skos:altLabel "h",
+        "short" ;
+    skos:definition "A 16-bit signed integer" ;
+    skos:inScheme linkml:extended_types ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Int16 ;
+    linkml:maximum_value "32767"^^<https://w3id.org/linkml/@id> ;
+    linkml:minimum_value "-32768"^^<https://w3id.org/linkml/@id> ;
+    linkml:typeof <https://purl.org/okn/schema/signedinteger> ;
+    linkml:uri xsd:integer .
+
+<https://purl.org/okn/schema/int32> a linkml:TypeDefinition ;
+    rdfs:seeAlso <https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.intc> ;
+    skos:altLabel "i",
+        "intc" ;
+    skos:definition "A 32-bit signed integer" ;
+    skos:inScheme linkml:extended_types ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Int32 ;
+    linkml:maximum_value "2147483647"^^<https://w3id.org/linkml/@id> ;
+    linkml:minimum_value "-2147483648"^^<https://w3id.org/linkml/@id> ;
+    linkml:typeof <https://purl.org/okn/schema/signedinteger> ;
+    linkml:uri xsd:integer .
+
+<https://purl.org/okn/schema/int64> a linkml:TypeDefinition ;
+    rdfs:seeAlso <https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int_> ;
+    skos:altLabel "int_",
+        "l",
+        "long" ;
+    skos:definition "A 64-bit signed integer" ;
+    skos:inScheme linkml:extended_types ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Int64 ;
+    linkml:maximum_value "9223372036854775807"^^<https://w3id.org/linkml/@id> ;
+    linkml:minimum_value "-9223372036854775808"^^<https://w3id.org/linkml/@id> ;
+    linkml:typeof <https://purl.org/okn/schema/signedinteger> ;
+    linkml:uri xsd:integer .
+
+<https://purl.org/okn/schema/int8> a linkml:TypeDefinition ;
+    rdfs:seeAlso <https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.byte> ;
+    skos:altLabel "b",
+        "byte" ;
+    skos:definition "An 8-bit signed integer" ;
+    skos:inScheme linkml:extended_types ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Int8 ;
+    linkml:maximum_value "127"^^<https://w3id.org/linkml/@id> ;
+    linkml:minimum_value "-128"^^<https://w3id.org/linkml/@id> ;
+    linkml:typeof <https://purl.org/okn/schema/signedinteger> ;
+    linkml:uri xsd:integer .
+
+<https://purl.org/okn/schema/jsonpath> a linkml:TypeDefinition ;
+    dcterms:conformsTo "https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html" ;
+    skos:definition "A string encoding a JSON Path. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded in tree form." ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpath\"." ;
+    skos:inScheme linkml:types ;
+    linkml:base "str" ;
+    linkml:definition_uri linkml:Jsonpath ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri xsd:string .
+
+<https://purl.org/okn/schema/jsonpointer> a linkml:TypeDefinition ;
+    dcterms:conformsTo "https://datatracker.ietf.org/doc/html/rfc6901" ;
+    skos:definition "A string encoding a JSON Pointer. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to a valid object within the current instance document when encoded in tree form." ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpointer\"." ;
+    skos:inScheme linkml:types ;
+    linkml:base "str" ;
+    linkml:definition_uri linkml:Jsonpointer ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri xsd:string .
+
+<https://purl.org/okn/schema/ncname> a linkml:TypeDefinition ;
+    skos:definition "Prefix part of CURIE" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"ncname\"." ;
+    skos:inScheme linkml:types ;
+    linkml:base "NCName" ;
+    linkml:definition_uri linkml:Ncname ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri xsd:string .
+
+<https://purl.org/okn/schema/nodeidentifier> a linkml:TypeDefinition ;
+    skos:definition "A URI, CURIE or BNODE that represents a node in a model." ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"nodeidentifier\"." ;
+    skos:inScheme linkml:types ;
+    linkml:base "NodeIdentifier" ;
+    linkml:definition_uri linkml:Nodeidentifier ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri shex:nonLiteral .
+
+<https://purl.org/okn/schema/objectidentifier> a linkml:TypeDefinition ;
+    skos:definition "A URI or CURIE that represents an object in the model." ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"objectidentifier\"." ;
+    skos:inScheme linkml:types ;
+    skos:note "Used for inheritance and type checking" ;
+    linkml:base "ElementIdentifier" ;
+    linkml:definition_uri linkml:Objectidentifier ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri shex:iri .
+
+<https://purl.org/okn/schema/sparqlpath> a linkml:TypeDefinition ;
+    dcterms:conformsTo "https://www.w3.org/TR/sparql11-query/#propertypaths" ;
+    skos:definition "A string encoding a SPARQL Property Path. The value of the string MUST conform to SPARQL syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded as RDF." ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"sparqlpath\"." ;
+    skos:inScheme linkml:types ;
+    linkml:base "str" ;
+    linkml:definition_uri linkml:Sparqlpath ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri xsd:string .
+
+<https://purl.org/okn/schema/time> a linkml:TypeDefinition ;
+    skos:definition "A time object represents a (local) time of day, independent of any particular day" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"time\".",
+        "URI is dateTime because OWL reasoners do not work with straight date or time" ;
+    skos:exactMatch schema1:Time ;
+    skos:inScheme linkml:types ;
+    linkml:base "XSDTime" ;
+    linkml:definition_uri linkml:Time ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri xsd:time .
+
+<https://purl.org/okn/schema/uint16> a linkml:TypeDefinition ;
+    skos:altLabel "H",
+        "ushort" ;
+    skos:definition "A 16-bit unsigned integer" ;
+    skos:inScheme linkml:extended_types ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Uint16 ;
+    linkml:maximum_value "65535"^^<https://w3id.org/linkml/@id> ;
+    linkml:minimum_value "0"^^<https://w3id.org/linkml/@id> ;
+    linkml:typeof <https://purl.org/okn/schema/unsignedinteger> ;
+    linkml:uri xsd:unsignedInt .
+
+<https://purl.org/okn/schema/uint32> a linkml:TypeDefinition ;
+    skos:altLabel "I",
+        "uintc" ;
+    skos:definition "A 32-bit unsigned integer" ;
+    skos:inScheme linkml:extended_types ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Uint32 ;
+    linkml:maximum_value "4294967295"^^<https://w3id.org/linkml/@id> ;
+    linkml:minimum_value "0"^^<https://w3id.org/linkml/@id> ;
+    linkml:typeof <https://purl.org/okn/schema/unsignedinteger> ;
+    linkml:uri xsd:unsignedInt .
+
+<https://purl.org/okn/schema/uint64> a linkml:TypeDefinition ;
+    skos:altLabel "L",
+        "uint_",
+        "ulong" ;
+    skos:definition "A 64-bit unsigned integer" ;
+    skos:inScheme linkml:extended_types ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Uint64 ;
+    linkml:maximum_value "18446744073709551615"^^<https://w3id.org/linkml/@id> ;
+    linkml:minimum_value "0"^^<https://w3id.org/linkml/@id> ;
+    linkml:typeof <https://purl.org/okn/schema/unsignedinteger> ;
+    linkml:uri xsd:unsignedInt .
+
+<https://purl.org/okn/schema/uint8> a linkml:TypeDefinition ;
+    rdfs:seeAlso <https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint8> ;
+    skos:altLabel "B",
+        "ubyte" ;
+    skos:definition "An 8-bit unsigned integer" ;
+    skos:inScheme linkml:extended_types ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Uint8 ;
+    linkml:maximum_value "255"^^<https://w3id.org/linkml/@id> ;
+    linkml:minimum_value "0"^^<https://w3id.org/linkml/@id> ;
+    linkml:typeof <https://purl.org/okn/schema/unsignedinteger> ;
+    linkml:uri xsd:unsignedInt .
+
+<https://purl.org/okn/schema/uriorcurie> a linkml:TypeDefinition ;
+    skos:definition "a URI or a CURIE" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uriorcurie\"." ;
+    skos:inScheme linkml:types ;
+    linkml:base "URIorCURIE" ;
+    linkml:definition_uri linkml:Uriorcurie ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri xsd:anyURI .
+
+<https://purl.org/okn/schema/Any> a linkml:ClassDefinition ;
+    skos:definition "An unconstrained type or object" ;
+    skos:inScheme linkml:extended_types ;
+    skos:mappingRelation linkml:Any ;
+    linkml:class_uri linkml:Any ;
+    linkml:definition_uri linkml:Any ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeAdditionalJustifiableHomicideCircumstances> a linkml:ClassDefinition ;
+    dcterms:title "Additional Justifiable Homicide Circumstances" ;
+    skos:definition "NIBRS data element under Victim Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/AdditionalJustifiableHomicideCircumstances> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/AdditionalJustifiableHomicideCircumstances> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeAdditionalJustifiableHomicideCircumstances> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeVictimSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeAge> a linkml:ClassDefinition ;
+    dcterms:title "Age" ;
+    skos:definition "NIBRS data element under Arrestee Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/Age> ;
+    skos:note "description: NIBRS data element under Offender Segment",
+        "description: NIBRS data element under Victim Segment" ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/Age> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeAge> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeVictimSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeAggravatedAssaultHomicideCircumstances> a linkml:ClassDefinition ;
+    dcterms:title "Aggravated Assault/Homicide Circumstances" ;
+    skos:definition "NIBRS data element under Victim Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/AggravatedAssault_HomicideCircumstances> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/AggravatedAssault_HomicideCircumstances> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeAggravatedAssaultHomicideCircumstances> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeVictimSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeArrestDate> a linkml:ClassDefinition ;
+    dcterms:title "Arrest Date" ;
+    skos:definition "NIBRS data element under Arrestee Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/ArrestDate> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/ArrestDate> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeArrestDate> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeArresteeSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeArrestTransactionNumber> a linkml:ClassDefinition ;
+    dcterms:title "Arrest Transaction Number" ;
+    skos:definition "NIBRS data element under Arrestee Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/ArrestTransactionNumber> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/ArrestTransactionNumber> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeArrestTransactionNumber> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeArresteeSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeArresteeSequenceNumber> a linkml:ClassDefinition ;
+    dcterms:title "Arrestee Sequence Number" ;
+    skos:definition "NIBRS data element under Arrestee Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/ArresteeSequenceNumber> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/ArresteeSequenceNumber> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeArresteeSequenceNumber> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeArresteeSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeArresteeWasArmedWith> a linkml:ClassDefinition ;
+    dcterms:title "Arrestee Was Armed With" ;
+    skos:definition "NIBRS data element under Arrestee Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/ArresteeWasArmedWith> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/ArresteeWasArmedWith> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeArresteeWasArmedWith> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeArresteeSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeAutomaticWeaponIndicator> a linkml:ClassDefinition ;
+    dcterms:title "Automatic Weapon Indicator" ;
+    skos:definition "NIBRS data element under Arrestee Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/AutomaticWeaponIndicator> ;
+    skos:note "description: NIBRS data element under Offense Segment" ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/AutomaticWeaponIndicator> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeAutomaticWeaponIndicator> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeOffenseSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeBiasMotivation> a linkml:ClassDefinition ;
+    dcterms:title "Bias Motivation" ;
+    skos:definition "NIBRS data element under Offense Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/BiasMotivation> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/BiasMotivation> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeBiasMotivation> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeOffenseSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeCargoTheft> a linkml:ClassDefinition ;
+    dcterms:title "Cargo Theft" ;
+    skos:definition "NIBRS data element under Administrative Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/CargoTheft> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/CargoTheft> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeCargoTheft> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeAdministrativeSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeClearedExceptionally> a linkml:ClassDefinition ;
+    dcterms:title "Cleared Exceptionally" ;
+    skos:definition "NIBRS data element under Administrative Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/ClearedExceptionally> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/ClearedExceptionally> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeClearedExceptionally> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeAdministrativeSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeDateRecovered> a linkml:ClassDefinition ;
+    dcterms:title "Date Recovered" ;
+    skos:definition "NIBRS data element under Property Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/DateRecovered> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/DateRecovered> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeDateRecovered> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticePropertySegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeEstimatedDrugQuantity> a linkml:ClassDefinition ;
+    dcterms:title "Estimated Drug Quantity" ;
+    skos:definition "NIBRS data element under Property Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/EstimatedDrugQuantity> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/EstimatedDrugQuantity> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeEstimatedDrugQuantity> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticePropertySegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeEthnicity> a linkml:ClassDefinition ;
+    dcterms:title "Ethnicity" ;
+    skos:definition "NIBRS data element under Offender Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/Ethnicity> ;
+    skos:note "description: NIBRS data element under Victim Segment" ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/Ethnicity> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeEthnicity> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeVictimSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeExceptionalClearanceDate> a linkml:ClassDefinition ;
+    dcterms:title "Exceptional Clearance Date" ;
+    skos:definition "NIBRS data element under Administrative Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/ExceptionalClearanceDate> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/ExceptionalClearanceDate> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeExceptionalClearanceDate> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeAdministrativeSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeIncidentDateHour> a linkml:ClassDefinition ;
+    dcterms:title "Incident Date/Hour" ;
+    skos:definition "NIBRS data element under Administrative Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/IncidentDate_Hour> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/IncidentDate_Hour> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeIncidentDateHour> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeAdministrativeSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeIncidentNumber> a linkml:ClassDefinition ;
+    dcterms:title "Incident Number" ;
+    skos:definition "NIBRS data element under Administrative Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/IncidentNumber> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/IncidentNumber> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeIncidentNumber> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeAdministrativeSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeLocationType> a linkml:ClassDefinition ;
+    dcterms:title "Location Type" ;
+    skos:definition "NIBRS data element under Offense Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/LocationType> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/LocationType> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeLocationType> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeOffenseSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeMethodofEntry> a linkml:ClassDefinition ;
+    dcterms:title "Method of Entry" ;
+    skos:definition "NIBRS data element under Offense Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/MethodofEntry> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/MethodofEntry> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeMethodofEntry> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeOffenseSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeMultipleArresteeSegmentsIndicator> a linkml:ClassDefinition ;
+    dcterms:title "Multiple Arrestee Segments Indicator" ;
+    skos:definition "NIBRS data element under Arrestee Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/MultipleArresteeSegmentsIndicator> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/MultipleArresteeSegmentsIndicator> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeMultipleArresteeSegmentsIndicator> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeArresteeSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeNumberofPremisesEntered> a linkml:ClassDefinition ;
+    dcterms:title "Number of Premises Entered" ;
+    skos:definition "NIBRS data element under Offense Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/NumberofPremisesEntered> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/NumberofPremisesEntered> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeNumberofPremisesEntered> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeOffenseSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeNumberofRecoveredMotorVehicles> a linkml:ClassDefinition ;
+    dcterms:title "Number of Recovered Motor Vehicles" ;
+    skos:definition "NIBRS data element under Property Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/NumberofRecoveredMotorVehicles> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/NumberofRecoveredMotorVehicles> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeNumberofRecoveredMotorVehicles> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticePropertySegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeNumberofStolenMotorVehicles> a linkml:ClassDefinition ;
+    dcterms:title "Number of Stolen Motor Vehicles" ;
+    skos:definition "NIBRS data element under Property Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/NumberofStolenMotorVehicles> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/NumberofStolenMotorVehicles> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeNumberofStolenMotorVehicles> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticePropertySegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeORI(OriginatingAgencyIdentifier)> a linkml:ClassDefinition ;
+    dcterms:title "ORI (Originating Agency Identifier)" ;
+    skos:definition "NIBRS data element under Administrative Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/ORI(OriginatingAgencyIdentifier)> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/ORI(OriginatingAgencyIdentifier)> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeORI(OriginatingAgencyIdentifier)> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeAdministrativeSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeOffenderNumber(s)toBeRelated> a linkml:ClassDefinition ;
+    dcterms:title "Offender Number(s) to Be Related" ;
+    skos:definition "NIBRS data element under Victim Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/OffenderNumber(s)toBeRelated> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/OffenderNumber(s)toBeRelated> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeOffenderNumber(s)toBeRelated> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeVictimSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeOffenderSequenceNumber> a linkml:ClassDefinition ;
+    dcterms:title "Offender Sequence Number" ;
+    skos:definition "NIBRS data element under Offender Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/OffenderSequenceNumber> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/OffenderSequenceNumber> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeOffenderSequenceNumber> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeOffenderSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeOffendersSuspectedofUsing> a linkml:ClassDefinition ;
+    dcterms:title "Offenders Suspected of Using" ;
+    skos:definition "NIBRS data element under Offense Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/OffendersSuspectedofUsing> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/OffendersSuspectedofUsing> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeOffendersSuspectedofUsing> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeOffenseSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeOffenseAttemptedCompleted> a linkml:ClassDefinition ;
+    dcterms:title "Offense Attempted/Completed" ;
+    skos:definition "NIBRS data element under Offense Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/OffenseAttempted_Completed> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/OffenseAttempted_Completed> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeOffenseAttemptedCompleted> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeOffenseSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeOfficerAssignmentType> a linkml:ClassDefinition ;
+    dcterms:title "Officer Assignment Type" ;
+    skos:definition "NIBRS data element under Victim Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/OfficerAssignmentType> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/OfficerAssignmentType> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeOfficerAssignmentType> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeVictimSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeOfficerORI> a linkml:ClassDefinition ;
+    dcterms:title "Officer ORI" ;
+    skos:definition "NIBRS data element under Victim Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/OfficerORI> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/OfficerORI> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeOfficerORI> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeVictimSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticePropertyDescription> a linkml:ClassDefinition ;
+    dcterms:title "Property Description" ;
+    skos:definition "NIBRS data element under Property Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/PropertyDescription> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/PropertyDescription> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticePropertyDescription> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticePropertySegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeRace> a linkml:ClassDefinition ;
+    dcterms:title "Race" ;
+    skos:definition "NIBRS data element under Arrestee Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/Race> ;
+    skos:note "description: NIBRS data element under Offender Segment",
+        "description: NIBRS data element under Victim Segment" ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/Race> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeRace> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeVictimSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeRelationshipofVictimtoOffender> a linkml:ClassDefinition ;
+    dcterms:title "Relationship of Victim to Offender" ;
+    skos:definition "NIBRS data element under Victim Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/RelationshipofVictimtoOffender> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/RelationshipofVictimtoOffender> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeRelationshipofVictimtoOffender> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeVictimSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeResidentStatus> a linkml:ClassDefinition ;
+    dcterms:title "Resident Status" ;
+    skos:definition "NIBRS data element under Victim Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/ResidentStatus> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/ResidentStatus> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeResidentStatus> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeVictimSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeSex> a linkml:ClassDefinition ;
+    dcterms:title "Sex" ;
+    skos:definition "NIBRS data element under Arrestee Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/Sex> ;
+    skos:note "description: NIBRS data element under Offender Segment",
+        "description: NIBRS data element under Victim Segment" ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/Sex> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeSex> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeVictimSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeSuspectedDrugType> a linkml:ClassDefinition ;
+    dcterms:title "Suspected Drug Type" ;
+    skos:definition "NIBRS data element under Property Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/SuspectedDrugType> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/SuspectedDrugType> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeSuspectedDrugType> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticePropertySegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeTypeofArrest> a linkml:ClassDefinition ;
+    dcterms:title "Type of Arrest" ;
+    skos:definition "NIBRS data element under Arrestee Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/TypeofArrest> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/TypeofArrest> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeTypeofArrest> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeArresteeSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeTypeofCriminalActivity> a linkml:ClassDefinition ;
+    dcterms:title "Type of Criminal Activity" ;
+    skos:definition "NIBRS data element under Offense Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/TypeofCriminalActivity> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/TypeofCriminalActivity> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeTypeofCriminalActivity> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeOffenseSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeTypeofDrugMeasurement> a linkml:ClassDefinition ;
+    dcterms:title "Type of Drug Measurement" ;
+    skos:definition "NIBRS data element under Property Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/TypeofDrugMeasurement> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/TypeofDrugMeasurement> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeTypeofDrugMeasurement> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticePropertySegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeTypeofInjury> a linkml:ClassDefinition ;
+    dcterms:title "Type of Injury" ;
+    skos:definition "NIBRS data element under Victim Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/TypeofInjury> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/TypeofInjury> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeTypeofInjury> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeVictimSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeTypeofOfficerActivityCircumstance> a linkml:ClassDefinition ;
+    dcterms:title "Type of Officer Activity Circumstance" ;
+    skos:definition "NIBRS data element under Victim Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/TypeofOfficerActivityCircumstance> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/TypeofOfficerActivityCircumstance> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeTypeofOfficerActivityCircumstance> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeVictimSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeTypeofPropertyLossEtc.> a linkml:ClassDefinition ;
+    dcterms:title "Type of Property Loss/Etc." ;
+    skos:definition "NIBRS data element under Property Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/TypeofPropertyLoss_Etc.> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/TypeofPropertyLoss_Etc.> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeTypeofPropertyLossEtc.> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticePropertySegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeTypeofVictim> a linkml:ClassDefinition ;
+    dcterms:title "Type of Victim" ;
+    skos:definition "NIBRS data element under Victim Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/TypeofVictim> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/TypeofVictim> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeTypeofVictim> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeVictimSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeTypeofWeaponForceInvolved> a linkml:ClassDefinition ;
+    dcterms:title "Type of Weapon/Force Involved" ;
+    skos:definition "NIBRS data element under Offense Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/TypeofWeapon_ForceInvolved> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/TypeofWeapon_ForceInvolved> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeTypeofWeaponForceInvolved> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeOffenseSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeUCRArrestOffenseCode> a linkml:ClassDefinition ;
+    dcterms:title "UCR Arrest Offense Code" ;
+    skos:definition "NIBRS data element under Arrestee Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/UCRArrestOffenseCode> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/UCRArrestOffenseCode> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeUCRArrestOffenseCode> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeArresteeSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeUCROffenseCode> a linkml:ClassDefinition ;
+    dcterms:title "UCR Offense Code" ;
+    skos:definition "NIBRS data element under Offense Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/UCROffenseCode> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/UCROffenseCode> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeUCROffenseCode> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeOffenseSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeValueofProperty> a linkml:ClassDefinition ;
+    dcterms:title "Value of Property" ;
+    skos:definition "NIBRS data element under Property Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/ValueofProperty> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/ValueofProperty> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeValueofProperty> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticePropertySegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeVictimConnectedtoUCROffenseCode> a linkml:ClassDefinition ;
+    dcterms:title "Victim Connected to UCR Offense Code" ;
+    skos:definition "NIBRS data element under Victim Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/VictimConnectedtoUCROffenseCode> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/VictimConnectedtoUCROffenseCode> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeVictimConnectedtoUCROffenseCode> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeVictimSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeVictimSequenceNumber> a linkml:ClassDefinition ;
+    dcterms:title "Victim Sequence Number" ;
+    skos:definition "NIBRS data element under Victim Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/VictimSequenceNumber> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/VictimSequenceNumber> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeVictimSequenceNumber> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeVictimSegment> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeOffenderSegment> a linkml:ClassDefinition ;
+    dcterms:title "Offender Segment" ;
+    skos:definition "NIBRS Offender Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/OffenderSegment> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/OffenderSegment> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeOffenderSegment> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeJustice> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/rural_administrativearea_abbreviation> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/administrativearea/abbreviation> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_administrativearea_abbreviation> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralAdministrativeareaState> ;
+    linkml:owner <https://purl.org/okn/schema/RuralAdministrativeareaState> ;
+    linkml:range <https://purl.org/okn/schema/string> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/administrativearea/abbreviation> .
+
+<https://purl.org/okn/schema/rural_administrativearea_containsPlace> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/administrativearea/containsPlace> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_administrativearea_containsPlace> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralAdministrativeareaState> ;
+    linkml:inlined true ;
+    linkml:owner <https://purl.org/okn/schema/RuralAdministrativeareaState> ;
+    linkml:range <https://purl.org/okn/schema/RuralAdministrativeareaCounty> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/administrativearea/containsPlace> .
+
+<https://purl.org/okn/schema/rural_administrativearea_latitude> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/administrativearea/latitude> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_administrativearea_latitude> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralAdministrativeareaCity> ;
+    linkml:owner <https://purl.org/okn/schema/RuralAdministrativeareaCity> ;
+    linkml:range <https://purl.org/okn/schema/float> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/administrativearea/latitude> .
+
+<https://purl.org/okn/schema/rural_administrativearea_longitude> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/administrativearea/longitude> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_administrativearea_longitude> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralAdministrativeareaCity> ;
+    linkml:owner <https://purl.org/okn/schema/RuralAdministrativeareaCity> ;
+    linkml:range <https://purl.org/okn/schema/float> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/administrativearea/longitude> .
+
+<https://purl.org/okn/schema/rural_administrativearea_primaryCounty> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/administrativearea/primaryCounty> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_administrativearea_primaryCounty> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralAdministrativeareaCity> ;
+    linkml:inlined true ;
+    linkml:owner <https://purl.org/okn/schema/RuralAdministrativeareaCity> ;
+    linkml:range <https://purl.org/okn/schema/RuralAdministrativeareaCounty> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/administrativearea/primaryCounty> .
+
+<https://purl.org/okn/schema/rural_administrativearea_ranking> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/administrativearea/ranking> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_administrativearea_ranking> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralAdministrativeareaCity> ;
+    linkml:owner <https://purl.org/okn/schema/RuralAdministrativeareaCity> ;
+    linkml:range <https://purl.org/okn/schema/integer> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/administrativearea/ranking> .
+
+<https://purl.org/okn/schema/rural_mentalhealthservice_containsService> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/mentalhealthservice/containsService> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_mentalhealthservice_containsService> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealthServiceCategory> ;
+    linkml:inlined true ;
+    linkml:owner <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealthServiceCategory> ;
+    linkml:range <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealthService> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/mentalhealthservice/containsService> .
+
+<https://purl.org/okn/schema/rural_mentalhealthservice_description> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/mentalhealthservice/description> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_mentalhealthservice_description> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealthService> ;
+    linkml:owner <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealthService> ;
+    linkml:range <https://purl.org/okn/schema/string> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/mentalhealthservice/description> .
+
+<https://purl.org/okn/schema/rural_settlementtype_censusCounty> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/settlementtype/censusCounty> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_settlementtype_censusCounty> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralSettlementtypeCountyStatus> ;
+    linkml:inlined true ;
+    linkml:owner <https://purl.org/okn/schema/RuralSettlementtypeCountyStatus> ;
+    linkml:range <https://purl.org/okn/schema/RuralAdministrativeareaCounty> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/settlementtype/censusCounty> .
+
+<https://purl.org/okn/schema/rural_settlementtype_code> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/settlementtype/code> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_settlementtype_code> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralSettlementtypeRUCC> ;
+    linkml:owner <https://purl.org/okn/schema/RuralSettlementtypeRUCC> ;
+    linkml:range <https://purl.org/okn/schema/string> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/settlementtype/code> .
+
+<https://purl.org/okn/schema/rural_settlementtype_description> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/settlementtype/description> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_settlementtype_description> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralSettlementtypeRUCC> ;
+    linkml:owner <https://purl.org/okn/schema/RuralSettlementtypeRUCC> ;
+    linkml:range <https://purl.org/okn/schema/string> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/settlementtype/description> .
+
+<https://purl.org/okn/schema/rural_settlementtype_hasRUCC> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/settlementtype/hasRUCC> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_settlementtype_hasRUCC> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralSettlementtypeCountyStatus> ;
+    linkml:inlined true ;
+    linkml:owner <https://purl.org/okn/schema/RuralSettlementtypeCountyStatus> ;
+    linkml:range <https://purl.org/okn/schema/RuralSettlementtypeRUCC> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/settlementtype/hasRUCC> .
+
+<https://purl.org/okn/schema/rural_settlementtype_population> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/settlementtype/population> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_settlementtype_population> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralSettlementtypeCountyStatus> ;
+    linkml:owner <https://purl.org/okn/schema/RuralSettlementtypeCountyStatus> ;
+    linkml:range <https://purl.org/okn/schema/integer> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/settlementtype/population> .
+
+<https://purl.org/okn/schema/rural_substanceabuse_code> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/substanceabuse/code> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_substanceabuse_code> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralSubstanceabuseSubstance> ;
+    linkml:owner <https://purl.org/okn/schema/RuralSubstanceabuseSubstance> ;
+    linkml:range <https://purl.org/okn/schema/string> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/substanceabuse/code> .
+
+<https://purl.org/okn/schema/rural_substanceabuse_description> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/substanceabuse/description> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_substanceabuse_description> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralSubstanceabuseSubstance> ;
+    linkml:owner <https://purl.org/okn/schema/RuralSubstanceabuseSubstance> ;
+    linkml:range <https://purl.org/okn/schema/string> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/substanceabuse/description> .
+
+<https://purl.org/okn/schema/rural_substanceabuse_identifier> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/substanceabuse/identifier> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_substanceabuse_identifier> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralSubstanceabuseSubstance> ;
+    linkml:owner <https://purl.org/okn/schema/RuralSubstanceabuseSubstance> ;
+    linkml:range <https://purl.org/okn/schema/string> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/substanceabuse/identifier> .
+
+<https://purl.org/okn/schema/rural_treatmentprovider_address> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/treatmentprovider/address> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_treatmentprovider_address> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralTreatmentproviderTreatmentProvider> ;
+    linkml:owner <https://purl.org/okn/schema/RuralTreatmentproviderTreatmentProvider> ;
+    linkml:range <https://purl.org/okn/schema/string> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/treatmentprovider/address> .
+
+<https://purl.org/okn/schema/rural_treatmentprovider_alias> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/treatmentprovider/alias> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_treatmentprovider_alias> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralTreatmentproviderTreatmentProvider> ;
+    linkml:owner <https://purl.org/okn/schema/RuralTreatmentproviderTreatmentProvider> ;
+    linkml:range <https://purl.org/okn/schema/string> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/treatmentprovider/alias> .
+
+<https://purl.org/okn/schema/rural_treatmentprovider_inCity> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/treatmentprovider/inCity> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:any_of [ a linkml:AnonymousSlotExpression ;
+            linkml:range <https://purl.org/okn/schema/RuralAdministrativeareaCity> ],
+        [ a linkml:AnonymousSlotExpression ;
+            linkml:range <https://purl.org/okn/schema/uri> ] ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_treatmentprovider_inCity> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralTreatmentproviderTreatmentProvider> ;
+    linkml:inlined true ;
+    linkml:owner <https://purl.org/okn/schema/RuralTreatmentproviderTreatmentProvider> ;
+    linkml:range <https://purl.org/okn/schema/Any> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/treatmentprovider/inCity> .
+
+<https://purl.org/okn/schema/rural_treatmentprovider_name> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/treatmentprovider/name> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_treatmentprovider_name> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralTreatmentproviderTreatmentProvider> ;
+    linkml:owner <https://purl.org/okn/schema/RuralTreatmentproviderTreatmentProvider> ;
+    linkml:range <https://purl.org/okn/schema/string> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/treatmentprovider/name> .
+
+<https://purl.org/okn/schema/rural_treatmentprovider_phone> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/treatmentprovider/phone> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_treatmentprovider_phone> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralTreatmentproviderTreatmentProvider> ;
+    linkml:owner <https://purl.org/okn/schema/RuralTreatmentproviderTreatmentProvider> ;
+    linkml:range <https://purl.org/okn/schema/string> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/treatmentprovider/phone> .
+
+<https://purl.org/okn/schema/rural_treatmentprovider_providesService> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/treatmentprovider/providesService> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_treatmentprovider_providesService> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralTreatmentproviderTreatmentProvider> ;
+    linkml:inlined true ;
+    linkml:owner <https://purl.org/okn/schema/RuralTreatmentproviderTreatmentProvider> ;
+    linkml:range <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealthService> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/treatmentprovider/providesService> .
+
+<https://purl.org/okn/schema/rural_treatmentprovider_zipcode> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/treatmentprovider/zipcode> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_treatmentprovider_zipcode> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralTreatmentproviderTreatmentProvider> ;
+    linkml:owner <https://purl.org/okn/schema/RuralTreatmentproviderTreatmentProvider> ;
+    linkml:range <https://purl.org/okn/schema/string> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/treatmentprovider/zipcode> .
+
+<https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealth> a linkml:ClassDefinition ;
+    dcterms:source <http://sail.ua.edu/ruralkg/ontology> ;
+    dcterms:title "Mental Health" ;
+    skos:definition "Mental health services, sourcing from services defined in National Directory Of Mental Health Treatment Facilities." ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation ns1:MentalHealth ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/mentalhealthservice/MentalHealth> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealth> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralSettlementtypeSettlementType> a linkml:ClassDefinition ;
+    dcterms:source <http://sail.ua.edu/ruralkg/ontology> ;
+    dcterms:title "Settlement Type" ;
+    skos:definition "Rural-Urban Continuum Code (RUCC) is incorporated. Categorize county-level areas into Metro or Nonmetro. It is an indicator for determining the rural-urban continuum code (RUCC) classification" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation ns5:SettlementType ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/settlementtype/SettlementType> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralSettlementtypeSettlementType> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralSubstanceabuseSubstanceAbuse> a linkml:ClassDefinition ;
+    dcterms:source <http://sail.ua.edu/ruralkg/ontology> ;
+    dcterms:title "Substance Abuse" ;
+    skos:definition "Categories of substance type and related incident types, extracted from National Survey on Drug Use and Health (NSDUH)." ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation ns3:SubstanceAbuse ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/substanceabuse/SubstanceAbuse> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralSubstanceabuseSubstanceAbuse> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/rural_administrativearea_fips> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/administrativearea/fips> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_administrativearea_fips> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralAdministrativeareaCounty>,
+        <https://purl.org/okn/schema/RuralAdministrativeareaState> ;
+    linkml:owner <https://purl.org/okn/schema/RuralAdministrativeareaState> ;
+    linkml:range <https://purl.org/okn/schema/string> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/administrativearea/fips> .
+
+<https://purl.org/okn/schema/rural_mentalhealthservice_code> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/mentalhealthservice/code> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_mentalhealthservice_code> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealthService>,
+        <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealthServiceCategory> ;
+    linkml:owner <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealthServiceCategory> ;
+    linkml:range <https://purl.org/okn/schema/string> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/mentalhealthservice/code> .
+
+<https://purl.org/okn/schema/rural_mentalhealthservice_name> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/mentalhealthservice/name> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_mentalhealthservice_name> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealthService>,
+        <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealthServiceCategory> ;
+    linkml:owner <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealthServiceCategory> ;
+    linkml:range <https://purl.org/okn/schema/string> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/mentalhealthservice/name> .
+
+<https://purl.org/okn/schema/rural_mentalhealthservice_year> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/mentalhealthservice/year> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_mentalhealthservice_year> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealthService>,
+        <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealthServiceCategory> ;
+    linkml:owner <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealthServiceCategory> ;
+    linkml:range <https://purl.org/okn/schema/integer> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/mentalhealthservice/year> .
+
+<https://purl.org/okn/schema/rural_settlementtype_year> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/settlementtype/year> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_settlementtype_year> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralSettlementtypeCountyStatus>,
+        <https://purl.org/okn/schema/RuralSettlementtypeRUCC> ;
+    linkml:owner <https://purl.org/okn/schema/RuralSettlementtypeRUCC> ;
+    linkml:range <https://purl.org/okn/schema/integer> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/settlementtype/year> .
+
+<https://purl.org/okn/schema/rural_substanceabuse_name> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/substanceabuse/name> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_substanceabuse_name> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralSubstanceabuseSubstance>,
+        <https://purl.org/okn/schema/RuralSubstanceabuseSubstanceRelatedIncident> ;
+    linkml:owner <https://purl.org/okn/schema/RuralSubstanceabuseSubstanceRelatedIncident> ;
+    linkml:range <https://purl.org/okn/schema/string> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/substanceabuse/name> .
+
+<https://purl.org/okn/schema/rural_substanceabuse_sourceDataset> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/substanceabuse/sourceDataset> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_substanceabuse_sourceDataset> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralSubstanceabuseSubstance>,
+        <https://purl.org/okn/schema/RuralSubstanceabuseSubstanceRelatedIncident> ;
+    linkml:owner <https://purl.org/okn/schema/RuralSubstanceabuseSubstanceRelatedIncident> ;
+    linkml:range <https://purl.org/okn/schema/string> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/substanceabuse/sourceDataset> .
+
+<https://purl.org/okn/schema/rural_substanceabuse_year> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/substanceabuse/year> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_substanceabuse_year> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralSubstanceabuseSubstance>,
+        <https://purl.org/okn/schema/RuralSubstanceabuseSubstanceRelatedIncident> ;
+    linkml:owner <https://purl.org/okn/schema/RuralSubstanceabuseSubstanceRelatedIncident> ;
+    linkml:range <https://purl.org/okn/schema/integer> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/substanceabuse/year> .
+
+<https://purl.org/okn/schema/uri> a linkml:TypeDefinition ;
+    dcterms:conformsTo "https://www.ietf.org/rfc/rfc3987.txt" ;
+    skos:closeMatch schema1:URL ;
+    skos:definition "a complete URI" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uri\"." ;
+    skos:inScheme linkml:types ;
+    skos:note "in RDF serializations a slot with range of uri is treated as a literal or type xsd:anyURI unless it is an identifier or a reference to an identifier, in which case it is translated directly to a node" ;
+    linkml:base "URI" ;
+    linkml:definition_uri linkml:Uri ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri xsd:anyURI .
+
+<https://purl.org/okn/schema/RuralAdministrativeareaAdministrativeArea> a linkml:ClassDefinition ;
+    dcterms:source <http://sail.ua.edu/ruralkg/ontology> ;
+    dcterms:title "Administrative Area" ;
+    skos:definition "Covers all administrative regions, including State, City, County, and MSA (undergoing)." ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation ns2:AdministrativeArea ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/administrativearea/AdministrativeArea> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralAdministrativeareaAdministrativeArea> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/rural_administrativearea_name> a linkml:SlotDefinition ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/administrativearea/name> ;
+    skos:note "No occurrences of this slot in the graph." ;
+    linkml:definition_uri <https://purl.org/okn/schema/rural_administrativearea_name> ;
+    linkml:domain_of <https://purl.org/okn/schema/RuralAdministrativeareaCity>,
+        <https://purl.org/okn/schema/RuralAdministrativeareaCounty>,
+        <https://purl.org/okn/schema/RuralAdministrativeareaState> ;
+    linkml:owner <https://purl.org/okn/schema/RuralAdministrativeareaState> ;
+    linkml:range <https://purl.org/okn/schema/string> ;
+    linkml:slot_uri <http://sail.ua.edu/ruralkg/administrativearea/name> .
+
+<https://purl.org/okn/schema/signedinteger> a linkml:TypeDefinition ;
+    rdfs:seeAlso <https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.signedinteger> ;
+    skos:definition "An integer that may be negative" ;
+    skos:inScheme linkml:extended_types ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Signedinteger ;
+    linkml:typeof <https://purl.org/okn/schema/integer> ;
+    linkml:uri xsd:integer .
+
+<https://purl.org/okn/schema/unsignedinteger> a linkml:TypeDefinition ;
+    rdfs:seeAlso <https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.unsignedinteger>,
+        <https://www.w3.org/TR/xmlschema-2/#nonNegativeInteger> ;
+    skos:definition "An integer that is non-negative" ;
+    skos:inScheme linkml:extended_types ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Unsignedinteger ;
+    linkml:minimum_value "0"^^<https://w3id.org/linkml/@id> ;
+    linkml:typeof <https://purl.org/okn/schema/integer> ;
+    linkml:uri xsd:unsignedInt .
+
+<https://purl.org/okn/schema/RuralAdministrativeareaCounty> a linkml:ClassDefinition ;
+    skos:definition "Defines counties within a state." ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation ns2:County ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/administrativearea/County> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralAdministrativeareaCounty> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralAdministrativeareaAdministrativeArea> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://purl.org/okn/schema/rural_administrativearea_fips>,
+        <https://purl.org/okn/schema/rural_administrativearea_name> .
+
+<https://purl.org/okn/schema/RuralJusticeAdministrativeSegment> a linkml:ClassDefinition ;
+    dcterms:title "Administrative Segment" ;
+    skos:definition "NIBRS Administrative Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/AdministrativeSegment> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/AdministrativeSegment> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeAdministrativeSegment> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeJustice> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralJusticeJustice> a linkml:ClassDefinition ;
+    dcterms:source <http://sail.ua.edu/ruralkg/ontology> ;
+    dcterms:title "Justice" ;
+    skos:definition "Justice data, including crime data, extracted from National Incident-Based Reporting System (NIBRS)." ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/Justice> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/Justice> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeJustice> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralSubstanceabuseSubstanceRelatedIncident> a linkml:ClassDefinition ;
+    skos:definition "Types of incidents related to substance abuse." ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation ns3:SubstanceRelatedIncident ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/substanceabuse/SubstanceRelatedIncident> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralSubstanceabuseSubstanceRelatedIncident> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralSubstanceabuseSubstanceAbuse> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://purl.org/okn/schema/rural_substanceabuse_name>,
+        <https://purl.org/okn/schema/rural_substanceabuse_sourceDataset>,
+        <https://purl.org/okn/schema/rural_substanceabuse_year> .
+
+<https://purl.org/okn/schema/RuralJusticeArresteeSegment> a linkml:ClassDefinition ;
+    dcterms:title "Arrestee Segment" ;
+    skos:definition "NIBRS Arrestee Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/ArresteeSegment> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/ArresteeSegment> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeArresteeSegment> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeJustice> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealthService> a linkml:ClassDefinition ;
+    skos:definition "Specific mental health services offered." ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation ns1:MentalHealthService ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/mentalhealthservice/MentalHealthService> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealthService> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealth> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://purl.org/okn/schema/rural_mentalhealthservice_code>,
+        <https://purl.org/okn/schema/rural_mentalhealthservice_description>,
+        <https://purl.org/okn/schema/rural_mentalhealthservice_name>,
+        <https://purl.org/okn/schema/rural_mentalhealthservice_year> .
+
+<https://purl.org/okn/schema/RuralSettlementtypeCountyStatus> a linkml:ClassDefinition ;
+    skos:definition "Status of a county in terms of rural or urban classification." ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation ns5:CountyStatus ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/settlementtype/CountyStatus> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralSettlementtypeCountyStatus> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralSettlementtypeSettlementType> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://purl.org/okn/schema/rural_settlementtype_censusCounty>,
+        <https://purl.org/okn/schema/rural_settlementtype_hasRUCC>,
+        <https://purl.org/okn/schema/rural_settlementtype_population>,
+        <https://purl.org/okn/schema/rural_settlementtype_year> .
+
+<https://purl.org/okn/schema/RuralSettlementtypeRUCC> a linkml:ClassDefinition ;
+    skos:definition "Rural-Urban Continuum Code classification." ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation ns5:RUCC ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/settlementtype/RUCC> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralSettlementtypeRUCC> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralSettlementtypeSettlementType> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://purl.org/okn/schema/rural_settlementtype_code>,
+        <https://purl.org/okn/schema/rural_settlementtype_description>,
+        <https://purl.org/okn/schema/rural_settlementtype_year> .
+
+<https://purl.org/okn/schema/RuralAdministrativeareaState> a linkml:ClassDefinition ;
+    skos:definition "Represents individual states within U.S." ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation ns2:State ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/administrativearea/State> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralAdministrativeareaState> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralAdministrativeareaAdministrativeArea> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://purl.org/okn/schema/rural_administrativearea_abbreviation>,
+        <https://purl.org/okn/schema/rural_administrativearea_containsPlace>,
+        <https://purl.org/okn/schema/rural_administrativearea_fips>,
+        <https://purl.org/okn/schema/rural_administrativearea_name> .
+
+<https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealthServiceCategory> a linkml:ClassDefinition ;
+    skos:definition "Categories of mental health services." ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation ns1:MentalHealthServiceCategory ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/mentalhealthservice/MentalHealthServiceCategory> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealthServiceCategory> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralMentalhealthserviceMentalHealth> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://purl.org/okn/schema/rural_mentalhealthservice_code>,
+        <https://purl.org/okn/schema/rural_mentalhealthservice_containsService>,
+        <https://purl.org/okn/schema/rural_mentalhealthservice_name>,
+        <https://purl.org/okn/schema/rural_mentalhealthservice_year> .
+
+<https://purl.org/okn/schema/float> a linkml:TypeDefinition ;
+    skos:definition "A real number that conforms to the xsd:float specification" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"float\"." ;
+    skos:exactMatch schema1:Float ;
+    skos:inScheme linkml:types ;
+    linkml:base "float" ;
+    linkml:definition_uri linkml:Float ;
+    linkml:imported_from "linkml:types" ;
+    linkml:uri xsd:float .
+
+<https://purl.org/okn/schema/RuralJusticePropertySegment> a linkml:ClassDefinition ;
+    dcterms:title "Property Segment" ;
+    skos:definition "NIBRS Property Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/PropertySegment> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/PropertySegment> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticePropertySegment> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeJustice> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralSubstanceabuseSubstance> a linkml:ClassDefinition ;
+    skos:definition "Types of substances that can be abused." ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation ns3:Substance ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/substanceabuse/Substance> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralSubstanceabuseSubstance> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralSubstanceabuseSubstanceAbuse> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://purl.org/okn/schema/rural_substanceabuse_code>,
+        <https://purl.org/okn/schema/rural_substanceabuse_description>,
+        <https://purl.org/okn/schema/rural_substanceabuse_identifier>,
+        <https://purl.org/okn/schema/rural_substanceabuse_name>,
+        <https://purl.org/okn/schema/rural_substanceabuse_sourceDataset>,
+        <https://purl.org/okn/schema/rural_substanceabuse_year> .
+
+<https://purl.org/okn/schema/RuralAdministrativeareaCity> a linkml:ClassDefinition ;
+    skos:definition "City entities within a county or state." ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation ns2:City ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/administrativearea/City> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralAdministrativeareaCity> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralAdministrativeareaAdministrativeArea> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://purl.org/okn/schema/rural_administrativearea_latitude>,
+        <https://purl.org/okn/schema/rural_administrativearea_longitude>,
+        <https://purl.org/okn/schema/rural_administrativearea_name>,
+        <https://purl.org/okn/schema/rural_administrativearea_primaryCounty>,
+        <https://purl.org/okn/schema/rural_administrativearea_ranking> .
+
+<https://purl.org/okn/schema/RuralJusticeOffenseSegment> a linkml:ClassDefinition ;
+    dcterms:title "Offense Segment" ;
+    skos:definition "NIBRS Offense Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/OffenseSegment> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/OffenseSegment> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeOffenseSegment> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeJustice> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/RuralTreatmentproviderTreatmentProvider> a linkml:ClassDefinition ;
+    dcterms:source <http://sail.ua.edu/ruralkg/ontology> ;
+    dcterms:title "Treatment Provider" ;
+    skos:definition "Entities that provide treatment services, sourcing from National Directory Of Mental Health Treatment Facilities." ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation ns4:TreatmentProvider ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/treatmentprovider/TreatmentProvider> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralTreatmentproviderTreatmentProvider> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://purl.org/okn/schema/rural_treatmentprovider_address>,
+        <https://purl.org/okn/schema/rural_treatmentprovider_alias>,
+        <https://purl.org/okn/schema/rural_treatmentprovider_inCity>,
+        <https://purl.org/okn/schema/rural_treatmentprovider_name>,
+        <https://purl.org/okn/schema/rural_treatmentprovider_phone>,
+        <https://purl.org/okn/schema/rural_treatmentprovider_providesService>,
+        <https://purl.org/okn/schema/rural_treatmentprovider_zipcode> .
+
+<https://purl.org/okn/schema/RuralJusticeVictimSegment> a linkml:ClassDefinition ;
+    dcterms:title "Victim Segment" ;
+    skos:definition "NIBRS Victim Segment" ;
+    skos:inScheme okns:ruralkg ;
+    skos:mappingRelation <http://sail.ua.edu/ruralkg/justice/VictimSegment> ;
+    linkml:class_uri <http://sail.ua.edu/ruralkg/justice/VictimSegment> ;
+    linkml:definition_uri <https://purl.org/okn/schema/RuralJusticeVictimSegment> ;
+    linkml:is_a <https://purl.org/okn/schema/RuralJusticeJustice> ;
+    linkml:slot_usage [ ] .
+
+<https://purl.org/okn/schema/integer> a linkml:TypeDefinition ;
+    skos:definition "An integer" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"integer\"." ;
+    skos:exactMatch schema1:Integer ;
+    skos:inScheme linkml:types ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Integer ;
+    linkml:imported_from "linkml:types" ;
+    linkml:uri xsd:integer .
+
+<https://purl.org/okn/schema/string> a linkml:TypeDefinition ;
+    skos:definition "A character string" ;
+    skos:editorialNote "In RDF serializations, a slot with range of string is treated as a literal or type xsd:string.   If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"string\"." ;
+    skos:exactMatch schema1:Text ;
+    skos:inScheme linkml:types ;
+    linkml:base "str" ;
+    linkml:definition_uri linkml:String ;
+    linkml:imported_from "linkml:types" ;
+    linkml:uri xsd:string .
+
+

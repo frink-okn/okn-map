@@ -1,0 +1,685 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix linkml: <https://w3id.org/linkml/> .
+@prefix okns: <https://purl.org/okn/schema/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pav: <http://purl.org/pav/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema1: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix shex: <http://www.w3.org/ns/shex#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+okns:base64binary a linkml:TypeDefinition ;
+    skos:definition "Arbitrary Base64-encoded binary data." ;
+    skos:inScheme okns:extended_types ;
+    skos:note "added by Mahir Morshed <mmorshed@scripps.edu>",
+        "used 'string' as base type since no 'binary' base type exists" ;
+    linkml:base "string" ;
+    linkml:definition_uri linkml:Base64binary ;
+    linkml:uri xsd:hexBinary .
+
+okns:boolean a linkml:TypeDefinition ;
+    skos:definition "A binary (true or false) value" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"boolean\"." ;
+    skos:exactMatch schema1:Boolean ;
+    skos:inScheme linkml:types ;
+    linkml:base "Bool" ;
+    linkml:definition_uri linkml:Boolean ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "bool" ;
+    linkml:uri xsd:boolean .
+
+okns:curie a linkml:TypeDefinition ;
+    dcterms:conformsTo "https://www.w3.org/TR/curie/" ;
+    skos:definition "a compact URI" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"curie\"." ;
+    skos:inScheme linkml:types ;
+    skos:note "in RDF serializations this MUST be expanded to a URI",
+        "in non-RDF serializations MAY be serialized as the compact representation" ;
+    linkml:base "Curie" ;
+    linkml:definition_uri linkml:Curie ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri xsd:string .
+
+okns:date a linkml:TypeDefinition ;
+    skos:definition "a date (year, month and day) in an idealized calendar" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date\".",
+        "URI is dateTime because OWL reasoners don't work with straight date or time" ;
+    skos:exactMatch schema1:Date ;
+    skos:inScheme linkml:types ;
+    linkml:base "XSDDate" ;
+    linkml:definition_uri linkml:Date ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri xsd:date .
+
+okns:date_or_datetime a linkml:TypeDefinition ;
+    skos:definition "Either a date or a datetime" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date_or_datetime\"." ;
+    skos:inScheme linkml:types ;
+    linkml:base "str" ;
+    linkml:definition_uri linkml:DateOrDatetime ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri linkml:DateOrDatetime .
+
+okns:datetime a linkml:TypeDefinition ;
+    skos:definition "The combination of a date and time" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"datetime\"." ;
+    skos:exactMatch schema1:DateTime ;
+    skos:inScheme linkml:types ;
+    linkml:base "XSDDateTime" ;
+    linkml:definition_uri linkml:Datetime ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri xsd:dateTime .
+
+okns:double a linkml:TypeDefinition ;
+    skos:closeMatch schema1:Float ;
+    skos:definition "A real number that conforms to the xsd:double specification" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"double\"." ;
+    skos:inScheme linkml:types ;
+    linkml:base "float" ;
+    linkml:definition_uri linkml:Double ;
+    linkml:imported_from "linkml:types" ;
+    linkml:uri xsd:double .
+
+okns:float16 a linkml:TypeDefinition ;
+    rdfs:seeAlso <https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.half> ;
+    skos:altLabel "e",
+        "half" ;
+    skos:definition "A 16-bit floating point number" ;
+    skos:inScheme okns:extended_types ;
+    linkml:base "float" ;
+    linkml:definition_uri linkml:Float16 ;
+    linkml:typeof okns:float ;
+    linkml:uri xsd:float .
+
+okns:float32 a linkml:TypeDefinition ;
+    rdfs:seeAlso <https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float32> ;
+    skos:altLabel "f" ;
+    skos:definition "A 32-bit floating point number" ;
+    skos:inScheme okns:extended_types ;
+    linkml:base "float" ;
+    linkml:definition_uri linkml:Float32 ;
+    linkml:typeof okns:float ;
+    linkml:uri xsd:float .
+
+okns:float64 a linkml:TypeDefinition ;
+    rdfs:seeAlso <https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64> ;
+    skos:altLabel "d" ;
+    skos:definition "A 64-bit floating point number" ;
+    skos:inScheme okns:extended_types ;
+    linkml:base "float" ;
+    linkml:definition_uri linkml:Float64 ;
+    linkml:typeof okns:float ;
+    linkml:uri xsd:float .
+
+okns:hexbinary a linkml:TypeDefinition ;
+    skos:definition "Arbitrary hex-encoded binary data." ;
+    skos:inScheme okns:extended_types ;
+    skos:note "added by Mahir Morshed <mmorshed@scripps.edu>",
+        "used 'string' as base type since no 'binary' base type exists" ;
+    linkml:base "string" ;
+    linkml:definition_uri linkml:Hexbinary ;
+    linkml:uri xsd:hexBinary .
+
+okns:int16 a linkml:TypeDefinition ;
+    rdfs:seeAlso <https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.short> ;
+    skos:altLabel "h",
+        "short" ;
+    skos:definition "A 16-bit signed integer" ;
+    skos:inScheme okns:extended_types ;
+    skos:note "uri added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Int16 ;
+    linkml:maximum_value "32767"^^<https://w3id.org/linkml/@id> ;
+    linkml:minimum_value "-32768"^^<https://w3id.org/linkml/@id> ;
+    linkml:typeof okns:signedinteger ;
+    linkml:uri xsd:short .
+
+okns:int32 a linkml:TypeDefinition ;
+    rdfs:seeAlso <https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.intc> ;
+    skos:altLabel "i",
+        "intc" ;
+    skos:definition "A 32-bit signed integer" ;
+    skos:inScheme okns:extended_types ;
+    skos:note "uri added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Int32 ;
+    linkml:maximum_value "2147483647"^^<https://w3id.org/linkml/@id> ;
+    linkml:minimum_value "-2147483648"^^<https://w3id.org/linkml/@id> ;
+    linkml:typeof okns:signedinteger ;
+    linkml:uri xsd:int .
+
+okns:int64 a linkml:TypeDefinition ;
+    rdfs:seeAlso <https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int_> ;
+    skos:altLabel "int_",
+        "l",
+        "long" ;
+    skos:definition "A 64-bit signed integer" ;
+    skos:inScheme okns:extended_types ;
+    skos:note "uri added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Int64 ;
+    linkml:maximum_value "9223372036854775807"^^<https://w3id.org/linkml/@id> ;
+    linkml:minimum_value "-9223372036854775808"^^<https://w3id.org/linkml/@id> ;
+    linkml:typeof okns:signedinteger ;
+    linkml:uri xsd:long .
+
+okns:int8 a linkml:TypeDefinition ;
+    rdfs:seeAlso <https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.byte> ;
+    skos:altLabel "b",
+        "byte" ;
+    skos:definition "An 8-bit signed integer" ;
+    skos:inScheme okns:extended_types ;
+    skos:note "uri added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Int8 ;
+    linkml:maximum_value "127"^^<https://w3id.org/linkml/@id> ;
+    linkml:minimum_value "-128"^^<https://w3id.org/linkml/@id> ;
+    linkml:typeof okns:signedinteger ;
+    linkml:uri xsd:byte .
+
+okns:jsonpath a linkml:TypeDefinition ;
+    dcterms:conformsTo "https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html" ;
+    skos:definition "A string encoding a JSON Path. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded in tree form." ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpath\"." ;
+    skos:inScheme linkml:types ;
+    linkml:base "str" ;
+    linkml:definition_uri linkml:Jsonpath ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri xsd:string .
+
+okns:jsonpointer a linkml:TypeDefinition ;
+    dcterms:conformsTo "https://datatracker.ietf.org/doc/html/rfc6901" ;
+    skos:definition "A string encoding a JSON Pointer. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to a valid object within the current instance document when encoded in tree form." ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpointer\"." ;
+    skos:inScheme linkml:types ;
+    linkml:base "str" ;
+    linkml:definition_uri linkml:Jsonpointer ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri xsd:string .
+
+okns:langrange a linkml:SlotDefinition ;
+    skos:definition "Used to refer to a subset of strings containing a particular language tag." ;
+    skos:inScheme okns:extended_types ;
+    skos:mappingRelation rdf:langRange ;
+    skos:note "added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:definition_uri linkml:langrange ;
+    linkml:range okns:string ;
+    linkml:slot_uri rdf:langRange .
+
+okns:language a linkml:TypeDefinition ;
+    skos:definition "Formal natural language identifier, as defined by [BCP 47] (currently represented by [RFC 4646] and [RFC 4647]) or its successor(s)." ;
+    skos:inScheme okns:extended_types ;
+    skos:note "added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:base "str" ;
+    linkml:definition_uri linkml:Language ;
+    linkml:typeof okns:token ;
+    linkml:uri xsd:language .
+
+okns:length a linkml:SlotDefinition ;
+    skos:definition "Number of units of length, where units of length varies depending on the type that is being derived from." ;
+    skos:inScheme okns:extended_types ;
+    skos:mappingRelation xsd:length ;
+    skos:note "added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:definition_uri linkml:length ;
+    linkml:range okns:string ;
+    linkml:slot_uri xsd:length .
+
+okns:maxexclusive a linkml:SlotDefinition ;
+    skos:definition "Exclusive upper bound of the ·value space· for a datatype with the ordered property." ;
+    skos:inScheme okns:extended_types ;
+    skos:mappingRelation xsd:maxExclusive ;
+    skos:note "added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:definition_uri linkml:maxexclusive ;
+    linkml:range okns:string ;
+    linkml:slot_uri xsd:maxExclusive .
+
+okns:maxlength a linkml:SlotDefinition ;
+    skos:definition "Maximum number of units of length, where units of length varies depending on the type that is being derived from." ;
+    skos:inScheme okns:extended_types ;
+    skos:mappingRelation xsd:maxLength ;
+    skos:note "added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:definition_uri linkml:maxlength ;
+    linkml:range okns:string ;
+    linkml:slot_uri xsd:maxLength .
+
+okns:minexclusive a linkml:SlotDefinition ;
+    skos:definition "Exclusive lower bound of the ·value space· for a datatype with the ordered property." ;
+    skos:inScheme okns:extended_types ;
+    skos:mappingRelation xsd:minExclusive ;
+    skos:note "added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:definition_uri linkml:minexclusive ;
+    linkml:range okns:string ;
+    linkml:slot_uri xsd:minExclusive .
+
+okns:minlength a linkml:SlotDefinition ;
+    skos:definition "Minimum number of units of length, where units of length varies depending on the type that is being derived from." ;
+    skos:inScheme okns:extended_types ;
+    skos:mappingRelation xsd:minLength ;
+    skos:note "added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:definition_uri linkml:minlength ;
+    linkml:range okns:string ;
+    linkml:slot_uri xsd:minLength .
+
+okns:name a linkml:TypeDefinition ;
+    skos:definition "XML Name." ;
+    skos:inScheme okns:extended_types ;
+    skos:note "added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:base "str" ;
+    linkml:definition_uri linkml:Name ;
+    linkml:typeof okns:token ;
+    linkml:uri xsd:Name .
+
+okns:ncname a linkml:TypeDefinition ;
+    skos:definition "Prefix part of CURIE" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"ncname\"." ;
+    skos:inScheme linkml:types ;
+    linkml:base "NCName" ;
+    linkml:definition_uri linkml:Ncname ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri xsd:string .
+
+okns:negativeinteger a linkml:TypeDefinition ;
+    skos:definition "An integer that is negative" ;
+    skos:inScheme okns:extended_types ;
+    skos:note "added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Negativeinteger ;
+    linkml:maximum_value "-1"^^<https://w3id.org/linkml/@id> ;
+    linkml:typeof okns:integer ;
+    linkml:uri xsd:negativeInteger .
+
+okns:nmtoken a linkml:TypeDefinition ;
+    skos:definition "NMTOKEN attribute type from [XML]." ;
+    skos:inScheme okns:extended_types ;
+    skos:note "added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:base "str" ;
+    linkml:definition_uri linkml:Nmtoken ;
+    linkml:typeof okns:token ;
+    linkml:uri xsd:NMTOKEN .
+
+okns:nodeidentifier a linkml:TypeDefinition ;
+    skos:definition "A URI, CURIE or BNODE that represents a node in a model." ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"nodeidentifier\"." ;
+    skos:inScheme linkml:types ;
+    linkml:base "NodeIdentifier" ;
+    linkml:definition_uri linkml:Nodeidentifier ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri shex:nonLiteral .
+
+okns:nonpositiveinteger a linkml:TypeDefinition ;
+    skos:definition "An integer that is not positive" ;
+    skos:inScheme okns:extended_types ;
+    skos:note "added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Nonpositiveinteger ;
+    linkml:maximum_value "0"^^<https://w3id.org/linkml/@id> ;
+    linkml:typeof okns:integer ;
+    linkml:uri xsd:nonPositiveInteger .
+
+okns:objectidentifier a linkml:TypeDefinition ;
+    skos:definition "A URI or CURIE that represents an object in the model." ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"objectidentifier\"." ;
+    skos:inScheme linkml:types ;
+    skos:note "Used for inheritance and type checking" ;
+    linkml:base "ElementIdentifier" ;
+    linkml:definition_uri linkml:Objectidentifier ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri shex:iri .
+
+okns:positiveinteger a linkml:TypeDefinition ;
+    skos:definition "An integer that is positive" ;
+    skos:inScheme okns:extended_types ;
+    skos:note "added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Positiveinteger ;
+    linkml:minimum_value "1"^^<https://w3id.org/linkml/@id> ;
+    linkml:typeof okns:integer ;
+    linkml:uri xsd:positiveInteger .
+
+okns:rational a linkml:TypeDefinition ;
+    skos:definition "Rational number." ;
+    skos:inScheme okns:extended_types ;
+    skos:note "added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:base "Decimal" ;
+    linkml:definition_uri linkml:Rational ;
+    linkml:typeof okns:decimal ;
+    linkml:uri owl:rational .
+
+okns:real a linkml:TypeDefinition ;
+    skos:definition "Real number." ;
+    skos:inScheme okns:extended_types ;
+    skos:note "added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:base "Decimal" ;
+    linkml:definition_uri linkml:Real ;
+    linkml:typeof okns:decimal ;
+    linkml:uri owl:real .
+
+okns:sparqlpath a linkml:TypeDefinition ;
+    dcterms:conformsTo "https://www.w3.org/TR/sparql11-query/#propertypaths" ;
+    skos:definition "A string encoding a SPARQL Property Path. The value of the string MUST conform to SPARQL syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded as RDF." ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"sparqlpath\"." ;
+    skos:inScheme linkml:types ;
+    linkml:base "str" ;
+    linkml:definition_uri linkml:Sparqlpath ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri xsd:string .
+
+okns:time a linkml:TypeDefinition ;
+    skos:definition "A time object represents a (local) time of day, independent of any particular day" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"time\".",
+        "URI is dateTime because OWL reasoners do not work with straight date or time" ;
+    skos:exactMatch schema1:Time ;
+    skos:inScheme linkml:types ;
+    linkml:base "XSDTime" ;
+    linkml:definition_uri linkml:Time ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri xsd:time .
+
+okns:uint16 a linkml:TypeDefinition ;
+    skos:altLabel "H",
+        "ushort" ;
+    skos:definition "A 16-bit unsigned integer" ;
+    skos:inScheme okns:extended_types ;
+    skos:note "uri added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Uint16 ;
+    linkml:maximum_value "65535"^^<https://w3id.org/linkml/@id> ;
+    linkml:minimum_value "0"^^<https://w3id.org/linkml/@id> ;
+    linkml:typeof okns:unsignedinteger ;
+    linkml:uri xsd:unsignedShort .
+
+okns:uint32 a linkml:TypeDefinition ;
+    skos:altLabel "I",
+        "uintc" ;
+    skos:definition "A 32-bit unsigned integer" ;
+    skos:inScheme okns:extended_types ;
+    skos:note "uri added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Uint32 ;
+    linkml:maximum_value "4294967295"^^<https://w3id.org/linkml/@id> ;
+    linkml:minimum_value "0"^^<https://w3id.org/linkml/@id> ;
+    linkml:typeof okns:unsignedinteger ;
+    linkml:uri xsd:unsignedInt .
+
+okns:uint64 a linkml:TypeDefinition ;
+    skos:altLabel "L",
+        "uint_",
+        "ulong" ;
+    skos:definition "A 64-bit unsigned integer" ;
+    skos:inScheme okns:extended_types ;
+    skos:note "uri added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Uint64 ;
+    linkml:maximum_value "18446744073709551615"^^<https://w3id.org/linkml/@id> ;
+    linkml:minimum_value "0"^^<https://w3id.org/linkml/@id> ;
+    linkml:typeof okns:unsignedinteger ;
+    linkml:uri xsd:unsignedLong .
+
+okns:uint8 a linkml:TypeDefinition ;
+    rdfs:seeAlso <https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint8> ;
+    skos:altLabel "B",
+        "ubyte" ;
+    skos:definition "An 8-bit unsigned integer" ;
+    skos:inScheme okns:extended_types ;
+    skos:note "uri added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Uint8 ;
+    linkml:maximum_value "255"^^<https://w3id.org/linkml/@id> ;
+    linkml:minimum_value "0"^^<https://w3id.org/linkml/@id> ;
+    linkml:typeof okns:unsignedinteger ;
+    linkml:uri xsd:unsignedByte .
+
+okns:uri a linkml:TypeDefinition ;
+    dcterms:conformsTo "https://www.ietf.org/rfc/rfc3987.txt" ;
+    skos:closeMatch schema1:URL ;
+    skos:definition "a complete URI" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uri\"." ;
+    skos:inScheme linkml:types ;
+    skos:note "in RDF serializations a slot with range of uri is treated as a literal or type xsd:anyURI unless it is an identifier or a reference to an identifier, in which case it is translated directly to a node" ;
+    linkml:base "URI" ;
+    linkml:definition_uri linkml:Uri ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri xsd:anyURI .
+
+okns:uriorcurie a linkml:TypeDefinition ;
+    skos:definition "a URI or a CURIE" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uriorcurie\"." ;
+    skos:inScheme linkml:types ;
+    linkml:base "URIorCURIE" ;
+    linkml:definition_uri linkml:Uriorcurie ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri xsd:anyURI .
+
+okns:normalizedstring a linkml:TypeDefinition ;
+    skos:definition "Normalized string, one that does not contain the carriage return (#xD), line feed (#xA) nor tab (#x9) characters." ;
+    skos:inScheme okns:extended_types ;
+    skos:note "added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:base "str" ;
+    linkml:definition_uri linkml:Normalizedstring ;
+    linkml:typeof okns:string ;
+    linkml:uri xsd:normalizedString .
+
+okns:swvs_moreinfo a linkml:SlotDefinition ;
+    dcterms:source <http://www.w3.org/2003/06/sw-vocab-status/ns#> ;
+    dcterms:title "more info" ;
+    skos:definition "more information about the status etc of a term, typically human oriented" ;
+    skos:editorialNote "No occurrences of this slot in the graph." ;
+    skos:inScheme okns:swvs ;
+    skos:mappingRelation <http://www.w3.org/2003/06/sw-vocab-status/ns#moreinfo> ;
+    linkml:definition_uri okns:swvs_moreinfo ;
+    linkml:inlined true ;
+    linkml:range okns:Any ;
+    linkml:slot_uri <http://www.w3.org/2003/06/sw-vocab-status/ns#moreinfo> .
+
+okns:swvs_term_status a linkml:SlotDefinition ;
+    dcterms:source <http://www.w3.org/2003/06/sw-vocab-status/ns#> ;
+    dcterms:title "term status" ;
+    skos:definition "the status of a vocabulary term, expressed as a short symbolic string; known values include 'unstable','testing', 'stable' and 'archaic'" ;
+    skos:editorialNote "No occurrences of this slot in the graph." ;
+    skos:inScheme okns:swvs ;
+    skos:mappingRelation <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> ;
+    linkml:definition_uri okns:swvs_term_status ;
+    linkml:inlined true ;
+    linkml:range okns:Any ;
+    linkml:slot_uri <http://www.w3.org/2003/06/sw-vocab-status/ns#term_status> .
+
+okns:swvs_userdocs a linkml:SlotDefinition ;
+    dcterms:source <http://www.w3.org/2003/06/sw-vocab-status/ns#> ;
+    dcterms:title "user docs" ;
+    skos:definition "human-oriented documentation, examples etc for use of this term" ;
+    skos:editorialNote "No occurrences of this slot in the graph." ;
+    skos:inScheme okns:swvs ;
+    skos:mappingRelation <http://www.w3.org/2003/06/sw-vocab-status/ns#userdocs> ;
+    linkml:definition_uri okns:swvs_userdocs ;
+    linkml:inlined true ;
+    linkml:range okns:Any ;
+    linkml:slot_uri <http://www.w3.org/2003/06/sw-vocab-status/ns#userdocs> .
+
+okns:decimal a linkml:TypeDefinition ;
+    skos:broadMatch schema1:Number ;
+    skos:definition "A real number with arbitrary precision that conforms to the xsd:decimal specification" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"decimal\"." ;
+    skos:inScheme linkml:types ;
+    linkml:base "Decimal" ;
+    linkml:definition_uri linkml:Decimal ;
+    linkml:imported_from "linkml:types" ;
+    linkml:uri xsd:decimal .
+
+okns:Any a linkml:ClassDefinition ;
+    skos:definition "An unconstrained type or object" ;
+    skos:inScheme okns:extended_types ;
+    skos:mappingRelation linkml:Any ;
+    linkml:class_uri linkml:Any ;
+    linkml:definition_uri linkml:Any ;
+    linkml:slot_usage [ ] .
+
+okns:float a linkml:TypeDefinition ;
+    skos:definition "A real number that conforms to the xsd:float specification" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"float\"." ;
+    skos:exactMatch schema1:Float ;
+    skos:inScheme linkml:types ;
+    linkml:base "float" ;
+    linkml:definition_uri linkml:Float ;
+    linkml:imported_from "linkml:types" ;
+    linkml:uri xsd:float .
+
+okns:swvs a linkml:SchemaDefinition ;
+    dcterms:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
+    pav:createdOn "2025-09-03T11:21:33.444359"^^xsd:dateTime ;
+    pav:lastUpdatedOn "2025-09-03T11:21:33.444359"^^xsd:dateTime ;
+    skos:definition "An RDF vocabulary for relating SW vocabulary terms to their status." ;
+    skos:note "description: This vocabulary was created in the FOAF project, based on experience with FOAF, Dublin Core and other early RDF vocabularies. Deployment experience shows that changing namespace URIs is expensive and unrewarding, so this vocabulary provides terms to support in-place evolution of structured data vocabularies. By indicating status at the level of terms rather than vocabularies, dictionary-style, fine grained improvements become easier. Different organizations and parties can agree or disagree on the status of a vocabulary term; however the status published alongside the term may deserve special attention. Future work could include patterns for citing announcements and decisions, or using SKOS to decentralise the extension of the basic status levels.",
+        "title: SemWeb Vocab Status ontology" ;
+    sh:declare [ sh:namespace <https://purl.org/okn/> ;
+            sh:prefix "okn" ],
+        [ sh:namespace owl: ;
+            sh:prefix "owl" ],
+        [ sh:namespace rdf: ;
+            sh:prefix "rdf" ],
+        [ sh:namespace <http://www.w3.org/2003/06/sw-vocab-status/ns#> ;
+            sh:prefix "swvs" ],
+        [ sh:namespace okns: ;
+            sh:prefix "okns" ] ;
+    linkml:annotations [ skos:example [ linkml:classes [ skos:example [ ] ;
+                            linkml:tag okns:classes ] ;
+                    linkml:pairs [ skos:example [ ] ;
+                            linkml:tag okns:pairs ] ] ;
+            linkml:tag okns:examples ],
+        [ skos:example [ linkml:classes [ skos:example [ ] ;
+                            linkml:tag okns:classes ] ;
+                    linkml:pairs [ skos:example [ ] ;
+                            linkml:tag okns:pairs ] ;
+                    linkml:slots [ skos:example [ ] ;
+                            linkml:tag okns:slots ] ] ;
+            linkml:tag okns:counts ] ;
+    linkml:classes okns:Any ;
+    linkml:default_prefix "okns" ;
+    linkml:default_range okns:string ;
+    linkml:generation_date "2025-09-04T07:21:49"^^xsd:dateTime ;
+    linkml:id okns:swvs ;
+    linkml:imports okns:extended_types,
+        linkml:types ;
+    linkml:metamodel_version "1.7.0" ;
+    linkml:slots okns:langrange,
+        okns:length,
+        okns:maxexclusive,
+        okns:maxlength,
+        okns:minexclusive,
+        okns:minlength,
+        okns:swvs_moreinfo,
+        okns:swvs_term_status,
+        okns:swvs_userdocs ;
+    linkml:source_file "swvs.yaml" ;
+    linkml:source_file_date "2025-09-03T11:21:33"^^xsd:dateTime ;
+    linkml:source_file_size 2688 ;
+    linkml:types okns:base64binary,
+        okns:boolean,
+        okns:curie,
+        okns:date,
+        okns:date_or_datetime,
+        okns:datetime,
+        okns:decimal,
+        okns:double,
+        okns:float,
+        okns:float16,
+        okns:float32,
+        okns:float64,
+        okns:hexbinary,
+        okns:int16,
+        okns:int32,
+        okns:int64,
+        okns:int8,
+        okns:integer,
+        okns:jsonpath,
+        okns:jsonpointer,
+        okns:language,
+        okns:name,
+        okns:ncname,
+        okns:negativeinteger,
+        okns:nmtoken,
+        okns:nodeidentifier,
+        okns:nonpositiveinteger,
+        okns:normalizedstring,
+        okns:objectidentifier,
+        okns:positiveinteger,
+        okns:rational,
+        okns:real,
+        okns:signedinteger,
+        okns:sparqlpath,
+        okns:string,
+        okns:time,
+        okns:token,
+        okns:uint16,
+        okns:uint32,
+        okns:uint64,
+        okns:uint8,
+        okns:unsignedinteger,
+        okns:uri,
+        okns:uriorcurie .
+
+okns:token a linkml:TypeDefinition ;
+    skos:definition "Tokenized string, one that does not contain the carriage return (#xD), line feed (#xA) nor tab (#x9) characters, that has no leading or trailing spaces (#x20) and that has no internal sequences of two or more spaces." ;
+    skos:inScheme okns:extended_types ;
+    skos:note "added by Mahir Morshed <mmorshed@scripps.edu>" ;
+    linkml:base "str" ;
+    linkml:definition_uri linkml:Token ;
+    linkml:typeof okns:normalizedstring ;
+    linkml:uri xsd:token .
+
+okns:signedinteger a linkml:TypeDefinition ;
+    rdfs:seeAlso <https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.signedinteger> ;
+    skos:definition "An integer that may be negative" ;
+    skos:inScheme okns:extended_types ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Signedinteger ;
+    linkml:typeof okns:integer ;
+    linkml:uri xsd:integer .
+
+okns:unsignedinteger a linkml:TypeDefinition ;
+    rdfs:seeAlso <https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.unsignedinteger>,
+        <https://www.w3.org/TR/xmlschema-2/#nonNegativeInteger> ;
+    skos:definition "An integer that is non-negative" ;
+    skos:inScheme okns:extended_types ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Unsignedinteger ;
+    linkml:minimum_value "0"^^<https://w3id.org/linkml/@id> ;
+    linkml:typeof okns:integer ;
+    linkml:uri xsd:unsignedInt .
+
+okns:integer a linkml:TypeDefinition ;
+    skos:definition "An integer" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"integer\"." ;
+    skos:exactMatch schema1:Integer ;
+    skos:inScheme linkml:types ;
+    linkml:base "int" ;
+    linkml:definition_uri linkml:Integer ;
+    linkml:imported_from "linkml:types" ;
+    linkml:uri xsd:integer .
+
+okns:string a linkml:TypeDefinition ;
+    skos:definition "A character string" ;
+    skos:editorialNote "In RDF serializations, a slot with range of string is treated as a literal or type xsd:string.   If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"string\"." ;
+    skos:exactMatch schema1:Text ;
+    skos:inScheme linkml:types ;
+    linkml:base "str" ;
+    linkml:definition_uri linkml:String ;
+    linkml:imported_from "linkml:types" ;
+    linkml:uri xsd:string .
+
+
