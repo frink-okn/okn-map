@@ -47,6 +47,9 @@ The OKN Map is a visualization tool for exploring the Prototype Open Knowledge N
    - `_equivalentclasses.ttl` - Scraped from Wikidata (P1709/P2888 properties)
    - `_manualequivalents.ttl` - Hand-curated mappings to Wikidata entities
 
+4. **Project Definitions**:
+   - `proto-okn-project.ttl` - Defines the Proto-OKN project and links all T1 graphs using `dct:isPartOf`
+
 ### Schema Structure (LinkML-based)
 
 Each TTL file describes a graph's schema using LinkML vocabulary:
@@ -99,6 +102,7 @@ linkml:annotations [
 
 ```sparql
 PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX linkml: <https://w3id.org/linkml/>
 PREFIX okn: <https://purl.org/okn/>
 PREFIX okns: <https://purl.org/okn/schema/>
@@ -106,6 +110,26 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 ```
 
 ## SPARQL Queries
+
+### Query 0: loadProtoOKNGraphs (Initial Load)
+**Purpose**: Load all graphs that are part of the Proto-OKN project on page load
+
+**When**: Automatically when the page loads
+
+```sparql
+SELECT ?graph ?graphLabel WHERE {
+  ?graph dct:isPartOf okn:proto-okn ;
+         a linkml:SchemaDefinition .
+  optional { ?graph dct:title ?graphLabel }
+}
+```
+
+**Result**: Returns all 16 T1 graphs that are members of the Proto-OKN project. These are displayed with the fcose layout algorithm.
+
+**Implementation Notes**:
+- Called in `App.vue` after Cytoscape initialization
+- Config must be loaded first to ensure SPARQL endpoint is set
+- Nodes are added dynamically with classes: `['graph','collapsed','importsMissing', shrunkGraphId]`
 
 ### Query 1: getDefinedClasses
 **Purpose**: Show classes defined within a graph (internal classes)
@@ -259,18 +283,15 @@ SELECT ?s ?sLabel ?o ?oLabel WHERE {
 - **Orange arrows with counts** (`classuse`): Graph A uses N instances of a class from Graph B
 
 ### Node Types
-- **Large rectangles with icons**: Use case categories (Biology & Health, Environment, Justice, Tech & Manufacturing)
-- **Yellow/green/blue/red dots**: T1 graphs (colored by use case)
-- **Gray dots**: External ontologies
-- **Red dots inside graphs**: Class definitions
+- **Black dots**: T1 graphs (all 16 Proto-OKN graphs loaded dynamically)
+- **Gray dots**: External ontologies (added when exploring dependencies)
+- **Red dots inside graphs**: Class definitions (when expanded)
 
-### Initial State (Hardcoded)
-The initial visualization is hardcoded in `App.vue` lines 34-70:
-- 4 use case category nodes (fixed positions)
-- Dictionary mapping each use case to its T1 graphs
-- T1 graphs appear when you click on a use case category
-
-**TODO comments** indicate this should be moved to configuration or queried from the triple store.
+### Initial State (Dynamic)
+The initial visualization is dynamically loaded from the triple store:
+- All graphs with `dct:isPartOf okn:proto-okn` are queried on page load
+- Nodes are positioned using the fcose (force-directed) layout algorithm
+- No hardcoded graph lists - all data comes from SPARQL queries
 
 ## Running the System
 
@@ -298,7 +319,7 @@ curl -G http://localhost:8000 \
 
 ### Frontend (Vue App)
 
-**Development mode** (recommended):
+**Development mode**:
 ```bash
 cd /Users/bizon/Projects/OKN/okn-map
 npm install
@@ -307,33 +328,44 @@ npm run dev
 
 Access at: **`http://localhost:5173/okn-map/`** (note the `/okn-map/` path)
 
-**Docker mode** (has path issues currently):
+**Docker mode** (production):
 ```bash
 docker build -f docker-frontend/Dockerfile -t okn-frontend .
 docker run -p 8080:8080 \
   -e API_URL=http://localhost:8000 \
-  -e PUBLIC_URL=http://localhost:8080 \
   okn-frontend
 ```
 
-**Issue**: Docker build expects assets at `/okn-map/` but serves from root. Use dev mode instead.
+Access at: **`http://localhost:8080`** (serves from root path)
+
+**Note**: Docker build uses `VITE_BASE_PATH=/` to serve assets from root, while dev mode uses `/okn-map/` as configured in vite.config.ts
 
 ### Configuration
 
-The frontend tries to load `config.json` to get the SPARQL endpoint URL:
+The frontend loads `config.json` to get the SPARQL endpoint URL before initializing:
 ```javascript
-// App.vue lines 16-24
+// App.vue - loadConfig function
 const oknSparqlEndpoint = ref("http://localhost:8000")
-onMounted(async () => {
+
+async function loadConfig(){
   try {
-    let response = await fetch("/okn-map/config.json");
+    let response = await fetch("/config.json");
     const config = await response.json();
     oknSparqlEndpoint.value = config.sparqlEndpoint;
   } catch (e) {
     // Falls back to localhost:8000
   }
+}
+
+// In onMounted - load config FIRST, then initialize
+onMounted(async () => {
+  await loadConfig()  // Ensures endpoint is set before queries run
+  cyc.value = cytoscape({ ... })
+  loadProtoOKNGraphs()  // Now safe to query
 })
 ```
+
+**Important**: Config must be loaded before Cytoscape initialization to ensure the SPARQL endpoint is set before any queries run.
 
 ## Data Generation
 
@@ -367,10 +399,9 @@ Both files provide `skos:exactMatch` statements that link classes across graphs 
 
 ## Known Issues / TODOs
 
-1. **Hardcoded T1 graphs**: Should be queried from triple store (App.vue:44)
-2. **Docker frontend path issues**: Assets expected at `/okn-map/` but served from root
-3. **Empty results handling**: UI appears to "hang" when queries return no results (e.g., DREAM-KG equivalences)
-4. **Query 2 naming**: `getAllUsedClasses` is misleading - it returns all classes but only visualizes external ones
+1. **Empty results handling**: UI appears to "hang" when queries return no results (e.g., DREAM-KG equivalences)
+2. **Query 2 naming**: `getAllUsedClasses` is misleading - it returns all classes but only visualizes external ones
+3. **Node styling**: All graphs currently display as black dots - could restore use case color coding by querying additional metadata
 
 ## Tips for Development
 

@@ -1,0 +1,434 @@
+# Precomputed Equivalence Relationships for OKN Map
+# Generated: 2025-10-12T15:00:29.982265
+# Total equivalences: 18
+
+@prefix okn: <https://purl.org/okn/> .
+@prefix okns: <https://purl.org/okn/schema/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+okn:equiv-shared-f9546acd a okn:SharedClassEquivalence ;
+    okn:sharedClass <https://schema.org/Place> ;
+    okn:inGraph <https://purl.org/okn/schema/ufokn> ;
+    okn:inGraph <https://purl.org/okn/schema/dreamkg> ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/ufokn> ;
+        okn:class <https://schema.org/Place> ;
+        okn:count 5839329
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/dreamkg> ;
+        okn:class <https://schema.org/Place> ;
+        okn:count 662
+    ].
+
+okn:equiv-shared-7d31e878 a okn:SharedClassEquivalence ;
+    okn:sharedClass <https://schema.org/Organization> ;
+    okn:inGraph <https://purl.org/okn/schema/securechainkg> ;
+    okn:inGraph <https://purl.org/okn/schema/dreamkg> ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/securechainkg> ;
+        okn:class <https://schema.org/Organization> ;
+        okn:count 22889
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/dreamkg> ;
+        okn:class <https://schema.org/Organization> ;
+        okn:count 662
+    ].
+
+okn:equiv-shared-1cb74e7e a okn:SharedClassEquivalence ;
+    okn:sharedClass <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion> ;
+    okn:inGraph <https://purl.org/okn/schema/spatialkg> ;
+    okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
+    okn:inGraph <https://purl.org/okn/schema/hydrologykg> ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/spatialkg> ;
+        okn:class <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion> ;
+        okn:count 35459
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/sawgraph> ;
+        okn:class <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion> ;
+        okn:count 529
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/hydrologykg> ;
+        okn:class <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion> ;
+        okn:count 35458
+    ].
+
+okn:equiv-shared-d561e4a0 a okn:SharedClassEquivalence ;
+    okn:sharedClass <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion_1> ;
+    okn:inGraph <https://purl.org/okn/schema/spatialkg> ;
+    okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
+    okn:inGraph <https://purl.org/okn/schema/hydrologykg> ;
+    okn:inGraph <https://purl.org/okn/schema/fiokg> ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/spatialkg> ;
+        okn:class <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion_1> ;
+        okn:count 102
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/sawgraph> ;
+        okn:class <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion_1> ;
+        okn:count 1
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/hydrologykg> ;
+        okn:class <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion_1> ;
+        okn:count 50
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/fiokg> ;
+        okn:class <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion_1> ;
+        okn:count 2
+    ].
+
+okn:equiv-shared-8e6817f0 a okn:SharedClassEquivalence ;
+    okn:sharedClass <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion_2> ;
+    okn:inGraph <https://purl.org/okn/schema/spatialkg> ;
+    okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
+    okn:inGraph <https://purl.org/okn/schema/hydrologykg> ;
+    okn:inGraph <https://purl.org/okn/schema/fiokg> ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/spatialkg> ;
+        okn:class <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion_2> ;
+        okn:count 6228
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/sawgraph> ;
+        okn:class <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion_2> ;
+        okn:count 16
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/hydrologykg> ;
+        okn:class <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion_2> ;
+        okn:count 3114
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/fiokg> ;
+        okn:class <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion_2> ;
+        okn:count 118
+    ].
+
+okn:equiv-shared-2395081b a okn:SharedClassEquivalence ;
+    okn:sharedClass <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion_3> ;
+    okn:inGraph <https://purl.org/okn/schema/spatialkg> ;
+    okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
+    okn:inGraph <https://purl.org/okn/schema/hydrologykg> ;
+    okn:inGraph <https://purl.org/okn/schema/fiokg> ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/spatialkg> ;
+        okn:class <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion_3> ;
+        okn:count 35458
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/sawgraph> ;
+        okn:class <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion_3> ;
+        okn:count 529
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/hydrologykg> ;
+        okn:class <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion_3> ;
+        okn:count 35458
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/fiokg> ;
+        okn:class <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion_3> ;
+        okn:count 2225
+    ].
+
+okn:equiv-shared-a2d1fc82 a okn:SharedClassEquivalence ;
+    okn:sharedClass <http://stko-kwg.geog.ucsb.edu/lod/ontology/Region> ;
+    okn:inGraph <https://purl.org/okn/schema/spatialkg> ;
+    okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
+    okn:inGraph <https://purl.org/okn/schema/hydrologykg> ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/spatialkg> ;
+        okn:class <http://stko-kwg.geog.ucsb.edu/lod/ontology/Region> ;
+        okn:count 41789
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/sawgraph> ;
+        okn:class <http://stko-kwg.geog.ucsb.edu/lod/ontology/Region> ;
+        okn:count 546
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/hydrologykg> ;
+        okn:class <http://stko-kwg.geog.ucsb.edu/lod/ontology/Region> ;
+        okn:count 38622
+    ].
+
+okn:equiv-shared-b756957a a okn:SharedClassEquivalence ;
+    okn:sharedClass <http://stko-kwg.geog.ucsb.edu/lod/ontology/S2Cell_Level13> ;
+    okn:inGraph <https://purl.org/okn/schema/spatialkg> ;
+    okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
+    okn:inGraph <https://purl.org/okn/schema/hydrologykg> ;
+    okn:inGraph <https://purl.org/okn/schema/fiokg> ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/spatialkg> ;
+        okn:class <http://stko-kwg.geog.ucsb.edu/lod/ontology/S2Cell_Level13> ;
+        okn:count 7404184
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/sawgraph> ;
+        okn:class <http://stko-kwg.geog.ucsb.edu/lod/ontology/S2Cell_Level13> ;
+        okn:count 86344
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/hydrologykg> ;
+        okn:class <http://stko-kwg.geog.ucsb.edu/lod/ontology/S2Cell_Level13> ;
+        okn:count 7404184
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/fiokg> ;
+        okn:class <http://stko-kwg.geog.ucsb.edu/lod/ontology/S2Cell_Level13> ;
+        okn:count 249509
+    ].
+
+okn:equiv-shared-9e81a854 a okn:SharedClassEquivalence ;
+    okn:sharedClass <http://www.opengis.net/ont/geosparql#Geometry> ;
+    okn:inGraph <https://purl.org/okn/schema/spatialkg> ;
+    okn:inGraph <https://purl.org/okn/schema/hydrologykg> ;
+    okn:inGraph <https://purl.org/okn/schema/sockg> ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/spatialkg> ;
+        okn:class <http://www.opengis.net/ont/geosparql#Geometry> ;
+        okn:count 7442807
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/hydrologykg> ;
+        okn:class <http://www.opengis.net/ont/geosparql#Geometry> ;
+        okn:count 590536
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/sockg> ;
+        okn:class <http://www.opengis.net/ont/geosparql#Geometry> ;
+        okn:count 47
+    ].
+
+okn:equiv-shared-498ecea4 a okn:SharedClassEquivalence ;
+    okn:sharedClass <http://www.opengis.net/ont/geosparql#SpatialObject> ;
+    okn:inGraph <https://purl.org/okn/schema/spatialkg> ;
+    okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
+    okn:inGraph <https://purl.org/okn/schema/hydrologykg> ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/spatialkg> ;
+        okn:class <http://www.opengis.net/ont/geosparql#SpatialObject> ;
+        okn:count 1878784
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/sawgraph> ;
+        okn:class <http://www.opengis.net/ont/geosparql#SpatialObject> ;
+        okn:count 8
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/hydrologykg> ;
+        okn:class <http://www.opengis.net/ont/geosparql#SpatialObject> ;
+        okn:count 12865
+    ].
+
+okn:equiv-shared-137c9dc1 a okn:SharedClassEquivalence ;
+    okn:sharedClass <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> ;
+    okn:inGraph <https://purl.org/okn/schema/spatialkg> ;
+    okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
+    okn:inGraph <https://purl.org/okn/schema/hydrologykg> ;
+    okn:inGraph <https://purl.org/okn/schema/fiokg> ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/spatialkg> ;
+        okn:class <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> ;
+        okn:count 1
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/sawgraph> ;
+        okn:class <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> ;
+        okn:count 20
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/hydrologykg> ;
+        okn:class <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> ;
+        okn:count 3
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/fiokg> ;
+        okn:class <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> ;
+        okn:count 19
+    ].
+
+okn:equiv-shared-e70106cf a okn:SharedClassEquivalence ;
+    okn:sharedClass <http://www.w3.org/2000/01/rdf-schema#Datatype> ;
+    okn:inGraph <https://purl.org/okn/schema/spatialkg> ;
+    okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
+    okn:inGraph <https://purl.org/okn/schema/hydrologykg> ;
+    okn:inGraph <https://purl.org/okn/schema/sockg> ;
+    okn:inGraph <https://purl.org/okn/schema/fiokg> ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/spatialkg> ;
+        okn:class <http://www.w3.org/2000/01/rdf-schema#Datatype> ;
+        okn:count 29
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/sawgraph> ;
+        okn:class <http://www.w3.org/2000/01/rdf-schema#Datatype> ;
+        okn:count 31
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/hydrologykg> ;
+        okn:class <http://www.w3.org/2000/01/rdf-schema#Datatype> ;
+        okn:count 29
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/sockg> ;
+        okn:class <http://www.w3.org/2000/01/rdf-schema#Datatype> ;
+        okn:count 2
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/fiokg> ;
+        okn:class <http://www.w3.org/2000/01/rdf-schema#Datatype> ;
+        okn:count 30
+    ].
+
+okn:equiv-shared-5d8d7b26 a okn:SharedClassEquivalence ;
+    okn:sharedClass <http://www.w3.org/2002/07/owl#Thing> ;
+    okn:inGraph <https://purl.org/okn/schema/spatialkg> ;
+    okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
+    okn:inGraph <https://purl.org/okn/schema/hydrologykg> ;
+    okn:inGraph <https://purl.org/okn/schema/fiokg> ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/spatialkg> ;
+        okn:class <http://www.w3.org/2002/07/owl#Thing> ;
+        okn:count 9363471
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/sawgraph> ;
+        okn:class <http://www.w3.org/2002/07/owl#Thing> ;
+        okn:count 7399
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/hydrologykg> ;
+        okn:class <http://www.w3.org/2002/07/owl#Thing> ;
+        okn:count 1974234
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/fiokg> ;
+        okn:class <http://www.w3.org/2002/07/owl#Thing> ;
+        okn:count 731236
+    ].
+
+okn:equiv-shared-345d2f07 a okn:SharedClassEquivalence ;
+    okn:sharedClass <http://qudt.org/schema/qudt/QuantityKind> ;
+    okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
+    okn:inGraph <https://purl.org/okn/schema/hydrologykg> ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/sawgraph> ;
+        okn:class <http://qudt.org/schema/qudt/QuantityKind> ;
+        okn:count 5
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/hydrologykg> ;
+        okn:class <http://qudt.org/schema/qudt/QuantityKind> ;
+        okn:count 1
+    ].
+
+okn:equiv-shared-bb70ba4a a okn:SharedClassEquivalence ;
+    okn:sharedClass <http://www.w3.org/2002/07/owl#NamedIndividual> ;
+    okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
+    okn:inGraph <https://purl.org/okn/schema/sudokn> ;
+    okn:inGraph <https://purl.org/okn/schema/fiokg> ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/sawgraph> ;
+        okn:class <http://www.w3.org/2002/07/owl#NamedIndividual> ;
+        okn:count 438
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/sudokn> ;
+        okn:class <http://www.w3.org/2002/07/owl#NamedIndividual> ;
+        okn:count 27
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/fiokg> ;
+        okn:class <http://www.w3.org/2002/07/owl#NamedIndividual> ;
+        okn:count 2308
+    ].
+
+okn:equiv-wikidata-Q515 a okn:WikidataEquivalence ;
+    okn:wikidataEntity <http://www.wikidata.org/entity/Q515> ;
+    okn:equivalentClass <http://sail.ua.edu/ruralkg/administrativearea/City> ;
+    okn:equivalentClass <https://idir.uta.edu/sockg-ontology/docs/City> ;
+    okn:equivalentClass <http://asu.edu/semantics/SUDOKN/City> ;
+    okn:inGraph <https://purl.org/okn/schema/ruralkg> ;
+    okn:inGraph <https://purl.org/okn/schema/sockg> ;
+    okn:inGraph <https://purl.org/okn/schema/sudokn> ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/ruralkg> ;
+        okn:class <http://sail.ua.edu/ruralkg/administrativearea/City> ;
+        okn:count 31120
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/sockg> ;
+        okn:class <https://idir.uta.edu/sockg-ontology/docs/City> ;
+        okn:count 37
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/sudokn> ;
+        okn:class <http://asu.edu/semantics/SUDOKN/City> ;
+        okn:count 2994
+    ].
+
+okn:equiv-wikidata-Q17334923 a okn:WikidataEquivalence ;
+    okn:wikidataEntity <http://www.wikidata.org/entity/Q17334923> ;
+    okn:equivalentClass <https://metadata.phila.gov/Location> ;
+    okn:equivalentClass <https://wildlife.proto-okn.net/kg/Location> ;
+    okn:equivalentClass <https://schema.org/Place> ;
+    okn:equivalentClass <neo4j://graph.schema#Location> ;
+    okn:inGraph <https://purl.org/okn/schema/nikg> ;
+    okn:inGraph <https://purl.org/okn/schema/wildlifekn> ;
+    okn:inGraph <https://purl.org/okn/schema/ufokn> ;
+    okn:inGraph <https://purl.org/okn/schema/dreamkg> ;
+    okn:inGraph <https://purl.org/okn/schema/spoke> ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/nikg> ;
+        okn:class <https://metadata.phila.gov/Location> ;
+        okn:count 9131
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/wildlifekn> ;
+        okn:class <https://wildlife.proto-okn.net/kg/Location> ;
+        okn:count 657
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/ufokn> ;
+        okn:class <https://schema.org/Place> ;
+        okn:count 5839329
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/dreamkg> ;
+        okn:class <https://schema.org/Place> ;
+        okn:count 662
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/spoke> ;
+        okn:class <neo4j://graph.schema#Location> ;
+        okn:count 106067
+    ].
+
+okn:equiv-wikidata-Q43460564 a okn:WikidataEquivalence ;
+    okn:wikidataEntity <http://www.wikidata.org/entity/Q43460564> ;
+    okn:equivalentClass <neo4j://graph.schema#Compound> ;
+    okn:equivalentClass <http://purl.obolibrary.org/obo/CHEMINF_000000> ;
+    okn:inGraph <https://purl.org/okn/schema/spoke> ;
+    okn:inGraph <https://purl.org/okn/schema/biobricks-ice> ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/spoke> ;
+        okn:class <neo4j://graph.schema#Compound> ;
+        okn:count 798
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/biobricks-ice> ;
+        okn:class <http://purl.obolibrary.org/obo/CHEMINF_000000> ;
+        okn:count 197214
+    ].
+
