@@ -94,6 +94,28 @@ const graphStyle = ref([ // the stylesheet for the graph
   {
     selector: ".graph.hovered",
     style: {'border-opacity': '1', 'text-opacity': '1'}
+  },
+  // equivalence node styling
+  {
+    selector: ".equivalence",
+    style: {
+      'shape': 'diamond',
+      'width': 40,
+      'height': 40,
+      'font-size': 10
+    }
+  },
+  {
+    selector: ".equiv-shared",
+    style: {'background-color': '#9370db'} // medium purple
+  },
+  {
+    selector: ".equiv-wikidata",
+    style: {'background-color': '#ff69b4'} // hot pink
+  },
+  {
+    selector: ".equiv-direct",
+    style: {'background-color': '#20b2aa'} // light sea green
   }
 ]);
 
@@ -441,7 +463,76 @@ SELECT ?graph ?graphLabel WHERE {
     for(let node of graphNodes){
       cyc.value.add(node)
     }
-    // Run layout to position the nodes
+    // Load equivalences after graphs are added
+    loadEquivalences()
+  })
+}
+
+async function loadEquivalences(){
+  console.log('Loading precomputed equivalences...')
+  const equivalencesQuery = `
+PREFIX okn: <https://purl.org/okn/>
+
+SELECT ?equiv ?type ?graph WHERE {
+  ?equiv a ?type ;
+         okn:inGraph ?graph .
+  FILTER(?type IN (okn:SharedClassEquivalence, okn:WikidataEquivalence, okn:DirectClassEquivalence))
+}
+`
+  console.log(equivalencesQuery)
+  const equivBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, equivalencesQuery)
+  let equivNodes = new Map() // Map to track unique equivalence nodes
+  let equivEdges = []
+
+  equivBindings.on('data', bindings => {
+    console.log(bindings)
+    let equivUri = bindings['equiv']['value']
+    let equivType = bindings['type']['value']
+    let graphUri = bindings['graph']['value']
+
+    let shrunkEquiv = shrinkEntity(equivUri)
+    let shrunkGraph = shrinkEntity(graphUri)
+    let shrunkEquivId = shrunkEquiv.replace(':','_')
+    let shrunkGraphId = shrunkGraph.replace(':','_')
+
+    // Add equivalence node if not already added
+    if (!equivNodes.has(shrunkEquivId)) {
+      let equivLabel = shrunkEquiv.split(':')[1] // Use the ID part as label
+      let typeClass = equivType.includes('Shared') ? 'equiv-shared' :
+                      equivType.includes('Wikidata') ? 'equiv-wikidata' : 'equiv-direct'
+      equivNodes.set(shrunkEquivId, {
+        group: 'nodes',
+        data: {id: shrunkEquivId, label: equivLabel, rank: 0},
+        classes: ['equivalence', typeClass]
+      })
+    }
+
+    // Add edge from equivalence node to graph
+    equivEdges.push({
+      group: 'edges',
+      classes: ['equivalent'],
+      data: {
+        id: shrunkEquivId + '_' + shrunkGraphId,
+        source: shrunkEquivId,
+        target: shrunkGraphId
+      }
+    })
+  })
+
+  equivBindings.on('end', () => {
+    console.log(`Loaded ${equivNodes.size} equivalence nodes with ${equivEdges.length} edges`)
+
+    // Add equivalence nodes
+    for(let node of equivNodes.values()){
+      cyc.value.add(node)
+    }
+
+    // Add edges
+    for(let edge of equivEdges){
+      cyc.value.add(edge)
+    }
+
+    // Run layout to position everything
     cyc.value.layout({
       name: 'fcose',
       nodeDimensionsIncludeLabels: true,
