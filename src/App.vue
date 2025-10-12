@@ -92,10 +92,10 @@ const graphStyle = ref([ // the stylesheet for the graph
       'text-opacity': '0'
     }
   },
-  {selector: '.usecase_bio', style: {'background-image': 'static/Biology-Health-1.png'}},
-  {selector: '.usecase_jus', style: {'background-image': 'static/Biology-Health-2.png'}},
-  {selector: '.usecase_env', style: {'background-image': 'static/Biology-Health-3.png'}},
-  {selector: '.usecase_tam', style: {'background-image': 'static/Biology-Health-4.png'}},
+  {selector: '.usecase_bio', style: {'background-image': '/Biology-Health-1.png'}},
+  {selector: '.usecase_jus', style: {'background-image': '/Biology-Health-2.png'}},
+  {selector: '.usecase_env', style: {'background-image': '/Biology-Health-3.png'}},
+  {selector: '.usecase_tam', style: {'background-image': '/Biology-Health-4.png'}},
   {selector: '.usecase_help', style: {'z-index': -5, 'opacity': 0.25, 'width': '25em', 'height': '25em'}},
   // edge styling
   {
