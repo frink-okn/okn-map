@@ -13,16 +13,17 @@ cytoscapeUndoRedo(cytoscape)
 cytoscape.use(contextMenus)
 // Making the endpoint configurable by resolving it dynamically.
 const oknSparqlEndpoint = ref("http://localhost:8000")
-onMounted(
-    async ()=>{
-      try {
-        let response = await fetch("/okn-map/config.json");
-        const config = await response.json();
-        oknSparqlEndpoint.value = config.sparqlEndpoint;
-    } catch (e){
-    }
-})
 
+async function loadConfig(){
+  try {
+    let response = await fetch("/config.json");
+    const config = await response.json();
+    oknSparqlEndpoint.value = config.sparqlEndpoint;
+    console.log("Loaded config, SPARQL endpoint:", oknSparqlEndpoint.value)
+  } catch (e){
+    console.log("Could not load config.json, using default endpoint", e)
+  }
+}
 
 const currentEntityDetails = ref({})
 
@@ -31,45 +32,7 @@ const myFetcher = new SparqlEndpointFetcher({
 });
 const cyc = ref()
 
-let usecases = [
-  // TODO: set positions relative to size of initial viewport?
-  {group: 'nodes', data: {id: 'usecase_bio', label: 'Biology and Health'}, classes: ['usecase','usecase_bio'], position: {x: -100, y: 0}, locked: true},
-  {group: 'nodes', data: {id: 'usecase_env', label: 'Environment'}, classes: ['usecase','usecase_env'], position: {x: 550, y: 0}, locked: true},
-  // {group: 'nodes', data: {id: 'usecase_help', label: 'Help!'}, classes: ['usecase','usecase_help'], position: {x: 225, y: 125}, locked: true},
-  {group: 'nodes', data: {id: 'usecase_jus', label: 'Justice'}, classes: ['usecase','usecase_jus'], position: {x: -100, y: 250}, locked: true},
-  {group: 'nodes', data: {id: 'usecase_tam', label: 'Technology and Manufacturing'}, classes: ['usecase','usecase_tam'], position: {x: 550, y: 250}, locked: true},
-]
-
-let t1graphs = {
-    // TODO: currently hardcoding T1s; move to configuration file?
-  // TODO: set positions relative to use case location
-  'usecase_bio': [
-    {group: 'nodes', data: {id: 'okns_biobricks-ice', label: 'BioBricks-ICE', rank: 0}, classes: ['graph','collapsed','t1','t1_bio','importsMissing','okns_biobricks-ice'], position: {x: -150, y: -50}},
-    {group: 'nodes', data: {id: 'okns_spoke', label: 'SPOKE', rank: 0}, classes: ['graph','collapsed','t1','t1_bio','importsMissing','okns_spoke'], position: {x: -50, y: -50}}
-  ],
-  'usecase_env': [
-    {group: 'nodes', data: {id: 'okns_climatemodelskg', label: 'ClimateModels-KG', rank: 0}, classes: ['graph','collapsed','t1_env','importsMissing','okns_climatemodelskg'], position: {x: 500, y: -50}},
-    {group: 'nodes', data: {id: 'okns_fiokg', label: 'SAWGRAPH FIO', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_fiokg'], position: {x: 625, y: 75}},
-    {group: 'nodes', data: {id: 'okns_hydrologykg', label: 'SAWGRAPH Hydrology', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_hydrologykg'], position: {x: 550, y: 75}},
-    {group: 'nodes', data: {id: 'okns_sawgraph', label: 'SAWGRAPH', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_sawgraph'], position: {x: 487, y: 25}},
-    {group: 'nodes', data: {id: 'okns_sockg', label: 'SOC-KG', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_sockg'], position: {x: 575, y: 0}},
-    {group: 'nodes', data: {id: 'okns_spatialkg', label: 'SAWGRAPH Spatial', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_spatialkg'], position: {x: 625, y: 75}},
-    {group: 'nodes', data: {id: 'okns_ufokn', label: 'WEN-OKN', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_ufokn'], position: {x: 475, y: 75}},
-    {group: 'nodes', data: {id: 'okns_wildlifekn', label: 'KN-Wildlife', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_wildlifekn'], position: {x:625, y: -50}},
-  ],
-  'usecase_jus': [
-    {group: 'nodes', data: {id: 'okns_dreamkg', label: 'DREAM-KG', rank: 0}, classes: ['graph','collapsed','t1','t1_jus','importsMissing','okns_dreamkg'], position: {x: -25, y: 225}},
-    {group: 'nodes', data: {id: 'okns_nikg', label: 'NIKG', rank: 0}, classes: ['graph','collapsed','t1','t1_jus','importsMissing','okns_nikg'], position: {x: -25, y: 300}},
-    {group: 'nodes', data: {id: 'okns_ruralkg', label: 'Rural-KG', rank: 0}, classes: ['graph','collapsed','t1','t1_jus','importsMissing','okns_ruralkg'], position: {x: -175, y: 325}},
-    {group: 'nodes', data: {id: 'okns_scales', label: 'SCALES', rank: 0}, classes: ['graph','collapsed','t1','t1_jus','importsMissing','okns_scales'], position: {x: -175, y: 250}},
-  ],
-  'usecase_tam': [
-    {group: 'nodes', data: {id: 'okns_securechainkg', label: 'Secure Chain', rank: 0}, classes: ['graph','collapsed','t1','t1_tam','importsMissing','okns_securechainkg'], position: {x: 625, y: 200}},
-    {group: 'nodes', data: {id: 'okns_sudokn', label: 'SUD-OKN', rank: 0}, classes: ['graph','collapsed','t1','t1_tam','importsMissing','okns_sudokn'], position: {x: 475, y: 200}}
-  ]
-}
-
-const initialElements = ref(usecases)
+const initialElements = ref([])
 
 const graphStyle = ref([ // the stylesheet for the graph
   {
@@ -79,24 +42,6 @@ const graphStyle = ref([ // the stylesheet for the graph
       'text-margin-y': '-5px'
     }
   },
-  // starting region styling
-  {
-    selector: '.usecase',
-    style: {
-      'width': '15em',
-      'height': '12.5em',
-      'background-width': '80%',
-      'background-height': '100%',
-      'background-color': '#e8e4ef',
-      'shape': 'round-rectangle',
-      'text-opacity': '0'
-    }
-  },
-  {selector: '.usecase_bio', style: {'background-image': '/Biology-Health-1.png'}},
-  {selector: '.usecase_jus', style: {'background-image': '/Biology-Health-2.png'}},
-  {selector: '.usecase_env', style: {'background-image': '/Biology-Health-3.png'}},
-  {selector: '.usecase_tam', style: {'background-image': '/Biology-Health-4.png'}},
-  {selector: '.usecase_help', style: {'z-index': -5, 'opacity': 0.25, 'width': '25em', 'height': '25em'}},
   // edge styling
   {
     selector: 'edge.import',
@@ -456,11 +401,55 @@ const definedClassesBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.v
 
 async function showEntityData(evt){
   let node = evt.target;
-  if(node === toRaw(cyc.value) || node.classes().includes('usecase'))
+  if(node === toRaw(cyc.value))
     return;
   console.log(node);
   cyc.value.$('#'+node.id()).style('opacity', '1');
   await getEntityData(node.id(), node.id().replace('_',':',1), node.classes())
+}
+
+async function loadProtoOKNGraphs(){
+  console.log('Loading Proto-OKN graphs...')
+  const protoOKNQuery = `
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX linkml: <https://w3id.org/linkml/>
+PREFIX okn: <https://purl.org/okn/>
+PREFIX okns: <https://purl.org/okn/schema/>
+
+SELECT ?graph ?graphLabel WHERE {
+  ?graph dct:isPartOf okn:proto-okn ;
+         a linkml:SchemaDefinition .
+  optional { ?graph dct:title ?graphLabel }
+}
+`
+  console.log(protoOKNQuery)
+  const graphBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, protoOKNQuery)
+  let graphNodes = []
+  graphBindings.on('data', bindings => {
+    console.log(bindings)
+    let shrunkGraph = shrinkEntity(bindings['graph']['value'])
+    let graphLabel = (bindings['graphLabel'] ?? {'value': shrunkGraph})['value']
+    let shrunkGraphId = shrunkGraph.replace(':','_')
+    graphNodes.push({
+      group: 'nodes',
+      data: {id: shrunkGraphId, label: graphLabel, rank: 0},
+      classes: ['graph','collapsed','importsMissing', shrunkGraphId]
+    })
+  })
+  graphBindings.on('end', () => {
+    console.log(`Loaded ${graphNodes.length} graphs`)
+    for(let node of graphNodes){
+      cyc.value.add(node)
+    }
+    // Run layout to position the nodes
+    cyc.value.layout({
+      name: 'fcose',
+      nodeDimensionsIncludeLabels: true,
+      animate: true,
+      randomize: true,
+      fit: true
+    }).run()
+  })
 }
 
 async function getEntityData(nodeid, nodeidreplaced, nodeclasses){
@@ -616,14 +605,17 @@ function uncollapseNodes(evt){ // modified from https://github.com/CamFlow/cytos
 }
 
 onMounted(async () => {
+  // Load config first to ensure SPARQL endpoint is set
+  await loadConfig()
+
   cyc.value = cytoscape({
     container: document.getElementsByClassName('cy-wrapper')[0],
     elements: initialElements.value,
     layout: {name:'preset'},
     style: graphStyle.value
   });
-  console.log('Starting!')
-  
+  console.log('Starting with endpoint:', oknSparqlEndpoint.value)
+
   var instance = cyc.value.contextMenus({
     menuItems: [
       {
@@ -680,20 +672,13 @@ onMounted(async () => {
 
   cyc.value.on('click', showEntityData);
 
-  cyc.value.on('click', '.usecase', function(evt){
-    let node = evt.target;
-    let nodeId = node.id();
-    for(let newNode of t1graphs[nodeId]){
-      cyc.value.add(newNode);
-    }
-    cyc.value.$('#'+nodeId).style({'opacity': 0.25});
-    cyc.value.$('#'+nodeId).style({'events': 'no'});
-  })
-
   cyc.value.on('ready', function(){
     cyc.value.center()
     console.log(cyc.value.elements().boundingBox())
   })
+
+  // Load Proto-OKN graphs after cytoscape is initialized
+  loadProtoOKNGraphs()
 
   cyc.value.on('dbltap', function(event){
     // target holds a reference to the originator
