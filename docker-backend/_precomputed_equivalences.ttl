@@ -1,5 +1,5 @@
 # Precomputed Equivalence Relationships for OKN Map
-# Generated: 2025-10-12T15:00:29.982265
+# Generated: 2025-10-12T15:26:10.003206
 # Total equivalences: 18
 
 @prefix okn: <https://purl.org/okn/> .
@@ -10,6 +10,7 @@
 
 
 okn:equiv-shared-f9546acd a okn:SharedClassEquivalence ;
+    rdfs:label "Shared: Place" ;
     okn:sharedClass <https://schema.org/Place> ;
     okn:inGraph <https://purl.org/okn/schema/ufokn> ;
     okn:inGraph <https://purl.org/okn/schema/dreamkg> ;
@@ -25,6 +26,7 @@ okn:equiv-shared-f9546acd a okn:SharedClassEquivalence ;
     ].
 
 okn:equiv-shared-7d31e878 a okn:SharedClassEquivalence ;
+    rdfs:label "Shared: Organization" ;
     okn:sharedClass <https://schema.org/Organization> ;
     okn:inGraph <https://purl.org/okn/schema/securechainkg> ;
     okn:inGraph <https://purl.org/okn/schema/dreamkg> ;
@@ -40,6 +42,7 @@ okn:equiv-shared-7d31e878 a okn:SharedClassEquivalence ;
     ].
 
 okn:equiv-shared-1cb74e7e a okn:SharedClassEquivalence ;
+    rdfs:label "Shared: AdministrativeRegion" ;
     okn:sharedClass <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion> ;
     okn:inGraph <https://purl.org/okn/schema/spatialkg> ;
     okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
@@ -61,6 +64,7 @@ okn:equiv-shared-1cb74e7e a okn:SharedClassEquivalence ;
     ].
 
 okn:equiv-shared-d561e4a0 a okn:SharedClassEquivalence ;
+    rdfs:label "Shared: AdministrativeRegion_1" ;
     okn:sharedClass <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion_1> ;
     okn:inGraph <https://purl.org/okn/schema/spatialkg> ;
     okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
@@ -88,6 +92,7 @@ okn:equiv-shared-d561e4a0 a okn:SharedClassEquivalence ;
     ].
 
 okn:equiv-shared-8e6817f0 a okn:SharedClassEquivalence ;
+    rdfs:label "Shared: AdministrativeRegion_2" ;
     okn:sharedClass <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion_2> ;
     okn:inGraph <https://purl.org/okn/schema/spatialkg> ;
     okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
@@ -115,6 +120,7 @@ okn:equiv-shared-8e6817f0 a okn:SharedClassEquivalence ;
     ].
 
 okn:equiv-shared-2395081b a okn:SharedClassEquivalence ;
+    rdfs:label "Shared: AdministrativeRegion_3" ;
     okn:sharedClass <http://stko-kwg.geog.ucsb.edu/lod/ontology/AdministrativeRegion_3> ;
     okn:inGraph <https://purl.org/okn/schema/spatialkg> ;
     okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
@@ -142,6 +148,7 @@ okn:equiv-shared-2395081b a okn:SharedClassEquivalence ;
     ].
 
 okn:equiv-shared-a2d1fc82 a okn:SharedClassEquivalence ;
+    rdfs:label "Shared: Region" ;
     okn:sharedClass <http://stko-kwg.geog.ucsb.edu/lod/ontology/Region> ;
     okn:inGraph <https://purl.org/okn/schema/spatialkg> ;
     okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
@@ -163,6 +170,7 @@ okn:equiv-shared-a2d1fc82 a okn:SharedClassEquivalence ;
     ].
 
 okn:equiv-shared-b756957a a okn:SharedClassEquivalence ;
+    rdfs:label "Shared: S2Cell_Level13" ;
     okn:sharedClass <http://stko-kwg.geog.ucsb.edu/lod/ontology/S2Cell_Level13> ;
     okn:inGraph <https://purl.org/okn/schema/spatialkg> ;
     okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
@@ -190,6 +198,7 @@ okn:equiv-shared-b756957a a okn:SharedClassEquivalence ;
     ].
 
 okn:equiv-shared-9e81a854 a okn:SharedClassEquivalence ;
+    rdfs:label "Shared: Geometry" ;
     okn:sharedClass <http://www.opengis.net/ont/geosparql#Geometry> ;
     okn:inGraph <https://purl.org/okn/schema/spatialkg> ;
     okn:inGraph <https://purl.org/okn/schema/hydrologykg> ;
@@ -211,6 +220,7 @@ okn:equiv-shared-9e81a854 a okn:SharedClassEquivalence ;
     ].
 
 okn:equiv-shared-498ecea4 a okn:SharedClassEquivalence ;
+    rdfs:label "Shared: SpatialObject" ;
     okn:sharedClass <http://www.opengis.net/ont/geosparql#SpatialObject> ;
     okn:inGraph <https://purl.org/okn/schema/spatialkg> ;
     okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
@@ -232,6 +242,7 @@ okn:equiv-shared-498ecea4 a okn:SharedClassEquivalence ;
     ].
 
 okn:equiv-shared-137c9dc1 a okn:SharedClassEquivalence ;
+    rdfs:label "Shared: List" ;
     okn:sharedClass <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> ;
     okn:inGraph <https://purl.org/okn/schema/spatialkg> ;
     okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
@@ -259,6 +270,7 @@ okn:equiv-shared-137c9dc1 a okn:SharedClassEquivalence ;
     ].
 
 okn:equiv-shared-e70106cf a okn:SharedClassEquivalence ;
+    rdfs:label "Shared: Datatype" ;
     okn:sharedClass <http://www.w3.org/2000/01/rdf-schema#Datatype> ;
     okn:inGraph <https://purl.org/okn/schema/spatialkg> ;
     okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
@@ -292,6 +304,7 @@ okn:equiv-shared-e70106cf a okn:SharedClassEquivalence ;
     ].
 
 okn:equiv-shared-5d8d7b26 a okn:SharedClassEquivalence ;
+    rdfs:label "Shared: Thing" ;
     okn:sharedClass <http://www.w3.org/2002/07/owl#Thing> ;
     okn:inGraph <https://purl.org/okn/schema/spatialkg> ;
     okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
@@ -319,6 +332,7 @@ okn:equiv-shared-5d8d7b26 a okn:SharedClassEquivalence ;
     ].
 
 okn:equiv-shared-345d2f07 a okn:SharedClassEquivalence ;
+    rdfs:label "Shared: QuantityKind" ;
     okn:sharedClass <http://qudt.org/schema/qudt/QuantityKind> ;
     okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
     okn:inGraph <https://purl.org/okn/schema/hydrologykg> ;
@@ -334,6 +348,7 @@ okn:equiv-shared-345d2f07 a okn:SharedClassEquivalence ;
     ].
 
 okn:equiv-shared-bb70ba4a a okn:SharedClassEquivalence ;
+    rdfs:label "Shared: NamedIndividual" ;
     okn:sharedClass <http://www.w3.org/2002/07/owl#NamedIndividual> ;
     okn:inGraph <https://purl.org/okn/schema/sawgraph> ;
     okn:inGraph <https://purl.org/okn/schema/sudokn> ;
@@ -355,45 +370,42 @@ okn:equiv-shared-bb70ba4a a okn:SharedClassEquivalence ;
     ].
 
 okn:equiv-wikidata-Q515 a okn:WikidataEquivalence ;
+    rdfs:label "city" ;
     okn:wikidataEntity <http://www.wikidata.org/entity/Q515> ;
     okn:equivalentClass <http://sail.ua.edu/ruralkg/administrativearea/City> ;
-    okn:equivalentClass <https://idir.uta.edu/sockg-ontology/docs/City> ;
     okn:equivalentClass <http://asu.edu/semantics/SUDOKN/City> ;
+    okn:equivalentClass <https://idir.uta.edu/sockg-ontology/docs/City> ;
     okn:inGraph <https://purl.org/okn/schema/ruralkg> ;
-    okn:inGraph <https://purl.org/okn/schema/sockg> ;
     okn:inGraph <https://purl.org/okn/schema/sudokn> ;
+    okn:inGraph <https://purl.org/okn/schema/sockg> ;
     okn:usage [
         okn:graph <https://purl.org/okn/schema/ruralkg> ;
         okn:class <http://sail.ua.edu/ruralkg/administrativearea/City> ;
         okn:count 31120
     ] ;
     okn:usage [
-        okn:graph <https://purl.org/okn/schema/sockg> ;
-        okn:class <https://idir.uta.edu/sockg-ontology/docs/City> ;
-        okn:count 37
-    ] ;
-    okn:usage [
         okn:graph <https://purl.org/okn/schema/sudokn> ;
         okn:class <http://asu.edu/semantics/SUDOKN/City> ;
         okn:count 2994
+    ] ;
+    okn:usage [
+        okn:graph <https://purl.org/okn/schema/sockg> ;
+        okn:class <https://idir.uta.edu/sockg-ontology/docs/City> ;
+        okn:count 37
     ].
 
 okn:equiv-wikidata-Q17334923 a okn:WikidataEquivalence ;
+    rdfs:label "physical location" ;
     okn:wikidataEntity <http://www.wikidata.org/entity/Q17334923> ;
-    okn:equivalentClass <https://metadata.phila.gov/Location> ;
     okn:equivalentClass <https://wildlife.proto-okn.net/kg/Location> ;
     okn:equivalentClass <https://schema.org/Place> ;
+    okn:equivalentClass <https://metadata.phila.gov/Location> ;
     okn:equivalentClass <neo4j://graph.schema#Location> ;
-    okn:inGraph <https://purl.org/okn/schema/nikg> ;
     okn:inGraph <https://purl.org/okn/schema/wildlifekn> ;
     okn:inGraph <https://purl.org/okn/schema/ufokn> ;
     okn:inGraph <https://purl.org/okn/schema/dreamkg> ;
+    okn:inGraph <https://purl.org/okn/schema/nikg> ;
     okn:inGraph <https://purl.org/okn/schema/spoke> ;
-    okn:usage [
-        okn:graph <https://purl.org/okn/schema/nikg> ;
-        okn:class <https://metadata.phila.gov/Location> ;
-        okn:count 9131
-    ] ;
     okn:usage [
         okn:graph <https://purl.org/okn/schema/wildlifekn> ;
         okn:class <https://wildlife.proto-okn.net/kg/Location> ;
@@ -410,12 +422,18 @@ okn:equiv-wikidata-Q17334923 a okn:WikidataEquivalence ;
         okn:count 662
     ] ;
     okn:usage [
+        okn:graph <https://purl.org/okn/schema/nikg> ;
+        okn:class <https://metadata.phila.gov/Location> ;
+        okn:count 9131
+    ] ;
+    okn:usage [
         okn:graph <https://purl.org/okn/schema/spoke> ;
         okn:class <neo4j://graph.schema#Location> ;
         okn:count 106067
     ].
 
 okn:equiv-wikidata-Q43460564 a okn:WikidataEquivalence ;
+    rdfs:label "chemical entity" ;
     okn:wikidataEntity <http://www.wikidata.org/entity/Q43460564> ;
     okn:equivalentClass <neo4j://graph.schema#Compound> ;
     okn:equivalentClass <http://purl.obolibrary.org/obo/CHEMINF_000000> ;

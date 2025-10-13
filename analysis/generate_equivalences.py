@@ -195,6 +195,37 @@ def get_wikidata_relationships(endpoint, used_classes):
     return class_to_wikidata
 
 
+def fetch_wikidata_labels(wikidata_uris):
+    """Fetch labels from Wikidata for given entity URIs."""
+    print("Fetching Wikidata labels...")
+
+    labels = {}
+    wikidata_endpoint = "https://query.wikidata.org/sparql"
+
+    # Build VALUES clause with all Wikidata URIs
+    values_clause = ' '.join(f"<{uri}>" for uri in wikidata_uris)
+
+    query = f"""
+    SELECT ?entity ?label WHERE {{
+      VALUES ?entity {{ {values_clause} }}
+      ?entity rdfs:label ?label .
+      FILTER(LANG(?label) = "en")
+    }}
+    """
+
+    try:
+        results = query_sparql(wikidata_endpoint, query)
+        for row in results:
+            if 'entity' in row and 'label' in row:
+                labels[row['entity']] = row['label']
+        print(f"  Fetched {len(labels)} Wikidata labels")
+    except Exception as e:
+        print(f"  Warning: Could not fetch Wikidata labels: {e}")
+        print(f"  Continuing with entity IDs as labels")
+
+    return labels
+
+
 def build_shared_class_groups(used_by_graph):
     """Find classes shared by multiple graphs."""
     print("Building shared class groups...")
@@ -250,7 +281,7 @@ def hash_uri(uri):
     return hashlib.md5(uri.encode()).hexdigest()[:8]
 
 
-def generate_equivalences(used_by_graph, graph_labels, shared_classes, skos_groups, wikidata_groups):
+def generate_equivalences(used_by_graph, graph_labels, shared_classes, skos_groups, wikidata_groups, wikidata_labels):
     """Generate equivalence data structures for TTL output."""
     equivalences = []
 
@@ -258,6 +289,9 @@ def generate_equivalences(used_by_graph, graph_labels, shared_classes, skos_grou
     print("\nGenerating shared class equivalences...")
     for class_uri, graph_list in shared_classes.items():
         equiv_id = f"okn:equiv-shared-{hash_uri(class_uri)}"
+
+        # Extract label from class URI (last part after / or #)
+        class_label = class_uri.split('/')[-1].split('#')[-1]
 
         usage = []
         for graph_uri in graph_list:
@@ -267,6 +301,7 @@ def generate_equivalences(used_by_graph, graph_labels, shared_classes, skos_grou
         equivalences.append({
             'id': equiv_id,
             'type': 'shared',
+            'label': f"Shared: {class_label}",
             'sharedClass': class_uri,
             'graphs': graph_list,
             'usage': usage
@@ -293,6 +328,10 @@ def generate_equivalences(used_by_graph, graph_labels, shared_classes, skos_grou
         if len(graph_usage) > 1:
             equiv_id = f"okn:equiv-direct-{hash_uri(''.join(sorted(equiv_class)))}"
 
+            # Create label from first class in set
+            first_class = sorted(equiv_class)[0]
+            class_label = first_class.split('/')[-1].split('#')[-1]
+
             usage = []
             for graph_uri, class_counts in graph_usage.items():
                 for class_uri, count in class_counts:
@@ -301,6 +340,7 @@ def generate_equivalences(used_by_graph, graph_labels, shared_classes, skos_grou
             equivalences.append({
                 'id': equiv_id,
                 'type': 'direct',
+                'label': f"SKOS: {class_label}",
                 'classes': list(equiv_class),
                 'graphs': list(graph_usage.keys()),
                 'usage': usage
@@ -328,6 +368,9 @@ def generate_equivalences(used_by_graph, graph_labels, shared_classes, skos_grou
             wikidata_id = wikidata_uri.split('/')[-1]
             equiv_id = f"okn:equiv-wikidata-{wikidata_id}"
 
+            # Use Wikidata label if available, otherwise use ID
+            label = wikidata_labels.get(wikidata_uri, wikidata_id)
+
             usage = []
             for graph_uri, class_counts in graph_usage.items():
                 for class_uri, count in class_counts:
@@ -336,6 +379,7 @@ def generate_equivalences(used_by_graph, graph_labels, shared_classes, skos_grou
             equivalences.append({
                 'id': equiv_id,
                 'type': 'wikidata',
+                'label': label,
                 'wikidataEntity': wikidata_uri,
                 'classes': list(class_set),
                 'graphs': list(graph_usage.keys()),
@@ -372,15 +416,18 @@ def generate_ttl(equivalences, graph_labels, output_file):
 
             if equiv['type'] == 'shared':
                 f.write(f"\n{equiv_id} a okn:SharedClassEquivalence ;\n")
+                f.write(f"    rdfs:label \"{equiv['label']}\" ;\n")
                 f.write(f"    okn:sharedClass <{equiv['sharedClass']}> ;\n")
 
             elif equiv['type'] == 'direct':
                 f.write(f"\n{equiv_id} a okn:DirectClassEquivalence ;\n")
+                f.write(f"    rdfs:label \"{equiv['label']}\" ;\n")
                 for class_uri in equiv['classes']:
                     f.write(f"    okn:equivalentClass <{class_uri}> ;\n")
 
             elif equiv['type'] == 'wikidata':
                 f.write(f"\n{equiv_id} a okn:WikidataEquivalence ;\n")
+                f.write(f"    rdfs:label \"{equiv['label']}\" ;\n")
                 f.write(f"    okn:wikidataEntity <{equiv['wikidataEntity']}> ;\n")
                 for class_uri in equiv['classes']:
                     f.write(f"    okn:equivalentClass <{class_uri}> ;\n")
@@ -434,10 +481,13 @@ def main():
     class_to_wikidata = get_wikidata_relationships(args.endpoint, all_used_classes)
     wikidata_groups = build_wikidata_groups(class_to_wikidata)
 
+    # Fetch Wikidata labels for all Wikidata entities
+    wikidata_labels = fetch_wikidata_labels(list(wikidata_groups.keys()))
+
     # Step 3: Generate equivalence data structures
     equivalences = generate_equivalences(
         used_by_graph, graph_labels,
-        shared_classes, skos_groups, wikidata_groups
+        shared_classes, skos_groups, wikidata_groups, wikidata_labels
     )
 
     # Step 4: Write TTL output
