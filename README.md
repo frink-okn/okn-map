@@ -20,10 +20,10 @@ python3 src/rdfgen-frink.py your-graph.yaml >/path/to/docker-backend/your-graph.
 
 The OKN Map itself is deployed in two parts:
 
-* a frontend built with Vue 3 and Vite (and, in principle, TypeScript) running on top of an nginx server and Node.js runtime; and
-* a backend that uses the ['rdflib-endpoint'](https://github.com/vemonet/rdflib-endpoint) Python library as a simple RDF triple-store and SPARQL endpoint.
+* a frontend (hosted at [frink.apps.renci.org/okn-map/](https://frink.apps.renci.org/okn-map/)) built with Vue 3 and Vite (and, in principle, TypeScript) running on top of an nginx server and Node.js runtime; and
+* a backend (hosted at [frink.apps.renci.org/okn-map/api](https://frink.apps.renci.org/okn-map/api)) that uses the ['rdflib-endpoint'](https://github.com/vemonet/rdflib-endpoint) Python library as a simple RDF triple-store and SPARQL endpoint.
 
-The Dockerfiles in `docker-backend` and `docker-frontend` should suffice for an arbitrary deployment elsewhere, although the content of `helm` may be adapted from its current contents specific to the deployment at [frink.apps.renci.org](https://frink.apps.renci.org/okn-map/).
+The Dockerfiles in `docker-backend` and `docker-frontend` should suffice for an arbitrary deployment elsewhere, although the content of `helm` may be adapted from its current contents specific to the deployment at frink.apps.renci.org.
 
 ## RDF Metagraph Description
 
