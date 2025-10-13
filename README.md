@@ -37,6 +37,7 @@ The underlying RDF files used with the OKN Map are as follows:
 * Theme 1 graphs, generated from [schemas in the 'graph-descriptions' repository](https://github.com/frink-okn/graph-descriptions).
 * IRI equivalences based on ['equivalent class'](https://www.wikidata.org/wiki/Property:P1709) and ['exact match'](https://www.wikidata.org/wiki/Property:P2888) statements in Wikidata, in `_equivalentclasses.ttl`.
 * Manually-added equivalences between Theme 1 graph classes/predicates and Wikidata entities, in `_manualequivalents.ttl`.
+* Proto-OKN project definition and graph membership relationships, in `proto-okn-project.ttl`.
 
 ### Prefixes
 
@@ -45,6 +46,7 @@ The RDF prefixes used in the remainder of this document are as follows:
 | Prefix | Definition |
 | --- | --- |
 | dcterms: | http://purl.org/dc/terms/ |
+| foaf: | http://xmlns.com/foaf/0.1/ |
 | linkml: | https://w3id.org/linkml/ |
 | okn: | http://purl.org/okn/ |
 | okns: | http://purl.org/okn/schema/ |
@@ -58,6 +60,7 @@ The RDF prefixes used in the remainder of this document are as follows:
 | dcterms:title     | Name of entity | |
 | dcterms:license   | License of schema | |
 | dcterms:source    | Source document of schema | |
+| dcterms:isPartOf  | Graph is part of project | Used to link Theme 1 graphs to the Proto-OKN project |
 | pav:createdOn     | Date schema created | |
 | pav:lastUpdatedOn | Date schema last updated | |
 | pav:version       | Version ID of schema | |
@@ -67,3 +70,10 @@ The RDF prefixes used in the remainder of this document are as follows:
 | linkml:slots      | Slot defined in this schema | |
 | linkml:types      | Type defined in this schema | |
 | linkml:imports    | Schema that this schema imports | |
+
+### List of classes
+
+| Class | Description | Notes |
+| --- | --- | --- |
+| linkml:SchemaDefinition | A LinkML schema/graph definition | Used for Theme 1 graphs and external ontologies |
+| foaf:Project | A collaborative project | Used to represent the Proto-OKN project (okn:proto-okn) |

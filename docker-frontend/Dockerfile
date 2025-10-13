@@ -5,6 +5,7 @@ RUN npm install
 COPY . .
 ARG PUBLIC_URL=__PUBLIC_URL_PLACEHOLDER__
 ENV PUBLIC_URL=${PUBLIC_URL}
+ENV VITE_BASE_PATH=/
 RUN npx vite build
 
 FROM nginx:alpine
