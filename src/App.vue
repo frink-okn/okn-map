@@ -187,7 +187,11 @@ let mappinglabels = {
   'notes': 'Internal comments',
   'slots': 'Predicates',
   'domain': 'Domain',
-  'range': 'Range'
+  'range': 'Range',
+  'wikidata': 'Wikidata Entity',
+  'shared_class': 'Shared Class',
+  'equivalent_classes': 'Equivalent Classes',
+  'graphs': 'Used in Graphs'
 }
 
 async function getDefinedClasses(evt){
@@ -472,50 +476,82 @@ async function loadEquivalences(){
   console.log('Loading precomputed equivalences...')
   const equivalencesQuery = `
 PREFIX okn: <https://purl.org/okn/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?equiv ?type ?graph WHERE {
+SELECT ?equiv ?type ?label ?graph ?class ?count WHERE {
   ?equiv a ?type ;
          okn:inGraph ?graph .
   FILTER(?type IN (okn:SharedClassEquivalence, okn:WikidataEquivalence, okn:DirectClassEquivalence))
+  optional { ?equiv rdfs:label ?label }
+  optional {
+    ?equiv okn:usage [
+      okn:graph ?graph ;
+      okn:class ?class ;
+      okn:count ?count
+    ]
+  }
 }
 `
   console.log(equivalencesQuery)
   const equivBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, equivalencesQuery)
   let equivNodes = new Map() // Map to track unique equivalence nodes
   let equivEdges = []
+  let edgeMetadata = new Map() // Store class info for each edge
 
   equivBindings.on('data', bindings => {
     console.log(bindings)
     let equivUri = bindings['equiv']['value']
     let equivType = bindings['type']['value']
     let graphUri = bindings['graph']['value']
+    let equivLabel = bindings['label'] ? bindings['label']['value'] : null
+    let classUri = bindings['class'] ? bindings['class']['value'] : null
+    let count = bindings['count'] ? bindings['count']['value'] : null
 
     let shrunkEquiv = shrinkEntity(equivUri)
     let shrunkGraph = shrinkEntity(graphUri)
     let shrunkEquivId = shrunkEquiv.replace(':','_')
     let shrunkGraphId = shrunkGraph.replace(':','_')
+    let edgeId = shrunkEquivId + '_' + shrunkGraphId
 
     // Add equivalence node if not already added
     if (!equivNodes.has(shrunkEquivId)) {
-      let equivLabel = shrunkEquiv.split(':')[1] // Use the ID part as label
+      // Use rdfs:label if available, otherwise fallback to ID
+      let label = equivLabel || shrunkEquiv.split(':')[1]
       let typeClass = equivType.includes('Shared') ? 'equiv-shared' :
                       equivType.includes('Wikidata') ? 'equiv-wikidata' : 'equiv-direct'
       equivNodes.set(shrunkEquivId, {
         group: 'nodes',
-        data: {id: shrunkEquivId, label: equivLabel, rank: 0},
+        data: {id: shrunkEquivId, label: label, rank: 0, equivUri: equivUri},
         classes: ['equivalence', typeClass]
       })
     }
 
+    // Store class info for edge metadata
+    if (classUri) {
+      let shrunkClass = shrinkEntity(classUri)
+      edgeMetadata.set(edgeId, {
+        classUri: classUri,
+        shrunkClass: shrunkClass,
+        count: count
+      })
+    }
+
     // Add edge from equivalence node to graph
+    let edgeData = {
+      id: edgeId,
+      source: shrunkEquivId,
+      target: shrunkGraphId
+    }
+    if (classUri) {
+      edgeData.classUri = classUri
+      edgeData.shrunkClass = shrinkEntity(classUri)
+      edgeData.count = count
+    }
+
     equivEdges.push({
       group: 'edges',
       classes: ['equivalent'],
-      data: {
-        id: shrunkEquivId + '_' + shrunkGraphId,
-        source: shrunkEquivId,
-        target: shrunkGraphId
-      }
+      data: edgeData
     })
   })
 
@@ -544,38 +580,95 @@ SELECT ?equiv ?type ?graph WHERE {
 }
 
 async function getEntityData(nodeid, nodeidreplaced, nodeclasses){
-  const entityDataQuery = `
+  // Check if this is an equivalence node
+  if (nodeclasses.includes('equivalence')) {
+    console.log('Getting equivalence data for', nodeidreplaced)
+    const equivDataQuery = `
+PREFIX okn: <https://purl.org/okn/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?p ?o WHERE {
+  ${nodeidreplaced} ?p ?o .
+}
+    `
+    console.log(equivDataQuery);
+
+    currentEntityDetails.value = {}
+    let equivalentClasses = []
+    let usageData = []
+    let wikidataEntity = null
+    let sharedClass = null
+
+    const equivDataBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, equivDataQuery);
+    equivDataBindings.on('data', bindings => {
+      let p = bindings['p']['value']
+      let o = bindings['o']['value']
+      let shrunkP = shrinkEntity(p)
+      let shrunkO = shrinkEntity(o)
+      console.log(shrunkP, shrunkO);
+
+      if (shrunkP === 'rdfs:label') {
+        currentEntityDetails.value['title'] = shrunkO
+      } else if (shrunkP === 'rdf:type') {
+        currentEntityDetails.value['type'] = shrunkO
+      } else if (shrunkP === 'okn:wikidataEntity') {
+        wikidataEntity = o
+        currentEntityDetails.value['wikidata'] = shrunkO
+      } else if (shrunkP === 'okn:sharedClass') {
+        sharedClass = o
+        currentEntityDetails.value['shared_class'] = shrunkO
+      } else if (shrunkP === 'okn:equivalentClass') {
+        equivalentClasses.push(shrunkO)
+      } else if (shrunkP === 'okn:inGraph') {
+        if (!currentEntityDetails.value['graphs']) {
+          currentEntityDetails.value['graphs'] = new Set()
+        }
+        currentEntityDetails.value['graphs'].add(shrunkO)
+      }
+    });
+
+    equivDataBindings.on('end', () => {
+      if (equivalentClasses.length > 0) {
+        currentEntityDetails.value['equivalent_classes'] = new Set(equivalentClasses)
+      }
+      currentEntityDetails.value['uri'] = nodeidreplaced.replace('_', ':', 1)
+      visibleTab.value = 'details'
+    })
+  } else {
+    // Original logic for non-equivalence nodes
+    const entityDataQuery = `
 SELECT ?p ?o WHERE {
   { ${nodeidreplaced} ?p ?o }
    union
   { ${nodeidreplaced} linkml:any_of/linkml:range ?o . bind(linkml:range as ?p) }
 }
-  `
-  console.log(entityDataQuery);
+    `
+    console.log(entityDataQuery);
 
-  currentEntityDetails.value = {}
+    currentEntityDetails.value = {}
 
-  const entityDataBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, entityDataQuery);
-  entityDataBindings.on('data', bindings => {
-    let shrunkP = shrinkEntity(bindings['p']['value'])
-    let shrunkO = shrinkEntity(bindings['o']['value'])
-    console.log(shrunkP, shrunkO);
-    if(['linkml:slots'].includes(shrunkP) && nodeclasses.includes('graph'))
-      return;
-    if(shrunkP in singlefieldmappings){
-      currentEntityDetails.value[singlefieldmappings[shrunkP]] = shrunkO;
-    }
-    else if(shrunkP in multiplefieldmappings){
-      if(multiplefieldmappings[shrunkP] in currentEntityDetails.value)
-        currentEntityDetails.value[multiplefieldmappings[shrunkP]].add(shrunkO);
-      else
-        currentEntityDetails.value[multiplefieldmappings[shrunkP]] = new Set([shrunkO]);
-    }
-  });
-  entityDataBindings.on('end', () => {
-    currentEntityDetails.value = currentEntityDetails.value;
-    visibleTab.value = 'details'
-  })
+    const entityDataBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, entityDataQuery);
+    entityDataBindings.on('data', bindings => {
+      let shrunkP = shrinkEntity(bindings['p']['value'])
+      let shrunkO = shrinkEntity(bindings['o']['value'])
+      console.log(shrunkP, shrunkO);
+      if(['linkml:slots'].includes(shrunkP) && nodeclasses.includes('graph'))
+        return;
+      if(shrunkP in singlefieldmappings){
+        currentEntityDetails.value[singlefieldmappings[shrunkP]] = shrunkO;
+      }
+      else if(shrunkP in multiplefieldmappings){
+        if(multiplefieldmappings[shrunkP] in currentEntityDetails.value)
+          currentEntityDetails.value[multiplefieldmappings[shrunkP]].add(shrunkO);
+        else
+          currentEntityDetails.value[multiplefieldmappings[shrunkP]] = new Set([shrunkO]);
+      }
+    });
+    entityDataBindings.on('end', () => {
+      currentEntityDetails.value = currentEntityDetails.value;
+      visibleTab.value = 'details'
+    })
+  }
   cyc.value.$('#'+nodeid).style('opacity', '1');
 }
 
@@ -707,60 +800,6 @@ onMounted(async () => {
   });
   console.log('Starting with endpoint:', oknSparqlEndpoint.value)
 
-  var instance = cyc.value.contextMenus({
-    menuItems: [
-      {
-        id: 'showImports',
-        content: 'Show graph dependencies',
-        tooltipText: 'Show all graphs that this graph depends on',
-        selector: '.graph',
-        onClickFunction: getGraphImports,
-      },
-      {
-        id: 'showClasses',
-        content: 'Show defined classes',
-        tooltipText: 'Show all classes defined in this graph',
-        selector: '.graph:childless[^removed]',
-        onClickFunction: getDefinedClasses,
-      },
-      {
-        id: 'showAllUsedClasses',
-        content: 'Show used classes',
-        tooltipText: 'Show those classes of which entities instantiated in this graph are types',
-        selector: '.graph:childless[^removed]',
-        onClickFunction: getAllUsedClasses,
-      },
-      {
-        id: 'showAllEquivalentClasses',
-        content: 'Show equivalent classes',
-        tooltipText: 'Show those classes defined in this graph that are linked to classes in other graphs',
-        selector: '.graph:childless[^removed]',
-        onClickFunction: getAllEquivalentClasses,
-      },
-      {
-        id: 'showEquivalents',
-        content: 'Show equivalent classes',
-        tooltipText: 'Add links to equivalent classes from other graphs',
-        selector: '.classDef',
-        onClickFunction: getEquivalentClasses
-      },
-      {
-        id: 'collapseNodes',
-        content: 'Collapse defined classes',
-        tooltipText: 'Display only a single dot for this graph',
-        selector: '.graph:parent',
-        onClickFunction: collapseNodes
-      },
-      {
-        id: 'uncollapseNodes',
-        content: 'Expand defined classes',
-        tooltipText: 'Display classes defined by this graph',
-        selector: '.graph:childless[removed]',
-        onClickFunction: uncollapseNodes
-      }
-    ]
-  });
-
   cyc.value.on('click', showEntityData);
 
   cyc.value.on('ready', function(){
@@ -786,6 +825,43 @@ onMounted(async () => {
 
   cyc.value.on('mouseover', 'node', function(evt){let node = evt.target; cyc.value.$("#"+node.id()).toggleClass('hovered')})
   cyc.value.on('mouseout', 'node', function(evt){let node = evt.target; cyc.value.$("#"+node.id()).toggleClass('hovered')})
+
+  // Edge mouseover tooltips
+  const tooltip = document.createElement('div')
+  tooltip.className = 'edge-tooltip'
+  tooltip.style.display = 'none'
+  document.body.appendChild(tooltip)
+
+  cyc.value.on('mouseover', 'edge', function(evt){
+    const edge = evt.target
+    let tooltipContent = ''
+
+    // Check if this is an equivalence edge with class info
+    if (edge.hasClass('equivalent') && edge.data('shrunkClass')) {
+      tooltipContent = `<strong>Class:</strong> ${edge.data('shrunkClass')}`
+      if (edge.data('count')) {
+        tooltipContent += `<br><strong>Count:</strong> ${edge.data('count')}`
+      }
+    } else if (edge.hasClass('classuse')) {
+      tooltipContent = `<strong>Usage:</strong> ${edge.data('label')} instances`
+    } else if (edge.hasClass('import')) {
+      tooltipContent = `<strong>Import dependency</strong>`
+    } else {
+      tooltipContent = 'Edge information'
+    }
+
+    tooltip.innerHTML = tooltipContent
+    tooltip.style.display = 'block'
+  })
+
+  cyc.value.on('mousemove', 'edge', function(evt){
+    tooltip.style.left = evt.originalEvent.pageX + 10 + 'px'
+    tooltip.style.top = evt.originalEvent.pageY + 10 + 'px'
+  })
+
+  cyc.value.on('mouseout', 'edge', function(evt){
+    tooltip.style.display = 'none'
+  })
 });
 
 const visibleTab = ref('help')
@@ -846,6 +922,9 @@ const visibleTab = ref('help')
                 </template>
                 <template v-else-if="['license','contributor'].includes(key)">
                   <a :href='value'>{{ value }}</a>
+                </template>
+                <template v-else-if="['wikidata'].includes(key)">
+                  <a :href='(prefixes.resolve(rdf.namedNode(value)) ?? {value: ""}).value' target='_blank'>{{ value }}</a>
                 </template>
                 <template v-else>
                   {{ value }}
