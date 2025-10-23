@@ -13,16 +13,17 @@ cytoscapeUndoRedo(cytoscape)
 cytoscape.use(contextMenus)
 // Making the endpoint configurable by resolving it dynamically.
 const oknSparqlEndpoint = ref("http://localhost:8000")
-onMounted(
-    async ()=>{
-      try {
-        let response = await fetch("/okn-map/config.json");
-        const config = await response.json();
-        oknSparqlEndpoint.value = config.sparqlEndpoint;
-    } catch (e){
-    }
-})
 
+async function loadConfig(){
+  try {
+    let response = await fetch("/config.json");
+    const config = await response.json();
+    oknSparqlEndpoint.value = config.sparqlEndpoint;
+    console.log("Loaded config, SPARQL endpoint:", oknSparqlEndpoint.value)
+  } catch (e){
+    console.log("Could not load config.json, using default endpoint", e)
+  }
+}
 
 const currentEntityDetails = ref({})
 
@@ -31,45 +32,7 @@ const myFetcher = new SparqlEndpointFetcher({
 });
 const cyc = ref()
 
-let usecases = [
-  // TODO: set positions relative to size of initial viewport?
-  {group: 'nodes', data: {id: 'usecase_bio', label: 'Biology and Health'}, classes: ['usecase','usecase_bio'], position: {x: -100, y: 0}, locked: true},
-  {group: 'nodes', data: {id: 'usecase_env', label: 'Environment'}, classes: ['usecase','usecase_env'], position: {x: 550, y: 0}, locked: true},
-  // {group: 'nodes', data: {id: 'usecase_help', label: 'Help!'}, classes: ['usecase','usecase_help'], position: {x: 225, y: 125}, locked: true},
-  {group: 'nodes', data: {id: 'usecase_jus', label: 'Justice'}, classes: ['usecase','usecase_jus'], position: {x: -100, y: 250}, locked: true},
-  {group: 'nodes', data: {id: 'usecase_tam', label: 'Technology and Manufacturing'}, classes: ['usecase','usecase_tam'], position: {x: 550, y: 250}, locked: true},
-]
-
-let t1graphs = {
-    // TODO: currently hardcoding T1s; move to configuration file?
-  // TODO: set positions relative to use case location
-  'usecase_bio': [
-    {group: 'nodes', data: {id: 'okns_biobricks-ice', label: 'BioBricks-ICE', rank: 0}, classes: ['graph','collapsed','t1','t1_bio','importsMissing','okns_biobricks-ice'], position: {x: -150, y: -50}},
-    {group: 'nodes', data: {id: 'okns_spoke', label: 'SPOKE', rank: 0}, classes: ['graph','collapsed','t1','t1_bio','importsMissing','okns_spoke'], position: {x: -50, y: -50}}
-  ],
-  'usecase_env': [
-    {group: 'nodes', data: {id: 'okns_climatemodelskg', label: 'ClimateModels-KG', rank: 0}, classes: ['graph','collapsed','t1_env','importsMissing','okns_climatemodelskg'], position: {x: 500, y: -50}},
-    {group: 'nodes', data: {id: 'okns_fiokg', label: 'SAWGRAPH FIO', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_fiokg'], position: {x: 625, y: 75}},
-    {group: 'nodes', data: {id: 'okns_hydrologykg', label: 'SAWGRAPH Hydrology', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_hydrologykg'], position: {x: 550, y: 75}},
-    {group: 'nodes', data: {id: 'okns_sawgraph', label: 'SAWGRAPH', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_sawgraph'], position: {x: 487, y: 25}},
-    {group: 'nodes', data: {id: 'okns_sockg', label: 'SOC-KG', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_sockg'], position: {x: 575, y: 0}},
-    {group: 'nodes', data: {id: 'okns_spatialkg', label: 'SAWGRAPH Spatial', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_spatialkg'], position: {x: 625, y: 75}},
-    {group: 'nodes', data: {id: 'okns_ufokn', label: 'WEN-OKN', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_ufokn'], position: {x: 475, y: 75}},
-    {group: 'nodes', data: {id: 'okns_wildlifekn', label: 'KN-Wildlife', rank: 0}, classes: ['graph','collapsed','t1','t1_env','importsMissing','okns_wildlifekn'], position: {x:625, y: -50}},
-  ],
-  'usecase_jus': [
-    {group: 'nodes', data: {id: 'okns_dreamkg', label: 'DREAM-KG', rank: 0}, classes: ['graph','collapsed','t1','t1_jus','importsMissing','okns_dreamkg'], position: {x: -25, y: 225}},
-    {group: 'nodes', data: {id: 'okns_nikg', label: 'NIKG', rank: 0}, classes: ['graph','collapsed','t1','t1_jus','importsMissing','okns_nikg'], position: {x: -25, y: 300}},
-    {group: 'nodes', data: {id: 'okns_ruralkg', label: 'Rural-KG', rank: 0}, classes: ['graph','collapsed','t1','t1_jus','importsMissing','okns_ruralkg'], position: {x: -175, y: 325}},
-    {group: 'nodes', data: {id: 'okns_scales', label: 'SCALES', rank: 0}, classes: ['graph','collapsed','t1','t1_jus','importsMissing','okns_scales'], position: {x: -175, y: 250}},
-  ],
-  'usecase_tam': [
-    {group: 'nodes', data: {id: 'okns_securechainkg', label: 'Secure Chain', rank: 0}, classes: ['graph','collapsed','t1','t1_tam','importsMissing','okns_securechainkg'], position: {x: 625, y: 200}},
-    {group: 'nodes', data: {id: 'okns_sudokn', label: 'SUD-OKN', rank: 0}, classes: ['graph','collapsed','t1','t1_tam','importsMissing','okns_sudokn'], position: {x: 475, y: 200}}
-  ]
-}
-
-const initialElements = ref(usecases)
+const initialElements = ref([])
 
 const graphStyle = ref([ // the stylesheet for the graph
   {
@@ -79,24 +42,6 @@ const graphStyle = ref([ // the stylesheet for the graph
       'text-margin-y': '-5px'
     }
   },
-  // starting region styling
-  {
-    selector: '.usecase',
-    style: {
-      'width': '15em',
-      'height': '12.5em',
-      'background-width': '80%',
-      'background-height': '100%',
-      'background-color': '#e8e4ef',
-      'shape': 'round-rectangle',
-      'text-opacity': '0'
-    }
-  },
-  {selector: '.usecase_bio', style: {'background-image': 'static/Biology-Health-1.png'}},
-  {selector: '.usecase_jus', style: {'background-image': 'static/Biology-Health-2.png'}},
-  {selector: '.usecase_env', style: {'background-image': 'static/Biology-Health-3.png'}},
-  {selector: '.usecase_tam', style: {'background-image': 'static/Biology-Health-4.png'}},
-  {selector: '.usecase_help', style: {'z-index': -5, 'opacity': 0.25, 'width': '25em', 'height': '25em'}},
   // edge styling
   {
     selector: 'edge.import',
@@ -149,6 +94,28 @@ const graphStyle = ref([ // the stylesheet for the graph
   {
     selector: ".graph.hovered",
     style: {'border-opacity': '1', 'text-opacity': '1'}
+  },
+  // equivalence node styling
+  {
+    selector: ".equivalence",
+    style: {
+      'shape': 'diamond',
+      'width': 40,
+      'height': 40,
+      'font-size': 10
+    }
+  },
+  {
+    selector: ".equiv-shared",
+    style: {'background-color': '#9370db'} // medium purple
+  },
+  {
+    selector: ".equiv-wikidata",
+    style: {'background-color': '#ff69b4'} // hot pink
+  },
+  {
+    selector: ".equiv-direct",
+    style: {'background-color': '#20b2aa'} // light sea green
   }
 ]);
 
@@ -220,7 +187,11 @@ let mappinglabels = {
   'notes': 'Internal comments',
   'slots': 'Predicates',
   'domain': 'Domain',
-  'range': 'Range'
+  'range': 'Range',
+  'wikidata': 'Wikidata Entity',
+  'shared_class': 'Shared Class',
+  'equivalent_classes': 'Equivalent Classes',
+  'graphs': 'Used in Graphs'
 }
 
 async function getDefinedClasses(evt){
@@ -456,46 +427,248 @@ const definedClassesBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.v
 
 async function showEntityData(evt){
   let node = evt.target;
-  if(node === toRaw(cyc.value) || node.classes().includes('usecase'))
+  if(node === toRaw(cyc.value))
     return;
   console.log(node);
   cyc.value.$('#'+node.id()).style('opacity', '1');
   await getEntityData(node.id(), node.id().replace('_',':',1), node.classes())
 }
 
+async function loadProtoOKNGraphs(){
+  console.log('Loading Proto-OKN graphs...')
+  const protoOKNQuery = `
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX linkml: <https://w3id.org/linkml/>
+PREFIX okn: <https://purl.org/okn/>
+PREFIX okns: <https://purl.org/okn/schema/>
+
+SELECT ?graph ?graphLabel WHERE {
+  ?graph dct:isPartOf okn:proto-okn ;
+         a linkml:SchemaDefinition .
+  optional { ?graph dct:title ?graphLabel }
+}
+`
+  console.log(protoOKNQuery)
+  const graphBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, protoOKNQuery)
+  let graphNodes = []
+  graphBindings.on('data', bindings => {
+    console.log(bindings)
+    let shrunkGraph = shrinkEntity(bindings['graph']['value'])
+    let graphLabel = (bindings['graphLabel'] ?? {'value': shrunkGraph})['value']
+    let shrunkGraphId = shrunkGraph.replace(':','_')
+    graphNodes.push({
+      group: 'nodes',
+      data: {id: shrunkGraphId, label: graphLabel, rank: 0},
+      classes: ['graph','collapsed','importsMissing', shrunkGraphId]
+    })
+  })
+  graphBindings.on('end', () => {
+    console.log(`Loaded ${graphNodes.length} graphs`)
+    for(let node of graphNodes){
+      cyc.value.add(node)
+    }
+    // Load equivalences after graphs are added
+    loadEquivalences()
+  })
+}
+
+async function loadEquivalences(){
+  console.log('Loading precomputed equivalences...')
+  const equivalencesQuery = `
+PREFIX okn: <https://purl.org/okn/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?equiv ?type ?label ?graph ?class ?count WHERE {
+  ?equiv a ?type ;
+         okn:inGraph ?graph .
+  FILTER(?type IN (okn:SharedClassEquivalence, okn:WikidataEquivalence, okn:DirectClassEquivalence))
+  optional { ?equiv rdfs:label ?label }
+  optional {
+    ?equiv okn:usage [
+      okn:graph ?graph ;
+      okn:class ?class ;
+      okn:count ?count
+    ]
+  }
+}
+`
+  console.log(equivalencesQuery)
+  const equivBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, equivalencesQuery)
+  let equivNodes = new Map() // Map to track unique equivalence nodes
+  let equivEdges = []
+  let edgeMetadata = new Map() // Store class info for each edge
+
+  equivBindings.on('data', bindings => {
+    console.log(bindings)
+    let equivUri = bindings['equiv']['value']
+    let equivType = bindings['type']['value']
+    let graphUri = bindings['graph']['value']
+    let equivLabel = bindings['label'] ? bindings['label']['value'] : null
+    let classUri = bindings['class'] ? bindings['class']['value'] : null
+    let count = bindings['count'] ? bindings['count']['value'] : null
+
+    let shrunkEquiv = shrinkEntity(equivUri)
+    let shrunkGraph = shrinkEntity(graphUri)
+    let shrunkEquivId = shrunkEquiv.replace(':','_')
+    let shrunkGraphId = shrunkGraph.replace(':','_')
+    let edgeId = shrunkEquivId + '_' + shrunkGraphId
+
+    // Add equivalence node if not already added
+    if (!equivNodes.has(shrunkEquivId)) {
+      // Use rdfs:label if available, otherwise fallback to ID
+      let label = equivLabel || shrunkEquiv.split(':')[1]
+      let typeClass = equivType.includes('Shared') ? 'equiv-shared' :
+                      equivType.includes('Wikidata') ? 'equiv-wikidata' : 'equiv-direct'
+      equivNodes.set(shrunkEquivId, {
+        group: 'nodes',
+        data: {id: shrunkEquivId, label: label, rank: 0, equivUri: equivUri},
+        classes: ['equivalence', typeClass]
+      })
+    }
+
+    // Store class info for edge metadata
+    if (classUri) {
+      let shrunkClass = shrinkEntity(classUri)
+      edgeMetadata.set(edgeId, {
+        classUri: classUri,
+        shrunkClass: shrunkClass,
+        count: count
+      })
+    }
+
+    // Add edge from equivalence node to graph
+    let edgeData = {
+      id: edgeId,
+      source: shrunkEquivId,
+      target: shrunkGraphId
+    }
+    if (classUri) {
+      edgeData.classUri = classUri
+      edgeData.shrunkClass = shrinkEntity(classUri)
+      edgeData.count = count
+    }
+
+    equivEdges.push({
+      group: 'edges',
+      classes: ['equivalent'],
+      data: edgeData
+    })
+  })
+
+  equivBindings.on('end', () => {
+    console.log(`Loaded ${equivNodes.size} equivalence nodes with ${equivEdges.length} edges`)
+
+    // Add equivalence nodes
+    for(let node of equivNodes.values()){
+      cyc.value.add(node)
+    }
+
+    // Add edges
+    for(let edge of equivEdges){
+      cyc.value.add(edge)
+    }
+
+    // Run layout to position everything
+    cyc.value.layout({
+      name: 'fcose',
+      nodeDimensionsIncludeLabels: true,
+      animate: true,
+      randomize: true,
+      fit: true
+    }).run()
+  })
+}
+
 async function getEntityData(nodeid, nodeidreplaced, nodeclasses){
-  const entityDataQuery = `
+  // Check if this is an equivalence node
+  if (nodeclasses.includes('equivalence')) {
+    console.log('Getting equivalence data for', nodeidreplaced)
+    const equivDataQuery = `
+PREFIX okn: <https://purl.org/okn/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?p ?o WHERE {
+  ${nodeidreplaced} ?p ?o .
+}
+    `
+    console.log(equivDataQuery);
+
+    currentEntityDetails.value = {}
+    let equivalentClasses = []
+    let usageData = []
+    let wikidataEntity = null
+    let sharedClass = null
+
+    const equivDataBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, equivDataQuery);
+    equivDataBindings.on('data', bindings => {
+      let p = bindings['p']['value']
+      let o = bindings['o']['value']
+      let shrunkP = shrinkEntity(p)
+      let shrunkO = shrinkEntity(o)
+      console.log(shrunkP, shrunkO);
+
+      if (shrunkP === 'rdfs:label') {
+        currentEntityDetails.value['title'] = shrunkO
+      } else if (shrunkP === 'rdf:type') {
+        currentEntityDetails.value['type'] = shrunkO
+      } else if (shrunkP === 'okn:wikidataEntity') {
+        wikidataEntity = o
+        currentEntityDetails.value['wikidata'] = shrunkO
+      } else if (shrunkP === 'okn:sharedClass') {
+        sharedClass = o
+        currentEntityDetails.value['shared_class'] = shrunkO
+      } else if (shrunkP === 'okn:equivalentClass') {
+        equivalentClasses.push(shrunkO)
+      } else if (shrunkP === 'okn:inGraph') {
+        if (!currentEntityDetails.value['graphs']) {
+          currentEntityDetails.value['graphs'] = new Set()
+        }
+        currentEntityDetails.value['graphs'].add(shrunkO)
+      }
+    });
+
+    equivDataBindings.on('end', () => {
+      if (equivalentClasses.length > 0) {
+        currentEntityDetails.value['equivalent_classes'] = new Set(equivalentClasses)
+      }
+      currentEntityDetails.value['uri'] = nodeidreplaced.replace('_', ':', 1)
+      visibleTab.value = 'details'
+    })
+  } else {
+    // Original logic for non-equivalence nodes
+    const entityDataQuery = `
 SELECT ?p ?o WHERE {
   { ${nodeidreplaced} ?p ?o }
    union
   { ${nodeidreplaced} linkml:any_of/linkml:range ?o . bind(linkml:range as ?p) }
 }
-  `
-  console.log(entityDataQuery);
+    `
+    console.log(entityDataQuery);
 
-  currentEntityDetails.value = {}
+    currentEntityDetails.value = {}
 
-  const entityDataBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, entityDataQuery);
-  entityDataBindings.on('data', bindings => {
-    let shrunkP = shrinkEntity(bindings['p']['value'])
-    let shrunkO = shrinkEntity(bindings['o']['value'])
-    console.log(shrunkP, shrunkO);
-    if(['linkml:slots'].includes(shrunkP) && nodeclasses.includes('graph'))
-      return;
-    if(shrunkP in singlefieldmappings){
-      currentEntityDetails.value[singlefieldmappings[shrunkP]] = shrunkO;
-    }
-    else if(shrunkP in multiplefieldmappings){
-      if(multiplefieldmappings[shrunkP] in currentEntityDetails.value)
-        currentEntityDetails.value[multiplefieldmappings[shrunkP]].add(shrunkO);
-      else
-        currentEntityDetails.value[multiplefieldmappings[shrunkP]] = new Set([shrunkO]);
-    }
-  });
-  entityDataBindings.on('end', () => {
-    currentEntityDetails.value = currentEntityDetails.value;
-    visibleTab.value = 'details'
-  })
+    const entityDataBindings = await myFetcher.fetchBindings(oknSparqlEndpoint.value, entityDataQuery);
+    entityDataBindings.on('data', bindings => {
+      let shrunkP = shrinkEntity(bindings['p']['value'])
+      let shrunkO = shrinkEntity(bindings['o']['value'])
+      console.log(shrunkP, shrunkO);
+      if(['linkml:slots'].includes(shrunkP) && nodeclasses.includes('graph'))
+        return;
+      if(shrunkP in singlefieldmappings){
+        currentEntityDetails.value[singlefieldmappings[shrunkP]] = shrunkO;
+      }
+      else if(shrunkP in multiplefieldmappings){
+        if(multiplefieldmappings[shrunkP] in currentEntityDetails.value)
+          currentEntityDetails.value[multiplefieldmappings[shrunkP]].add(shrunkO);
+        else
+          currentEntityDetails.value[multiplefieldmappings[shrunkP]] = new Set([shrunkO]);
+      }
+    });
+    entityDataBindings.on('end', () => {
+      currentEntityDetails.value = currentEntityDetails.value;
+      visibleTab.value = 'details'
+    })
+  }
   cyc.value.$('#'+nodeid).style('opacity', '1');
 }
 
@@ -616,84 +789,26 @@ function uncollapseNodes(evt){ // modified from https://github.com/CamFlow/cytos
 }
 
 onMounted(async () => {
+  // Load config first to ensure SPARQL endpoint is set
+  await loadConfig()
+
   cyc.value = cytoscape({
     container: document.getElementsByClassName('cy-wrapper')[0],
     elements: initialElements.value,
     layout: {name:'preset'},
     style: graphStyle.value
   });
-  console.log('Starting!')
-  
-  var instance = cyc.value.contextMenus({
-    menuItems: [
-      {
-        id: 'showImports',
-        content: 'Show graph dependencies',
-        tooltipText: 'Show all graphs that this graph depends on',
-        selector: '.graph',
-        onClickFunction: getGraphImports,
-      },
-      {
-        id: 'showClasses',
-        content: 'Show defined classes',
-        tooltipText: 'Show all classes defined in this graph',
-        selector: '.graph:childless[^removed]',
-        onClickFunction: getDefinedClasses,
-      },
-      {
-        id: 'showAllUsedClasses',
-        content: 'Show used classes',
-        tooltipText: 'Show those classes of which entities instantiated in this graph are types',
-        selector: '.graph:childless[^removed]',
-        onClickFunction: getAllUsedClasses,
-      },
-      {
-        id: 'showAllEquivalentClasses',
-        content: 'Show equivalent classes',
-        tooltipText: 'Show those classes defined in this graph that are linked to classes in other graphs',
-        selector: '.graph:childless[^removed]',
-        onClickFunction: getAllEquivalentClasses,
-      },
-      {
-        id: 'showEquivalents',
-        content: 'Show equivalent classes',
-        tooltipText: 'Add links to equivalent classes from other graphs',
-        selector: '.classDef',
-        onClickFunction: getEquivalentClasses
-      },
-      {
-        id: 'collapseNodes',
-        content: 'Collapse defined classes',
-        tooltipText: 'Display only a single dot for this graph',
-        selector: '.graph:parent',
-        onClickFunction: collapseNodes
-      },
-      {
-        id: 'uncollapseNodes',
-        content: 'Expand defined classes',
-        tooltipText: 'Display classes defined by this graph',
-        selector: '.graph:childless[removed]',
-        onClickFunction: uncollapseNodes
-      }
-    ]
-  });
+  console.log('Starting with endpoint:', oknSparqlEndpoint.value)
 
   cyc.value.on('click', showEntityData);
-
-  cyc.value.on('click', '.usecase', function(evt){
-    let node = evt.target;
-    let nodeId = node.id();
-    for(let newNode of t1graphs[nodeId]){
-      cyc.value.add(newNode);
-    }
-    cyc.value.$('#'+nodeId).style({'opacity': 0.25});
-    cyc.value.$('#'+nodeId).style({'events': 'no'});
-  })
 
   cyc.value.on('ready', function(){
     cyc.value.center()
     console.log(cyc.value.elements().boundingBox())
   })
+
+  // Load Proto-OKN graphs after cytoscape is initialized
+  loadProtoOKNGraphs()
 
   cyc.value.on('dbltap', function(event){
     // target holds a reference to the originator
@@ -710,6 +825,43 @@ onMounted(async () => {
 
   cyc.value.on('mouseover', 'node', function(evt){let node = evt.target; cyc.value.$("#"+node.id()).toggleClass('hovered')})
   cyc.value.on('mouseout', 'node', function(evt){let node = evt.target; cyc.value.$("#"+node.id()).toggleClass('hovered')})
+
+  // Edge mouseover tooltips
+  const tooltip = document.createElement('div')
+  tooltip.className = 'edge-tooltip'
+  tooltip.style.display = 'none'
+  document.body.appendChild(tooltip)
+
+  cyc.value.on('mouseover', 'edge', function(evt){
+    const edge = evt.target
+    let tooltipContent = ''
+
+    // Check if this is an equivalence edge with class info
+    if (edge.hasClass('equivalent') && edge.data('shrunkClass')) {
+      tooltipContent = `<strong>Class:</strong> ${edge.data('shrunkClass')}`
+      if (edge.data('count')) {
+        tooltipContent += `<br><strong>Count:</strong> ${edge.data('count')}`
+      }
+    } else if (edge.hasClass('classuse')) {
+      tooltipContent = `<strong>Usage:</strong> ${edge.data('label')} instances`
+    } else if (edge.hasClass('import')) {
+      tooltipContent = `<strong>Import dependency</strong>`
+    } else {
+      tooltipContent = 'Edge information'
+    }
+
+    tooltip.innerHTML = tooltipContent
+    tooltip.style.display = 'block'
+  })
+
+  cyc.value.on('mousemove', 'edge', function(evt){
+    tooltip.style.left = evt.originalEvent.pageX + 10 + 'px'
+    tooltip.style.top = evt.originalEvent.pageY + 10 + 'px'
+  })
+
+  cyc.value.on('mouseout', 'edge', function(evt){
+    tooltip.style.display = 'none'
+  })
 });
 
 const visibleTab = ref('help')
@@ -770,6 +922,9 @@ const visibleTab = ref('help')
                 </template>
                 <template v-else-if="['license','contributor'].includes(key)">
                   <a :href='value'>{{ value }}</a>
+                </template>
+                <template v-else-if="['wikidata'].includes(key)">
+                  <a :href='(prefixes.resolve(rdf.namedNode(value)) ?? {value: ""}).value' target='_blank'>{{ value }}</a>
                 </template>
                 <template v-else>
                   {{ value }}
