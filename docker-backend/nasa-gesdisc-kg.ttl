@@ -1,0 +1,1221 @@
+('https://w3id.org/linkml/meta.context.jsonld',)
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix linkml: <https://w3id.org/linkml/> .
+@prefix ns1: <https://nasa-gesdisc.proto-okn.net/kg/schema/> .
+@prefix okn: <https://purl.org/okn/> .
+@prefix okns: <https://purl.org/okn/schema/> .
+@prefix pav: <http://purl.org/pav/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_CITES a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:CITES ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_CITES ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPublication ;
+    linkml:inlined true ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPublication ;
+    linkml:range okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPublication ;
+    linkml:slot_uri ns1:CITES .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_APPLIEDRESEARCHAREA a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:HAS_APPLIEDRESEARCHAREA ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_APPLIEDRESEARCHAREA ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPublication ;
+    linkml:inlined true ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPublication ;
+    linkml:range okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaScienceKeyword ;
+    linkml:slot_uri ns1:HAS_APPLIEDRESEARCHAREA .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_DATASET a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:HAS_DATASET ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_DATASET ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataCenter ;
+    linkml:inlined true ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataCenter ;
+    linkml:range okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:slot_uri ns1:HAS_DATASET .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_INSTRUMENT a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:HAS_INSTRUMENT ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_INSTRUMENT ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPlatform ;
+    linkml:inlined true ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPlatform ;
+    linkml:range okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaInstrument ;
+    linkml:slot_uri ns1:HAS_INSTRUMENT .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_PLATFORM a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:HAS_PLATFORM ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_PLATFORM ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:inlined true ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:range okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPlatform ;
+    linkml:slot_uri ns1:HAS_PLATFORM .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_SCIENCEKEYWORD a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:HAS_SCIENCEKEYWORD ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_SCIENCEKEYWORD ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:inlined true ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:range okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaScienceKeyword ;
+    linkml:slot_uri ns1:HAS_SCIENCEKEYWORD .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_SUBCATEGORY a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:HAS_SUBCATEGORY ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_SUBCATEGORY ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaScienceKeyword ;
+    linkml:inlined true ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaScienceKeyword ;
+    linkml:range okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaScienceKeyword ;
+    linkml:slot_uri ns1:HAS_SUBCATEGORY .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_OF_PROJECT a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:OF_PROJECT ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_OF_PROJECT ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:inlined true ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:range okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaProject ;
+    linkml:slot_uri ns1:OF_PROJECT .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_Type a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:Type ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_Type ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPlatform ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPlatform ;
+    linkml:range okns:string ;
+    linkml:slot_uri ns1:Type .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_USES_DATASET a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:USES_DATASET ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_USES_DATASET ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPublication ;
+    linkml:inlined true ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPublication ;
+    linkml:range okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:slot_uri ns1:USES_DATASET .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_cmrId a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:cmrId ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_cmrId ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:range okns:string ;
+    linkml:slot_uri ns1:cmrId .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_daac a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:daac ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_daac ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:range okns:string ;
+    linkml:slot_uri ns1:daac .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_landingPageUrl a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:landingPageUrl ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_landingPageUrl ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:range okns:uri ;
+    linkml:slot_uri ns1:landingPageUrl .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_nwCorner_crs a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:nwCorner_crs ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_nwCorner_crs ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:range okns:string ;
+    linkml:slot_uri ns1:nwCorner_crs .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_nwCorner_latitude a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:nwCorner_latitude ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_nwCorner_latitude ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:range okns:decimal ;
+    linkml:slot_uri ns1:nwCorner_latitude .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_nwCorner_longitude a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:nwCorner_longitude ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_nwCorner_longitude ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:range okns:decimal ;
+    linkml:slot_uri ns1:nwCorner_longitude .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_seCorner_crs a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:seCorner_crs ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_seCorner_crs ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:range okns:string ;
+    linkml:slot_uri ns1:seCorner_crs .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_seCorner_latitude a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:seCorner_latitude ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_seCorner_latitude ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:range okns:decimal ;
+    linkml:slot_uri ns1:seCorner_latitude .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_seCorner_longitude a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:seCorner_longitude ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_seCorner_longitude ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:range okns:decimal ;
+    linkml:slot_uri ns1:seCorner_longitude .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_temporalFrequency a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:temporalFrequency ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_temporalFrequency ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:range okns:string ;
+    linkml:slot_uri ns1:temporalFrequency .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_url a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:url ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_url ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataCenter ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataCenter ;
+    linkml:range okns:uri ;
+    linkml:slot_uri ns1:url .
+
+okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaInstrument a okns:ClassDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:Instrument ;
+    linkml:class_uri ns1:Instrument ;
+    linkml:definition_uri okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaInstrument ;
+    linkml:slot_usage [ ] ;
+    linkml:slots okns:dct_subject,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_globalId,
+        okns:rdfs_label .
+
+okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaProject a okns:ClassDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:Project ;
+    linkml:class_uri ns1:Project ;
+    linkml:definition_uri okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaProject ;
+    linkml:slot_usage [ ] ;
+    linkml:slots okns:dct_subject,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_globalId,
+        okns:rdfs_label .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_pagerank_publication_dataset a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:pagerank_publication_dataset ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_pagerank_publication_dataset ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset,
+        okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPublication ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPublication ;
+    linkml:range okns:float ;
+    linkml:slot_uri ns1:pagerank_publication_dataset .
+
+okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataCenter a okns:ClassDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:DataCenter ;
+    linkml:class_uri ns1:DataCenter ;
+    linkml:definition_uri okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataCenter ;
+    linkml:slot_usage [ ] ;
+    linkml:slots okns:dct_subject,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_DATASET,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_globalId,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_url,
+        okns:rdfs_label .
+
+okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPlatform a okns:ClassDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:Platform ;
+    linkml:class_uri ns1:Platform ;
+    linkml:definition_uri okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPlatform ;
+    linkml:slot_usage [ ] ;
+    linkml:slots okns:dct_subject,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_INSTRUMENT,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_Type,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_globalId,
+        okns:rdfs_label .
+
+okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaScienceKeyword a okns:ClassDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:ScienceKeyword ;
+    linkml:class_uri ns1:ScienceKeyword ;
+    linkml:definition_uri okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaScienceKeyword ;
+    linkml:slot_usage [ ] ;
+    linkml:slots okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_SUBCATEGORY,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_globalId,
+        okns:rdfs_label .
+
+okns:https___nasa_gesdisc.proto_okn.net_kg_schema_globalId a okns:SlotDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:globalId ;
+    linkml:definition_uri okns:https___nasa_gesdisc.proto_okn.net_kg_schema_globalId ;
+    linkml:domain_of okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataCenter,
+        okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset,
+        okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaInstrument,
+        okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPlatform,
+        okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaProject,
+        okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPublication,
+        okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaScienceKeyword ;
+    linkml:owner okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaScienceKeyword ;
+    linkml:range okns:string ;
+    linkml:slot_uri ns1:globalId .
+
+okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPublication a okns:ClassDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:Publication ;
+    linkml:class_uri ns1:Publication ;
+    linkml:definition_uri okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPublication ;
+    linkml:slot_usage [ ] ;
+    linkml:slots okns:dct_identifier,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_CITES,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_APPLIEDRESEARCHAREA,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_USES_DATASET,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_globalId,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_pagerank_publication_dataset,
+        okns:sdos_abstract,
+        okns:sdos_title,
+        okns:time_year .
+
+okns:nasa-gesdisc-kg a okns:SchemaDefinition ;
+    dcterms:contributor <mailto:lisa@renci.org> ;
+    dcterms:license "https://creativecommons.org/publicdomain/zero/1.0/" ;
+    dcterms:title "NASA-GESDISC-KG" ;
+    pav:createdOn "2025-10-22T07:44:49.319193"^^xsd:dateTime ;
+    pav:lastUpdatedOn "2025-10-22T07:44:49.319193"^^xsd:dateTime ;
+    rdfs:seeAlso <https://frink.apps.renci.org/ldf/nasa-gesdisc-kg>,
+        <https://frink.apps.renci.org/nasa-gesdisc-kg/sparql>,
+        <https://frink.renci.org/kg-stats/nasa-gesdisc-kg> ;
+    skos:definition "The NASA Knowledge Graph Dataset is an expansive graph-based dataset designed to integrate and interconnect information about satellite datasets, scientific publications, instruments, platforms, projects, data centers, and science keywords. This knowledge graph is particularly focused on datasets managed by NASA's Distributed Active Archive Centers (DAACs), which are NASA's data repositories responsible for archiving and distributing scientific data. In addition to NASA DAACs, the graph includes datasets from 184 data providers worldwide, including various government agencies and academic institutions." ;
+    sh:declare [ sh:namespace rdfs: ;
+            sh:prefix "rdfs" ],
+        [ sh:namespace okn: ;
+            sh:prefix "okn" ],
+        [ sh:namespace time: ;
+            sh:prefix "time" ],
+        [ sh:namespace okns: ;
+            sh:prefix "okns" ],
+        [ sh:namespace dcterms: ;
+            sh:prefix "dct" ],
+        [ sh:namespace linkml: ;
+            sh:prefix "linkml" ],
+        [ sh:namespace schema: ;
+            sh:prefix "sdos" ],
+        [ sh:namespace rdf: ;
+            sh:prefix "rdf" ] ;
+    okns:default_prefix "okns" ;
+    okns:metamodel_version "1.7.0" ;
+    okns:source_file "nasa-gesdisc-kg.yaml" ;
+    linkml:annotations [ skos:example [ okns:pairs [ skos:example [ rdfs:label [ skos:example [ ns1:DataCenter [ skos:example [ okns:string [ skos:example 197 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:DataCenter ] ;
+                                                    ns1:Dataset [ skos:example [ okns:string [ skos:example 6821 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Dataset ] ;
+                                                    ns1:Instrument [ skos:example [ okns:string [ skos:example 897 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Instrument ] ;
+                                                    ns1:Platform [ skos:example [ okns:string [ skos:example 451 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Platform ] ;
+                                                    ns1:Project [ skos:example [ okns:string [ skos:example 351 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Project ] ;
+                                                    ns1:ScienceKeyword [ skos:example [ okns:string [ skos:example 1609 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:ScienceKeyword ] ] ;
+                                            linkml:tag rdfs:label ] ;
+                                    dcterms:date [ skos:example [ ns1:Dataset [ skos:example [ okns:datetime [ skos:example 10817 ;
+                                                                            linkml:tag okns:datetime ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag dcterms:date ] ;
+                                    dcterms:identifier [ skos:example [ ns1:Dataset [ skos:example [ okns:string [ skos:example 6821 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Dataset ] ;
+                                                    ns1:Publication [ skos:example [ okns:string [ skos:example 135352 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Publication ] ] ;
+                                            linkml:tag dcterms:identifier ] ;
+                                    dcterms:subject [ skos:example [ ns1:DataCenter [ skos:example [ okns:string [ skos:example 197 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:DataCenter ] ;
+                                                    ns1:Dataset [ skos:example [ okns:string [ skos:example 6821 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Dataset ] ;
+                                                    ns1:Instrument [ skos:example [ okns:string [ skos:example 783 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Instrument ] ;
+                                                    ns1:Platform [ skos:example [ okns:string [ skos:example 378 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Platform ] ;
+                                                    ns1:Project [ skos:example [ okns:string [ skos:example 342 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Project ] ] ;
+                                            linkml:tag dcterms:subject ] ;
+                                    rdf:object [ skos:example [ rdf:Statement [ skos:example [ ns1:Dataset [ skos:example 35695 ;
+                                                                            linkml:tag ns1:Dataset ] ;
+                                                                    ns1:Instrument [ skos:example 2526 ;
+                                                                            linkml:tag ns1:Instrument ] ;
+                                                                    ns1:Platform [ skos:example 10398 ;
+                                                                            linkml:tag ns1:Platform ] ;
+                                                                    ns1:Project [ skos:example 6378 ;
+                                                                            linkml:tag ns1:Project ] ;
+                                                                    ns1:Publication [ skos:example 208429 ;
+                                                                            linkml:tag ns1:Publication ] ;
+                                                                    ns1:ScienceKeyword [ skos:example 143089 ;
+                                                                            linkml:tag ns1:ScienceKeyword ] ] ;
+                                                            linkml:tag rdf:Statement ] ] ;
+                                            linkml:tag rdf:object ] ;
+                                    rdf:predicate [ skos:example [ rdf:Statement [ skos:example [ linkml:uri [ skos:example 406515 ;
+                                                                            linkml:tag okns:uri ] ] ;
+                                                            linkml:tag rdf:Statement ] ] ;
+                                            linkml:tag rdf:predicate ] ;
+                                    rdf:subject [ skos:example [ rdf:Statement [ skos:example [ ns1:DataCenter [ skos:example 9834 ;
+                                                                            linkml:tag ns1:DataCenter ] ;
+                                                                    ns1:Dataset [ skos:example 38347 ;
+                                                                            linkml:tag ns1:Dataset ] ;
+                                                                    ns1:Platform [ skos:example 2526 ;
+                                                                            linkml:tag ns1:Platform ] ;
+                                                                    ns1:Publication [ skos:example 353985 ;
+                                                                            linkml:tag ns1:Publication ] ;
+                                                                    ns1:ScienceKeyword [ skos:example 1823 ;
+                                                                            linkml:tag ns1:ScienceKeyword ] ] ;
+                                                            linkml:tag rdf:Statement ] ] ;
+                                            linkml:tag rdf:subject ] ;
+                                    time:year [ skos:example [ ns1:Publication [ skos:example [ okns:int32 [ skos:example 135348 ;
+                                                                            linkml:tag okns:int32 ] ] ;
+                                                            linkml:tag ns1:Publication ] ] ;
+                                            linkml:tag time:year ] ;
+                                    ns1:CITES [ skos:example [ ns1:Publication [ skos:example [ ns1:Publication [ skos:example 208429 ;
+                                                                            linkml:tag ns1:Publication ] ] ;
+                                                            linkml:tag ns1:Publication ] ] ;
+                                            linkml:tag ns1:CITES ] ;
+                                    ns1:HAS_APPLIEDRESEARCHAREA [ skos:example [ ns1:Publication [ skos:example [ ns1:ScienceKeyword [ skos:example 119695 ;
+                                                                            linkml:tag ns1:ScienceKeyword ] ] ;
+                                                            linkml:tag ns1:Publication ] ] ;
+                                            linkml:tag ns1:HAS_APPLIEDRESEARCHAREA ] ;
+                                    ns1:HAS_DATASET [ skos:example [ ns1:DataCenter [ skos:example [ ns1:Dataset [ skos:example 9834 ;
+                                                                            linkml:tag ns1:Dataset ] ] ;
+                                                            linkml:tag ns1:DataCenter ] ] ;
+                                            linkml:tag ns1:HAS_DATASET ] ;
+                                    ns1:HAS_INSTRUMENT [ skos:example [ ns1:Platform [ skos:example [ ns1:Instrument [ skos:example 2526 ;
+                                                                            linkml:tag ns1:Instrument ] ] ;
+                                                            linkml:tag ns1:Platform ] ] ;
+                                            linkml:tag ns1:HAS_INSTRUMENT ] ;
+                                    ns1:HAS_PLATFORM [ skos:example [ ns1:Dataset [ skos:example [ ns1:Platform [ skos:example 10398 ;
+                                                                            linkml:tag ns1:Platform ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:HAS_PLATFORM ] ;
+                                    ns1:HAS_SCIENCEKEYWORD [ skos:example [ ns1:Dataset [ skos:example [ ns1:ScienceKeyword [ skos:example 21571 ;
+                                                                            linkml:tag ns1:ScienceKeyword ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:HAS_SCIENCEKEYWORD ] ;
+                                    ns1:HAS_SUBCATEGORY [ skos:example [ ns1:ScienceKeyword [ skos:example [ ns1:ScienceKeyword [ skos:example 1823 ;
+                                                                            linkml:tag ns1:ScienceKeyword ] ] ;
+                                                            linkml:tag ns1:ScienceKeyword ] ] ;
+                                            linkml:tag ns1:HAS_SUBCATEGORY ] ;
+                                    ns1:OF_PROJECT [ skos:example [ ns1:Dataset [ skos:example [ ns1:Project [ skos:example 6378 ;
+                                                                            linkml:tag ns1:Project ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:OF_PROJECT ] ;
+                                    ns1:Type [ skos:example [ ns1:Platform [ skos:example [ okns:string [ skos:example 444 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Platform ] ] ;
+                                            linkml:tag ns1:Type ] ;
+                                    ns1:USES_DATASET [ skos:example [ ns1:Publication [ skos:example [ ns1:Dataset [ skos:example 25861 ;
+                                                                            linkml:tag ns1:Dataset ] ] ;
+                                                            linkml:tag ns1:Publication ] ] ;
+                                            linkml:tag ns1:USES_DATASET ] ;
+                                    ns1:cmrId [ skos:example [ ns1:Dataset [ skos:example [ okns:string [ skos:example 6821 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:cmrId ] ;
+                                    ns1:daac [ skos:example [ ns1:Dataset [ skos:example [ okns:string [ skos:example 6821 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:daac ] ;
+                                    ns1:globalId [ skos:example [ ns1:DataCenter [ skos:example [ okns:string [ skos:example 197 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:DataCenter ] ;
+                                                    ns1:Dataset [ skos:example [ okns:string [ skos:example 6821 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Dataset ] ;
+                                                    ns1:Instrument [ skos:example [ okns:string [ skos:example 897 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Instrument ] ;
+                                                    ns1:Platform [ skos:example [ okns:string [ skos:example 451 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Platform ] ;
+                                                    ns1:Project [ skos:example [ okns:string [ skos:example 351 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Project ] ;
+                                                    ns1:Publication [ skos:example [ okns:string [ skos:example 135352 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Publication ] ;
+                                                    ns1:ScienceKeyword [ skos:example [ okns:string [ skos:example 1609 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:ScienceKeyword ] ] ;
+                                            linkml:tag ns1:globalId ] ;
+                                    ns1:landingPageUrl [ skos:example [ ns1:Dataset [ skos:example [ linkml:uri [ skos:example 3190 ;
+                                                                            linkml:tag okns:uri ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:landingPageUrl ] ;
+                                    ns1:nwCorner_crs [ skos:example [ ns1:Dataset [ skos:example [ okns:string [ skos:example 5721 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:nwCorner_crs ] ;
+                                    ns1:nwCorner_latitude [ skos:example [ ns1:Dataset [ skos:example [ okns:decimal [ skos:example 5721 ;
+                                                                            linkml:tag okns:decimal ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:nwCorner_latitude ] ;
+                                    ns1:nwCorner_longitude [ skos:example [ ns1:Dataset [ skos:example [ okns:decimal [ skos:example 5721 ;
+                                                                            linkml:tag okns:decimal ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:nwCorner_longitude ] ;
+                                    ns1:pagerank_publication_dataset [ skos:example [ ns1:Dataset [ skos:example [ okns:float [ skos:example 6821 ;
+                                                                            linkml:tag okns:float ] ] ;
+                                                            linkml:tag ns1:Dataset ] ;
+                                                    ns1:Publication [ skos:example [ okns:float [ skos:example 135352 ;
+                                                                            linkml:tag okns:float ] ] ;
+                                                            linkml:tag ns1:Publication ] ] ;
+                                            linkml:tag ns1:pagerank_publication_dataset ] ;
+                                    ns1:seCorner_crs [ skos:example [ ns1:Dataset [ skos:example [ okns:string [ skos:example 5721 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:seCorner_crs ] ;
+                                    ns1:seCorner_latitude [ skos:example [ ns1:Dataset [ skos:example [ okns:decimal [ skos:example 5721 ;
+                                                                            linkml:tag okns:decimal ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:seCorner_latitude ] ;
+                                    ns1:seCorner_longitude [ skos:example [ ns1:Dataset [ skos:example [ okns:decimal [ skos:example 5721 ;
+                                                                            linkml:tag okns:decimal ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:seCorner_longitude ] ;
+                                    ns1:temporalFrequency [ skos:example [ ns1:Dataset [ skos:example [ okns:string [ skos:example 6821 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:temporalFrequency ] ;
+                                    ns1:url [ skos:example [ ns1:DataCenter [ skos:example [ linkml:uri [ skos:example 197 ;
+                                                                            linkml:tag okns:uri ] ] ;
+                                                            linkml:tag ns1:DataCenter ] ] ;
+                                            linkml:tag ns1:url ] ;
+                                    schema:abstract [ skos:example [ ns1:Dataset [ skos:example [ okns:string [ skos:example 6821 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Dataset ] ;
+                                                    ns1:Publication [ skos:example [ okns:string [ skos:example 134641 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Publication ] ] ;
+                                            linkml:tag schema:abstract ] ;
+                                    schema:title [ skos:example [ ns1:Publication [ skos:example [ okns:string [ skos:example 135343 ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Publication ] ] ;
+                                            linkml:tag schema:title ] ] ;
+                            linkml:tag okns:pairs ] ;
+                    linkml:classes [ skos:example [ rdf:Statement [ skos:example 406515 ;
+                                            linkml:tag rdf:Statement ] ;
+                                    ns1:DataCenter [ skos:example 197 ;
+                                            linkml:tag ns1:DataCenter ] ;
+                                    ns1:Dataset [ skos:example 6821 ;
+                                            linkml:tag ns1:Dataset ] ;
+                                    ns1:Instrument [ skos:example 897 ;
+                                            linkml:tag ns1:Instrument ] ;
+                                    ns1:Platform [ skos:example 451 ;
+                                            linkml:tag ns1:Platform ] ;
+                                    ns1:Project [ skos:example 351 ;
+                                            linkml:tag ns1:Project ] ;
+                                    ns1:Publication [ skos:example 135352 ;
+                                            linkml:tag ns1:Publication ] ;
+                                    ns1:ScienceKeyword [ skos:example 1609 ;
+                                            linkml:tag ns1:ScienceKeyword ] ] ;
+                            linkml:tag okns:classes ] ;
+                    linkml:slots [ skos:example [ rdfs:label [ skos:example 10326 ;
+                                            linkml:tag rdfs:label ] ;
+                                    dcterms:date [ skos:example 10817 ;
+                                            linkml:tag dcterms:date ] ;
+                                    dcterms:identifier [ skos:example 142173 ;
+                                            linkml:tag dcterms:identifier ] ;
+                                    dcterms:subject [ skos:example 8521 ;
+                                            linkml:tag dcterms:subject ] ;
+                                    rdf:object [ skos:example 406515 ;
+                                            linkml:tag rdf:object ] ;
+                                    rdf:predicate [ skos:example 406515 ;
+                                            linkml:tag rdf:predicate ] ;
+                                    rdf:subject [ skos:example 406515 ;
+                                            linkml:tag rdf:subject ] ;
+                                    time:year [ skos:example 135348 ;
+                                            linkml:tag time:year ] ;
+                                    ns1:CITES [ skos:example 208429 ;
+                                            linkml:tag ns1:CITES ] ;
+                                    ns1:HAS_APPLIEDRESEARCHAREA [ skos:example 119695 ;
+                                            linkml:tag ns1:HAS_APPLIEDRESEARCHAREA ] ;
+                                    ns1:HAS_DATASET [ skos:example 9834 ;
+                                            linkml:tag ns1:HAS_DATASET ] ;
+                                    ns1:HAS_INSTRUMENT [ skos:example 2526 ;
+                                            linkml:tag ns1:HAS_INSTRUMENT ] ;
+                                    ns1:HAS_PLATFORM [ skos:example 10398 ;
+                                            linkml:tag ns1:HAS_PLATFORM ] ;
+                                    ns1:HAS_SCIENCEKEYWORD [ skos:example 21571 ;
+                                            linkml:tag ns1:HAS_SCIENCEKEYWORD ] ;
+                                    ns1:HAS_SUBCATEGORY [ skos:example 1823 ;
+                                            linkml:tag ns1:HAS_SUBCATEGORY ] ;
+                                    ns1:OF_PROJECT [ skos:example 6378 ;
+                                            linkml:tag ns1:OF_PROJECT ] ;
+                                    ns1:Type [ skos:example 444 ;
+                                            linkml:tag ns1:Type ] ;
+                                    ns1:USES_DATASET [ skos:example 25861 ;
+                                            linkml:tag ns1:USES_DATASET ] ;
+                                    ns1:cmrId [ skos:example 6821 ;
+                                            linkml:tag ns1:cmrId ] ;
+                                    ns1:daac [ skos:example 6821 ;
+                                            linkml:tag ns1:daac ] ;
+                                    ns1:globalId [ skos:example 145678 ;
+                                            linkml:tag ns1:globalId ] ;
+                                    ns1:landingPageUrl [ skos:example 3190 ;
+                                            linkml:tag ns1:landingPageUrl ] ;
+                                    ns1:nwCorner_crs [ skos:example 5721 ;
+                                            linkml:tag ns1:nwCorner_crs ] ;
+                                    ns1:nwCorner_latitude [ skos:example 5721 ;
+                                            linkml:tag ns1:nwCorner_latitude ] ;
+                                    ns1:nwCorner_longitude [ skos:example 5721 ;
+                                            linkml:tag ns1:nwCorner_longitude ] ;
+                                    ns1:pagerank_publication_dataset [ skos:example 142173 ;
+                                            linkml:tag ns1:pagerank_publication_dataset ] ;
+                                    ns1:seCorner_crs [ skos:example 5721 ;
+                                            linkml:tag ns1:seCorner_crs ] ;
+                                    ns1:seCorner_latitude [ skos:example 5721 ;
+                                            linkml:tag ns1:seCorner_latitude ] ;
+                                    ns1:seCorner_longitude [ skos:example 5721 ;
+                                            linkml:tag ns1:seCorner_longitude ] ;
+                                    ns1:temporalFrequency [ skos:example 6821 ;
+                                            linkml:tag ns1:temporalFrequency ] ;
+                                    ns1:url [ skos:example 197 ;
+                                            linkml:tag ns1:url ] ;
+                                    schema:abstract [ skos:example 141462 ;
+                                            linkml:tag schema:abstract ] ;
+                                    schema:title [ skos:example 135343 ;
+                                            linkml:tag schema:title ] ] ;
+                            linkml:tag okns:slots ] ] ;
+            linkml:tag okns:counts ],
+        [ skos:example [ okns:pairs [ skos:example [ rdfs:label [ skos:example [ ns1:DataCenter [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "rdfs:label" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/6821" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "BYU/SCP" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:DataCenter ] ;
+                                                    ns1:Dataset [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "rdfs:label" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "ERS-1_BYU_L3_OW_SIGMA0_ENHANCED" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Dataset ] ;
+                                                    ns1:Instrument [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "rdfs:label" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/7820" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "AMI" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Instrument ] ;
+                                                    ns1:Platform [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "rdfs:label" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/7369" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "ERS-1" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Platform ] ;
+                                                    ns1:Project [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "rdfs:label" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/7018" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "SCP" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Project ] ;
+                                                    ns1:ScienceKeyword [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "rdfs:label" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/34483" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "DATA ANALYSIS AND VISUALIZATION" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:ScienceKeyword ] ] ;
+                                            linkml:tag rdfs:label ] ;
+                                    dcterms:date [ skos:example [ ns1:Dataset [ skos:example [ okns:datetime [ skos:example [ rdf:predicate [ skos:example "dct:date" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "1992-01-01T00:00:00+00:00" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:datetime ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag dcterms:date ] ;
+                                    dcterms:identifier [ skos:example [ ns1:Dataset [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "dct:identifier" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "10.5067/ERS1B-SNEN0" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Dataset ] ;
+                                                    ns1:Publication [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "dct:identifier" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/10000" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "10.1111/COBI.13282" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Publication ] ] ;
+                                            linkml:tag dcterms:identifier ] ;
+                                    dcterms:subject [ skos:example [ ns1:DataCenter [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "dct:subject" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/6821" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "N/A" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:DataCenter ] ;
+                                                    ns1:Dataset [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "dct:subject" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "ERS-1 Gridded Level 3 Enhanced Resolution Sigma-0 from BYU" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Dataset ] ;
+                                                    ns1:Instrument [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "dct:subject" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/7820" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "Active Microwave Instrument" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Instrument ] ;
+                                                    ns1:Platform [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "dct:subject" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/7369" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "European Remote Sensing Satellite-1" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Platform ] ;
+                                                    ns1:Project [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "dct:subject" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/7018" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "Scatterometry Climate Record Pathfinder" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Project ] ] ;
+                                            linkml:tag dcterms:subject ] ;
+                                    rdf:object [ skos:example [ rdf:Statement [ skos:example [ ns1:Dataset [ skos:example [ rdf:predicate [ skos:example "rdf:object" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/relationship/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/0" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag ns1:Dataset ] ;
+                                                                    ns1:Instrument [ skos:example [ rdf:predicate [ skos:example "rdf:object" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/relationship/26610" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/7820" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag ns1:Instrument ] ;
+                                                                    ns1:Platform [ skos:example [ rdf:predicate [ skos:example "rdf:object" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/relationship/16212" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/7369" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag ns1:Platform ] ;
+                                                                    ns1:Project [ skos:example [ rdf:predicate [ skos:example "rdf:object" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/relationship/10000" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/7024" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag ns1:Project ] ;
+                                                                    ns1:Publication [ skos:example [ rdf:predicate [ skos:example "rdf:object" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/relationship/100000" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/17877" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag ns1:Publication ] ;
+                                                                    ns1:ScienceKeyword [ skos:example [ rdf:predicate [ skos:example "rdf:object" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/relationship/286820" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/34554" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag ns1:ScienceKeyword ] ] ;
+                                                            linkml:tag rdf:Statement ] ] ;
+                                            linkml:tag rdf:object ] ;
+                                    rdf:predicate [ skos:example [ rdf:Statement [ skos:example [ linkml:uri [ skos:example [ rdf:predicate [ skos:example "rdf:predicate" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/relationship/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/HAS_DATASET" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:uri ] ] ;
+                                                            linkml:tag rdf:Statement ] ] ;
+                                            linkml:tag rdf:predicate ] ;
+                                    rdf:subject [ skos:example [ rdf:Statement [ skos:example [ ns1:DataCenter [ skos:example [ rdf:predicate [ skos:example "rdf:subject" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/relationship/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/6821" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag ns1:DataCenter ] ;
+                                                                    ns1:Dataset [ skos:example [ rdf:predicate [ skos:example "rdf:subject" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/relationship/10000" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/138" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag ns1:Dataset ] ;
+                                                                    ns1:Platform [ skos:example [ rdf:predicate [ skos:example "rdf:subject" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/relationship/26610" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/7369" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag ns1:Platform ] ;
+                                                                    ns1:Publication [ skos:example [ rdf:predicate [ skos:example "rdf:subject" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/relationship/100000" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/53279" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag ns1:Publication ] ;
+                                                                    ns1:ScienceKeyword [ skos:example [ rdf:predicate [ skos:example "rdf:subject" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/relationship/54997" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/34483" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag ns1:ScienceKeyword ] ] ;
+                                                            linkml:tag rdf:Statement ] ] ;
+                                            linkml:tag rdf:subject ] ;
+                                    time:year [ skos:example [ ns1:Publication [ skos:example [ okns:int32 [ skos:example [ rdf:predicate [ skos:example "time:year" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/10000" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "2019" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:int32 ] ] ;
+                                                            linkml:tag ns1:Publication ] ] ;
+                                            linkml:tag time:year ] ;
+                                    ns1:CITES [ skos:example [ ns1:Publication [ skos:example [ ns1:Publication [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/CITES" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/100000" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/23747" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag ns1:Publication ] ] ;
+                                                            linkml:tag ns1:Publication ] ] ;
+                                            linkml:tag ns1:CITES ] ;
+                                    ns1:HAS_APPLIEDRESEARCHAREA [ skos:example [ ns1:Publication [ skos:example [ ns1:ScienceKeyword [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/HAS_APPLIEDRESEARCHAREA" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/10000" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/35220" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag ns1:ScienceKeyword ] ] ;
+                                                            linkml:tag ns1:Publication ] ] ;
+                                            linkml:tag ns1:HAS_APPLIEDRESEARCHAREA ] ;
+                                    ns1:HAS_DATASET [ skos:example [ ns1:DataCenter [ skos:example [ ns1:Dataset [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/HAS_DATASET" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/6821" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/0" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag ns1:Dataset ] ] ;
+                                                            linkml:tag ns1:DataCenter ] ] ;
+                                            linkml:tag ns1:HAS_DATASET ] ;
+                                    ns1:HAS_INSTRUMENT [ skos:example [ ns1:Platform [ skos:example [ ns1:Instrument [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/HAS_INSTRUMENT" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/7369" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/7820" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag ns1:Instrument ] ] ;
+                                                            linkml:tag ns1:Platform ] ] ;
+                                            linkml:tag ns1:HAS_INSTRUMENT ] ;
+                                    ns1:HAS_PLATFORM [ skos:example [ ns1:Dataset [ skos:example [ ns1:Platform [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/HAS_PLATFORM" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/7369" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag ns1:Platform ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:HAS_PLATFORM ] ;
+                                    ns1:HAS_SCIENCEKEYWORD [ skos:example [ ns1:Dataset [ skos:example [ ns1:ScienceKeyword [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/HAS_SCIENCEKEYWORD" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/34541" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag ns1:ScienceKeyword ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:HAS_SCIENCEKEYWORD ] ;
+                                    ns1:HAS_SUBCATEGORY [ skos:example [ ns1:ScienceKeyword [ skos:example [ ns1:ScienceKeyword [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/HAS_SUBCATEGORY" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/34483" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/34484" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag ns1:ScienceKeyword ] ] ;
+                                                            linkml:tag ns1:ScienceKeyword ] ] ;
+                                            linkml:tag ns1:HAS_SUBCATEGORY ] ;
+                                    ns1:OF_PROJECT [ skos:example [ ns1:Dataset [ skos:example [ ns1:Project [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/OF_PROJECT" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/7018" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag ns1:Project ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:OF_PROJECT ] ;
+                                    ns1:Type [ skos:example [ ns1:Platform [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/Type" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/7369" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "Earth Observation Satellites" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Platform ] ] ;
+                                            linkml:tag ns1:Type ] ;
+                                    ns1:USES_DATASET [ skos:example [ ns1:Publication [ skos:example [ ns1:Dataset [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/USES_DATASET" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/10004" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/161" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag ns1:Dataset ] ] ;
+                                                            linkml:tag ns1:Publication ] ] ;
+                                            linkml:tag ns1:USES_DATASET ] ;
+                                    ns1:cmrId [ skos:example [ ns1:Dataset [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/cmrId" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "C2617226208-POCLOUD" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:cmrId ] ;
+                                    ns1:daac [ skos:example [ ns1:Dataset [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/daac" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "NASA/JPL/PODAAC" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:daac ] ;
+                                    ns1:globalId [ skos:example [ ns1:DataCenter [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/globalId" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/6821" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "46b38de5-bd0d-5055-a829-27b9bd736e7a" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:DataCenter ] ;
+                                                    ns1:Dataset [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/globalId" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "dcf602c1-0e51-55f1-97fb-dbfb8a704c0f" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Dataset ] ;
+                                                    ns1:Instrument [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/globalId" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/7820" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "f4d62d70-809d-5264-97c2-9fee6f7e54c0" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Instrument ] ;
+                                                    ns1:Platform [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/globalId" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/7369" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "5a0c4d6a-8696-5c21-a821-63301ab32ffa" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Platform ] ;
+                                                    ns1:Project [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/globalId" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/7018" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "7540d35b-6334-52e4-a566-a6b56529bef1" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Project ] ;
+                                                    ns1:Publication [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/globalId" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/10000" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "dd0ff369-99bb-5ea4-87e8-769ead7dd7c2" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Publication ] ;
+                                                    ns1:ScienceKeyword [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/globalId" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/34483" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "3133f2fc-268e-50c1-ba3d-ded48c82484b" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:ScienceKeyword ] ] ;
+                                            linkml:tag ns1:globalId ] ;
+                                    ns1:landingPageUrl [ skos:example [ ns1:Dataset [ skos:example [ linkml:uri [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/landingPageUrl" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "https://archive.podaac.earthdata.nasa.gov/podaac-ops-cumulus-docs/ers1/open/L3/byu_scp/sigma0enhanced/docs/dLongERS1.html" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:uri ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:landingPageUrl ] ;
+                                    ns1:nwCorner_crs [ skos:example [ ns1:Dataset [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/nwCorner_crs" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "wgs-84" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:nwCorner_crs ] ;
+                                    ns1:nwCorner_latitude [ skos:example [ ns1:Dataset [ skos:example [ okns:decimal [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/nwCorner_latitude" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "88.2" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:decimal ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:nwCorner_latitude ] ;
+                                    ns1:nwCorner_longitude [ skos:example [ ns1:Dataset [ skos:example [ okns:decimal [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/nwCorner_longitude" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "-180.0" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:decimal ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:nwCorner_longitude ] ;
+                                    ns1:pagerank_publication_dataset [ skos:example [ ns1:Dataset [ skos:example [ okns:float [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/pagerank_publication_dataset" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "0.15000000000000002" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:float ] ] ;
+                                                            linkml:tag ns1:Dataset ] ;
+                                                    ns1:Publication [ skos:example [ okns:float [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/pagerank_publication_dataset" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/10000" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "2.0837499999999998" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:float ] ] ;
+                                                            linkml:tag ns1:Publication ] ] ;
+                                            linkml:tag ns1:pagerank_publication_dataset ] ;
+                                    ns1:seCorner_crs [ skos:example [ ns1:Dataset [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/seCorner_crs" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "wgs-84" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:seCorner_crs ] ;
+                                    ns1:seCorner_latitude [ skos:example [ ns1:Dataset [ skos:example [ okns:decimal [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/seCorner_latitude" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "-79.7" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:decimal ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:seCorner_latitude ] ;
+                                    ns1:seCorner_longitude [ skos:example [ ns1:Dataset [ skos:example [ okns:decimal [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/seCorner_longitude" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "180.0" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:decimal ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:seCorner_longitude ] ;
+                                    ns1:temporalFrequency [ skos:example [ ns1:Dataset [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/temporalFrequency" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "Unknown" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Dataset ] ] ;
+                                            linkml:tag ns1:temporalFrequency ] ;
+                                    ns1:url [ skos:example [ ns1:DataCenter [ skos:example [ linkml:uri [ skos:example [ rdf:predicate [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/schema/url" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/6821" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "N/A" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:uri ] ] ;
+                                                            linkml:tag ns1:DataCenter ] ] ;
+                                            linkml:tag ns1:url ] ;
+                                    schema:abstract [ skos:example [ ns1:Dataset [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "sdos:abstract" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/0" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "This European Remote Sensing (ERS) Sigma-0 dataset is generated by the Scatterometer Climate Record Pathfinder (SCP) project at Brigham Young University (BYU) and is generated using a Scatterometer Image Reconstruction (SIR) technique developed by Dr. David Long at BYU. The dataset provides SIR processed Sigma-0 data from the ERS-1 C-band scatterometer, which is also known as the Active Microwave Instrument (AMI). AMI is a multimode radar operating at a frequency of 5.3 GHz (C-band), using vertically polarized antennas for both transmission and reception. The SIR technique results in an enhanced resolution image reconstruction and gridded on an equal-area grid (for non-polar regions) at 8.9 km pixel resolution stored in SIR files; polar regions are gridded at the same resolution using a polar-stereographic technique. A non-enhanced version is provided at 44.5 km pixel resolution in a format known as GRD (i.e., gridded) files. All files are produced in IEEE formatted binary. All data files are separated and organized by region, parameter, and sampling technique (i.e., SIR vs. GRD). The regions of China and Japan are combined into a single region. In addition to Sigma-0, various statistical parameters are provided for added guidance, including but not limited to: standard deviation, measurement counts, pixel time, Sigma-0 error, and average incidence angle. This dataset was once distributed on tape, but has been made available on FTP thanks to the BYU SCP." ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Dataset ] ;
+                                                    ns1:Publication [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "sdos:abstract" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/10000" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "The prosperity and well-being of human societies relies on healthy ecosystems and the services they provide. However, the biodiversity crisis is undermining ecosystems services and functions. Vultures are among the most imperiled taxonomic groups on Earth, yet they have a fundamental ecosystem function. These obligate scavengers rapidly consume large amounts of carrion and human waste, a service that may aid in both disease prevention and control of mammalian scavengers, including feral dogs, which in turn threaten humans. We combined information about the distribution of all 15 vulture species found in Europe, Asia, and Africa with their threats and used detailed expert knowledge on threat intensity to prioritize critical areas for conserving vultures in Africa and Eurasia. Threats we identified included poisoning, mortality due to collision with wind energy infrastructures, and other anthropogenic activities related to human land use and influence. Areas important for vulture conservation were concentrated in southern and eastern Africa, South Asia, and the Iberian Peninsula, and over 80% of these areas were unprotected. Some vulture species required larger areas for protection than others. Finally, countries that had the largest share of all identified important priority areas for vulture conservation were those with the largest expenditures related to rabies burden (e.g., India, China, and Myanmar). Vulture populations have declined markedly in most of these countries. Restoring healthy vulture populations through targeted actions in the priority areas we identified may help restore the ecosystem services vultures provide, including sanitation and potentially prevention of diseases, such as rabies, a heavy burden afflicting fragile societies. Our findings may guide stakeholders to prioritize actions where they are needed most in order to achieve international goals for biodiversity conservation and sustainable development.Areas Prioritarias para la Conservacion de Buitres del Viejo MundoResumenLa prosperidad y el bienestar de la sociedad humana dependen de ecosistemas sanos y de los servicios ambientales que estos proporcionan. Sin embargo, la crisis de biodiversidad esta afectando a los servicios ambientales y sus funciones. Los buitres se encuentran entre los grupos taxonomicos con mayor amenaza sobre el planeta, a pesar de tener una funcion fundamental en los ecosistemas. Estos carroneros obligados consumen rapidamente grandes cantidades de carrona y desechos humanos, un servicio que puede ayudar en la prevencion de enfermedades y en el control de mamiferos carroneros, incluyendo a los perros ferales, los cuales pueden ser un peligro para los humanos. Combinamos la informacion sobre la distribucion de las 15 especies de buitres en Europa, Asia y Africa con las amenazas que presentan y usamos el conocimiento detallado de expertos sobre la intensidad de las amenazas para priorizar las areas criticas para la conservacion de buitres en Africa y en Eurasia. Las amenazas que identificamos incluyeron el envenenamiento, la mortalidad por colisiones con infraestructura eolica y otras actividades antropogenicas relacionadas con el uso de suelo y la influencia humana. Las areas importantes para la conservacion de buitres estuvieron concentradas en el sur y el este de Africa, el sur de Asia y la Peninsula Iberica, y mas del 80% de estas areas no contaban con proteccion. Algunas especies de buitres requirieron areas mas grandes para su proteccion que otras especies. Finalmente, los paises que tuvieron la mayor porcion de todas las areas prioritarias importantes e identificadas para la conservacion de buitres tambien fueron aquellos con los mayores gastos relacionados con la carga de la rabia (por ejemplo, India, China y Myanmar). Las poblaciones de buitres han declinado marcadamente en la mayoria de estos paises. La restauracion de poblaciones sanas de buitres por medio de acciones enfocadas en las areas prioritarias que identificamos puede ayudar a restaurar los servicios ambientales que proporcionan los buitres, incluyendo el saneamiento y la prevencion potencial de enfermedades, como la rabia, una carga pesada que aflige a las sociedades fragiles. Nuestros resultados pueden guiar a los interesados hacia la priorizacion de acciones en donde mas se necesitan para poder alcanzar los objetivos internacionales para la conservacion de la biodiversidad y el desarrollo sustentable., , , , , , , , ,  80% , , (), , , , , : ; : Article impact statement: Eighty percent of areas important for Old World vulture conservation are unprotected and in southern and eastern Africa, South Asia, and Iberia." ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Publication ] ] ;
+                                            linkml:tag schema:abstract ] ;
+                                    schema:title [ skos:example [ ns1:Publication [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "sdos:title" ;
+                                                                                            linkml:tag okns:predicate ] ;
+                                                                                    okns:subject [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/10000" ;
+                                                                                            linkml:tag okns:subject ] ;
+                                                                                    linkml:object [ skos:example "Priority areas for conservation of Old World vultures" ;
+                                                                                            linkml:tag okns:object ] ] ;
+                                                                            linkml:tag okns:string ] ] ;
+                                                            linkml:tag ns1:Publication ] ] ;
+                                            linkml:tag schema:title ] ] ;
+                            linkml:tag okns:pairs ] ;
+                    linkml:classes [ skos:example [ rdf:Statement [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/relationship/99999" ;
+                                            linkml:tag rdf:Statement ] ;
+                                    ns1:DataCenter [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/7017" ;
+                                            linkml:tag ns1:DataCenter ] ;
+                                    ns1:Dataset [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/999" ;
+                                            linkml:tag ns1:Dataset ] ;
+                                    ns1:Instrument [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/8716" ;
+                                            linkml:tag ns1:Instrument ] ;
+                                    ns1:Platform [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/7819" ;
+                                            linkml:tag ns1:Platform ] ;
+                                    ns1:Project [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/7368" ;
+                                            linkml:tag ns1:Project ] ;
+                                    ns1:Publication [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/9891" ;
+                                            linkml:tag ns1:Publication ] ;
+                                    ns1:ScienceKeyword [ skos:example "https://nasa-gesdisc.proto-okn.net/kg/node/36091" ;
+                                            linkml:tag ns1:ScienceKeyword ] ] ;
+                            linkml:tag okns:classes ] ] ;
+            linkml:tag okns:examples ] ;
+    linkml:classes okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataCenter,
+        okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset,
+        okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaInstrument,
+        okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPlatform,
+        okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaProject,
+        okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPublication,
+        okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaScienceKeyword ;
+    linkml:default_range okns:string ;
+    linkml:generation_date "2025-10-30T10:44:47"^^xsd:dateTime ;
+    linkml:id okns:nasa-gesdisc-kg ;
+    linkml:imports okns:dc,
+        okns:extended_types,
+        okns:owl-rdf-rdfs,
+        okns:sdo,
+        okns:skos,
+        okns:time,
+        linkml:types ;
+    linkml:slots okns:https___nasa_gesdisc.proto_okn.net_kg_schema_CITES,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_APPLIEDRESEARCHAREA,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_DATASET,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_INSTRUMENT,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_PLATFORM,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_SCIENCEKEYWORD,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_SUBCATEGORY,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_OF_PROJECT,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_Type,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_USES_DATASET,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_cmrId,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_daac,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_globalId,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_landingPageUrl,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_nwCorner_crs,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_nwCorner_latitude,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_nwCorner_longitude,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_pagerank_publication_dataset,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_seCorner_crs,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_seCorner_latitude,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_seCorner_longitude,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_temporalFrequency,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_url ;
+    linkml:source_file_date "2025-10-30T10:44:30"^^xsd:dateTime ;
+    linkml:source_file_size 90777 .
+
+okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset a okns:ClassDefinition ;
+    skos:inScheme okns:nasa-gesdisc-kg ;
+    skos:mappingRelation ns1:Dataset ;
+    linkml:class_uri ns1:Dataset ;
+    linkml:definition_uri okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaDataset ;
+    linkml:slot_usage [ ] ;
+    linkml:slots okns:dct_date,
+        okns:dct_identifier,
+        okns:dct_subject,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_PLATFORM,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_HAS_SCIENCEKEYWORD,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_OF_PROJECT,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_cmrId,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_daac,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_globalId,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_landingPageUrl,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_nwCorner_crs,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_nwCorner_latitude,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_nwCorner_longitude,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_pagerank_publication_dataset,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_seCorner_crs,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_seCorner_latitude,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_seCorner_longitude,
+        okns:https___nasa_gesdisc.proto_okn.net_kg_schema_temporalFrequency,
+        okns:rdfs_label,
+        okns:sdos_abstract .
+
+
