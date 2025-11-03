@@ -1,14 +1,11 @@
+('https://w3id.org/linkml/meta.context.jsonld',)
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix linkml: <https://w3id.org/linkml/> .
-@prefix ns1: <neo4j://graph.schema#> .
-@prefix okn: <https://purl.org/okn/> .
-@prefix okns: <https://purl.org/okn/schema/> .
+@prefix ns1: <neo4j:> .
 @prefix pav: <http://purl.org/pav/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix schema1: <http://schema.org/> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix shex: <http://www.w3.org/ns/shex#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -25,12 +22,12 @@
     skos:definition "Scalable Precision Medicine Open Knowledge Engine (SPOKE) integrates data from NASA's GeneLab and social determinants of health data." ;
     sh:declare [ sh:namespace <https://purl.org/okn/> ;
             sh:prefix "okn" ],
+        [ sh:namespace <https://purl.org/okn/schema/> ;
+            sh:prefix "okns" ],
         [ sh:namespace linkml: ;
             sh:prefix "linkml" ],
         [ sh:namespace <neo4j://graph.schema#> ;
-            sh:prefix "neo4j" ],
-        [ sh:namespace <https://purl.org/okn/schema/> ;
-            sh:prefix "okns" ] ;
+            sh:prefix "neo4j" ] ;
     linkml:annotations [ skos:example [ linkml:classes [ skos:example [ ns1:Compound [ skos:example "neo4j://graph.individuals#778857" ;
                                             linkml:tag ns1:Compound ] ;
                                     ns1:Disease [ skos:example "neo4j://graph.individuals#153323" ;
@@ -569,8 +566,8 @@
         <https://purl.org/okn/schema/Neo4jSDoH> ;
     linkml:default_prefix "okns" ;
     linkml:default_range <https://purl.org/okn/schema/string> ;
-    linkml:generation_date "2025-09-04T20:01:09"^^xsd:dateTime ;
-    linkml:id okns:spoke ;
+    linkml:generation_date "2025-11-03T09:27:51"^^xsd:dateTime ;
+    linkml:id <okns:spoke> ;
     linkml:imports linkml:types ;
     linkml:metamodel_version "1.7.0" ;
     linkml:slots <https://purl.org/okn/schema/neo4j_ASSOCIATES_SaD>,
@@ -597,226 +594,11 @@
         <https://purl.org/okn/schema/neo4j_source>,
         <https://purl.org/okn/schema/neo4j_sources> ;
     linkml:source_file "spoke.yaml" ;
-    linkml:source_file_date "2025-07-22T19:30:53"^^xsd:dateTime ;
-    linkml:source_file_size 38582 ;
-    linkml:types <https://purl.org/okn/schema/boolean>,
-        <https://purl.org/okn/schema/curie>,
-        <https://purl.org/okn/schema/date>,
-        <https://purl.org/okn/schema/date_or_datetime>,
-        <https://purl.org/okn/schema/datetime>,
-        <https://purl.org/okn/schema/decimal>,
-        <https://purl.org/okn/schema/double>,
-        <https://purl.org/okn/schema/float>,
-        <https://purl.org/okn/schema/integer>,
-        <https://purl.org/okn/schema/jsonpath>,
-        <https://purl.org/okn/schema/jsonpointer>,
-        <https://purl.org/okn/schema/ncname>,
-        <https://purl.org/okn/schema/nodeidentifier>,
-        <https://purl.org/okn/schema/objectidentifier>,
-        <https://purl.org/okn/schema/sparqlpath>,
-        <https://purl.org/okn/schema/string>,
-        <https://purl.org/okn/schema/time>,
-        <https://purl.org/okn/schema/uri>,
-        <https://purl.org/okn/schema/uriorcurie> .
-
-<https://purl.org/okn/schema/boolean> a linkml:TypeDefinition ;
-    skos:definition "A binary (true or false) value" ;
-    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"boolean\"." ;
-    skos:exactMatch schema1:Boolean ;
-    skos:inScheme linkml:types ;
-    linkml:base "Bool" ;
-    linkml:definition_uri linkml:Boolean ;
-    linkml:imported_from "linkml:types" ;
-    linkml:repr "bool" ;
-    linkml:uri xsd:boolean .
-
-<https://purl.org/okn/schema/curie> a linkml:TypeDefinition ;
-    dcterms:conformsTo "https://www.w3.org/TR/curie/" ;
-    skos:definition "a compact URI" ;
-    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"curie\"." ;
-    skos:inScheme linkml:types ;
-    skos:note "in RDF serializations this MUST be expanded to a URI",
-        "in non-RDF serializations MAY be serialized as the compact representation" ;
-    linkml:base "Curie" ;
-    linkml:definition_uri linkml:Curie ;
-    linkml:imported_from "linkml:types" ;
-    linkml:repr "str" ;
-    linkml:uri xsd:string .
-
-<https://purl.org/okn/schema/date> a linkml:TypeDefinition ;
-    skos:definition "a date (year, month and day) in an idealized calendar" ;
-    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date\".",
-        "URI is dateTime because OWL reasoners don't work with straight date or time" ;
-    skos:exactMatch schema1:Date ;
-    skos:inScheme linkml:types ;
-    linkml:base "XSDDate" ;
-    linkml:definition_uri linkml:Date ;
-    linkml:imported_from "linkml:types" ;
-    linkml:repr "str" ;
-    linkml:uri xsd:date .
-
-<https://purl.org/okn/schema/date_or_datetime> a linkml:TypeDefinition ;
-    skos:definition "Either a date or a datetime" ;
-    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date_or_datetime\"." ;
-    skos:inScheme linkml:types ;
-    linkml:base "str" ;
-    linkml:definition_uri linkml:DateOrDatetime ;
-    linkml:imported_from "linkml:types" ;
-    linkml:repr "str" ;
-    linkml:uri linkml:DateOrDatetime .
-
-<https://purl.org/okn/schema/datetime> a linkml:TypeDefinition ;
-    skos:definition "The combination of a date and time" ;
-    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"datetime\"." ;
-    skos:exactMatch schema1:DateTime ;
-    skos:inScheme linkml:types ;
-    linkml:base "XSDDateTime" ;
-    linkml:definition_uri linkml:Datetime ;
-    linkml:imported_from "linkml:types" ;
-    linkml:repr "str" ;
-    linkml:uri xsd:dateTime .
-
-<https://purl.org/okn/schema/decimal> a linkml:TypeDefinition ;
-    skos:broadMatch schema1:Number ;
-    skos:definition "A real number with arbitrary precision that conforms to the xsd:decimal specification" ;
-    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"decimal\"." ;
-    skos:inScheme linkml:types ;
-    linkml:base "Decimal" ;
-    linkml:definition_uri linkml:Decimal ;
-    linkml:imported_from "linkml:types" ;
-    linkml:uri xsd:decimal .
-
-<https://purl.org/okn/schema/double> a linkml:TypeDefinition ;
-    skos:closeMatch schema1:Float ;
-    skos:definition "A real number that conforms to the xsd:double specification" ;
-    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"double\"." ;
-    skos:inScheme linkml:types ;
-    linkml:base "float" ;
-    linkml:definition_uri linkml:Double ;
-    linkml:imported_from "linkml:types" ;
-    linkml:uri xsd:double .
-
-<https://purl.org/okn/schema/float> a linkml:TypeDefinition ;
-    skos:definition "A real number that conforms to the xsd:float specification" ;
-    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"float\"." ;
-    skos:exactMatch schema1:Float ;
-    skos:inScheme linkml:types ;
-    linkml:base "float" ;
-    linkml:definition_uri linkml:Float ;
-    linkml:imported_from "linkml:types" ;
-    linkml:uri xsd:float .
-
-<https://purl.org/okn/schema/integer> a linkml:TypeDefinition ;
-    skos:definition "An integer" ;
-    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"integer\"." ;
-    skos:exactMatch schema1:Integer ;
-    skos:inScheme linkml:types ;
-    linkml:base "int" ;
-    linkml:definition_uri linkml:Integer ;
-    linkml:imported_from "linkml:types" ;
-    linkml:uri xsd:integer .
-
-<https://purl.org/okn/schema/jsonpath> a linkml:TypeDefinition ;
-    dcterms:conformsTo "https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html" ;
-    skos:definition "A string encoding a JSON Path. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded in tree form." ;
-    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpath\"." ;
-    skos:inScheme linkml:types ;
-    linkml:base "str" ;
-    linkml:definition_uri linkml:Jsonpath ;
-    linkml:imported_from "linkml:types" ;
-    linkml:repr "str" ;
-    linkml:uri xsd:string .
-
-<https://purl.org/okn/schema/jsonpointer> a linkml:TypeDefinition ;
-    dcterms:conformsTo "https://datatracker.ietf.org/doc/html/rfc6901" ;
-    skos:definition "A string encoding a JSON Pointer. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to a valid object within the current instance document when encoded in tree form." ;
-    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpointer\"." ;
-    skos:inScheme linkml:types ;
-    linkml:base "str" ;
-    linkml:definition_uri linkml:Jsonpointer ;
-    linkml:imported_from "linkml:types" ;
-    linkml:repr "str" ;
-    linkml:uri xsd:string .
-
-<https://purl.org/okn/schema/ncname> a linkml:TypeDefinition ;
-    skos:definition "Prefix part of CURIE" ;
-    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"ncname\"." ;
-    skos:inScheme linkml:types ;
-    linkml:base "NCName" ;
-    linkml:definition_uri linkml:Ncname ;
-    linkml:imported_from "linkml:types" ;
-    linkml:repr "str" ;
-    linkml:uri xsd:string .
-
-<https://purl.org/okn/schema/nodeidentifier> a linkml:TypeDefinition ;
-    skos:definition "A URI, CURIE or BNODE that represents a node in a model." ;
-    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"nodeidentifier\"." ;
-    skos:inScheme linkml:types ;
-    linkml:base "NodeIdentifier" ;
-    linkml:definition_uri linkml:Nodeidentifier ;
-    linkml:imported_from "linkml:types" ;
-    linkml:repr "str" ;
-    linkml:uri shex:nonLiteral .
-
-<https://purl.org/okn/schema/objectidentifier> a linkml:TypeDefinition ;
-    skos:definition "A URI or CURIE that represents an object in the model." ;
-    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"objectidentifier\"." ;
-    skos:inScheme linkml:types ;
-    skos:note "Used for inheritance and type checking" ;
-    linkml:base "ElementIdentifier" ;
-    linkml:definition_uri linkml:Objectidentifier ;
-    linkml:imported_from "linkml:types" ;
-    linkml:repr "str" ;
-    linkml:uri shex:iri .
-
-<https://purl.org/okn/schema/sparqlpath> a linkml:TypeDefinition ;
-    dcterms:conformsTo "https://www.w3.org/TR/sparql11-query/#propertypaths" ;
-    skos:definition "A string encoding a SPARQL Property Path. The value of the string MUST conform to SPARQL syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded as RDF." ;
-    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"sparqlpath\"." ;
-    skos:inScheme linkml:types ;
-    linkml:base "str" ;
-    linkml:definition_uri linkml:Sparqlpath ;
-    linkml:imported_from "linkml:types" ;
-    linkml:repr "str" ;
-    linkml:uri xsd:string .
-
-<https://purl.org/okn/schema/time> a linkml:TypeDefinition ;
-    skos:definition "A time object represents a (local) time of day, independent of any particular day" ;
-    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"time\".",
-        "URI is dateTime because OWL reasoners do not work with straight date or time" ;
-    skos:exactMatch schema1:Time ;
-    skos:inScheme linkml:types ;
-    linkml:base "XSDTime" ;
-    linkml:definition_uri linkml:Time ;
-    linkml:imported_from "linkml:types" ;
-    linkml:repr "str" ;
-    linkml:uri xsd:time .
-
-<https://purl.org/okn/schema/uri> a linkml:TypeDefinition ;
-    dcterms:conformsTo "https://www.ietf.org/rfc/rfc3987.txt" ;
-    skos:closeMatch schema1:URL ;
-    skos:definition "a complete URI" ;
-    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uri\"." ;
-    skos:inScheme linkml:types ;
-    skos:note "in RDF serializations a slot with range of uri is treated as a literal or type xsd:anyURI unless it is an identifier or a reference to an identifier, in which case it is translated directly to a node" ;
-    linkml:base "URI" ;
-    linkml:definition_uri linkml:Uri ;
-    linkml:imported_from "linkml:types" ;
-    linkml:repr "str" ;
-    linkml:uri xsd:anyURI .
-
-<https://purl.org/okn/schema/uriorcurie> a linkml:TypeDefinition ;
-    skos:definition "a URI or a CURIE" ;
-    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uriorcurie\"." ;
-    skos:inScheme linkml:types ;
-    linkml:base "URIorCURIE" ;
-    linkml:definition_uri linkml:Uriorcurie ;
-    linkml:imported_from "linkml:types" ;
-    linkml:repr "str" ;
-    linkml:uri xsd:anyURI .
+    linkml:source_file_date "2025-09-29T12:17:25"^^xsd:dateTime ;
+    linkml:source_file_size 38582 .
 
 <https://purl.org/okn/schema/neo4j_ASSOCIATES_SaD> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#ASSOCIATES_SaD> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_ASSOCIATES_SaD> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jSDoH> ;
@@ -826,7 +608,7 @@
     linkml:slot_uri <neo4j://graph.schema#ASSOCIATES_SaD> .
 
 <https://purl.org/okn/schema/neo4j_CONTRAINDICATES_CcD> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#CONTRAINDICATES_CcD> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_CONTRAINDICATES_CcD> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jCompound> ;
@@ -836,7 +618,7 @@
     linkml:slot_uri <neo4j://graph.schema#CONTRAINDICATES_CcD> .
 
 <https://purl.org/okn/schema/neo4j_FOUNDIN_CfL> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#FOUNDIN_CfL> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_FOUNDIN_CfL> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jCompound> ;
@@ -846,7 +628,7 @@
     linkml:slot_uri <neo4j://graph.schema#FOUNDIN_CfL> .
 
 <https://purl.org/okn/schema/neo4j_FOUNDIN_EfL> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#FOUNDIN_EfL> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_FOUNDIN_EfL> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jEnvironment> ;
@@ -856,7 +638,7 @@
     linkml:slot_uri <neo4j://graph.schema#FOUNDIN_EfL> .
 
 <https://purl.org/okn/schema/neo4j_HASROLE_ChC> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#HASROLE_ChC> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_HASROLE_ChC> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jCompound> ;
@@ -866,7 +648,7 @@
     linkml:slot_uri <neo4j://graph.schema#HASROLE_ChC> .
 
 <https://purl.org/okn/schema/neo4j_INTERACTS_CiC> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#INTERACTS_CiC> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_INTERACTS_CiC> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jCompound> ;
@@ -876,7 +658,7 @@
     linkml:slot_uri <neo4j://graph.schema#INTERACTS_CiC> .
 
 <https://purl.org/okn/schema/neo4j_ISA_CiC> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#ISA_CiC> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_ISA_CiC> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jCompound> ;
@@ -886,7 +668,7 @@
     linkml:slot_uri <neo4j://graph.schema#ISA_CiC> .
 
 <https://purl.org/okn/schema/neo4j_ISA_DiD> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#ISA_DiD> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_ISA_DiD> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jDisease> ;
@@ -896,7 +678,7 @@
     linkml:slot_uri <neo4j://graph.schema#ISA_DiD> .
 
 <https://purl.org/okn/schema/neo4j_ISA_EiE> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#ISA_EiE> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_ISA_EiE> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jEnvironment> ;
@@ -906,7 +688,7 @@
     linkml:slot_uri <neo4j://graph.schema#ISA_EiE> .
 
 <https://purl.org/okn/schema/neo4j_ISA_SiS> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#ISA_SiS> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_ISA_SiS> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jSDoH> ;
@@ -916,7 +698,7 @@
     linkml:slot_uri <neo4j://graph.schema#ISA_SiS> .
 
 <https://purl.org/okn/schema/neo4j_ISOLATEDIN_OiL> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#ISOLATEDIN_OiL> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_ISOLATEDIN_OiL> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jOrganism> ;
@@ -926,7 +708,7 @@
     linkml:slot_uri <neo4j://graph.schema#ISOLATEDIN_OiL> .
 
 <https://purl.org/okn/schema/neo4j_MORTALITY_DmL> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#MORTALITY_DmL> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_MORTALITY_DmL> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jDisease> ;
@@ -936,7 +718,7 @@
     linkml:slot_uri <neo4j://graph.schema#MORTALITY_DmL> .
 
 <https://purl.org/okn/schema/neo4j_PARTOF_CpC> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#PARTOF_CpC> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_PARTOF_CpC> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jCompound> ;
@@ -946,7 +728,7 @@
     linkml:slot_uri <neo4j://graph.schema#PARTOF_CpC> .
 
 <https://purl.org/okn/schema/neo4j_PARTOF_LpL> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#PARTOF_LpL> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_PARTOF_LpL> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jLocation> ;
@@ -956,7 +738,7 @@
     linkml:slot_uri <neo4j://graph.schema#PARTOF_LpL> .
 
 <https://purl.org/okn/schema/neo4j_PREVALENCEIN_SpL> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#PREVALENCEIN_SpL> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_PREVALENCEIN_SpL> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jSDoH> ;
@@ -966,7 +748,7 @@
     linkml:slot_uri <neo4j://graph.schema#PREVALENCEIN_SpL> .
 
 <https://purl.org/okn/schema/neo4j_PREVALENCE_DpL> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#PREVALENCE_DpL> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_PREVALENCE_DpL> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jDisease> ;
@@ -976,7 +758,7 @@
     linkml:slot_uri <neo4j://graph.schema#PREVALENCE_DpL> .
 
 <https://purl.org/okn/schema/neo4j_RESEMBLES_DrD> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#RESEMBLES_DrD> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_RESEMBLES_DrD> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jDisease> ;
@@ -986,7 +768,7 @@
     linkml:slot_uri <neo4j://graph.schema#RESEMBLES_DrD> .
 
 <https://purl.org/okn/schema/neo4j_RESPONDS_TO_OrC> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#RESPONDS_TO_OrC> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_RESPONDS_TO_OrC> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jOrganism> ;
@@ -996,7 +778,7 @@
     linkml:slot_uri <neo4j://graph.schema#RESPONDS_TO_OrC> .
 
 <https://purl.org/okn/schema/neo4j_TREATS_CtD> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#TREATS_CtD> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_TREATS_CtD> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jCompound> ;
@@ -1006,7 +788,7 @@
     linkml:slot_uri <neo4j://graph.schema#TREATS_CtD> .
 
 <https://purl.org/okn/schema/neo4j_source> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#source> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_source> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jDisease> ;
@@ -1015,7 +797,7 @@
     linkml:slot_uri <neo4j://graph.schema#source> .
 
 <https://purl.org/okn/schema/neo4j_sources> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#sources> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_sources> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jCompound>,
@@ -1028,7 +810,7 @@
     linkml:slot_uri <neo4j://graph.schema#sources> .
 
 <https://purl.org/okn/schema/neo4j_identifier> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#identifier> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_identifier> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jCompound>,
@@ -1042,7 +824,7 @@
     linkml:slot_uri <neo4j://graph.schema#identifier> .
 
 <https://purl.org/okn/schema/neo4j_name> a linkml:SlotDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation <neo4j://graph.schema#name> ;
     linkml:definition_uri <https://purl.org/okn/schema/neo4j_name> ;
     linkml:domain_of <https://purl.org/okn/schema/Neo4jCompound>,
@@ -1056,7 +838,7 @@
     linkml:slot_uri <neo4j://graph.schema#name> .
 
 <https://purl.org/okn/schema/Neo4jOrganism> a linkml:ClassDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation ns1:Organism ;
     linkml:class_uri <neo4j://graph.schema#Organism> ;
     linkml:definition_uri <https://purl.org/okn/schema/Neo4jOrganism> ;
@@ -1068,7 +850,7 @@
         <https://purl.org/okn/schema/neo4j_sources> .
 
 <https://purl.org/okn/schema/Neo4jEnvironment> a linkml:ClassDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation ns1:Environment ;
     linkml:class_uri <neo4j://graph.schema#Environment> ;
     linkml:definition_uri <https://purl.org/okn/schema/Neo4jEnvironment> ;
@@ -1080,7 +862,7 @@
         <https://purl.org/okn/schema/neo4j_sources> .
 
 <https://purl.org/okn/schema/Neo4jLocation> a linkml:ClassDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation ns1:Location ;
     linkml:class_uri <neo4j://graph.schema#Location> ;
     linkml:definition_uri <https://purl.org/okn/schema/Neo4jLocation> ;
@@ -1091,7 +873,7 @@
         <https://purl.org/okn/schema/neo4j_sources> .
 
 <https://purl.org/okn/schema/Neo4jSDoH> a linkml:ClassDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation ns1:SDoH ;
     linkml:class_uri <neo4j://graph.schema#SDoH> ;
     linkml:definition_uri <https://purl.org/okn/schema/Neo4jSDoH> ;
@@ -1104,7 +886,7 @@
         <https://purl.org/okn/schema/neo4j_sources> .
 
 <https://purl.org/okn/schema/Neo4jDisease> a linkml:ClassDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation ns1:Disease ;
     linkml:class_uri <neo4j://graph.schema#Disease> ;
     linkml:definition_uri <https://purl.org/okn/schema/Neo4jDisease> ;
@@ -1118,7 +900,7 @@
         <https://purl.org/okn/schema/neo4j_source> .
 
 <https://purl.org/okn/schema/Neo4jCompound> a linkml:ClassDefinition ;
-    skos:inScheme okns:spoke ;
+    skos:inScheme <okns:spoke> ;
     skos:mappingRelation ns1:Compound ;
     linkml:class_uri <neo4j://graph.schema#Compound> ;
     linkml:definition_uri <https://purl.org/okn/schema/Neo4jCompound> ;
@@ -1133,15 +915,5 @@
         <https://purl.org/okn/schema/neo4j_identifier>,
         <https://purl.org/okn/schema/neo4j_name>,
         <https://purl.org/okn/schema/neo4j_sources> .
-
-<https://purl.org/okn/schema/string> a linkml:TypeDefinition ;
-    skos:definition "A character string" ;
-    skos:editorialNote "In RDF serializations, a slot with range of string is treated as a literal or type xsd:string.   If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"string\"." ;
-    skos:exactMatch schema1:Text ;
-    skos:inScheme linkml:types ;
-    linkml:base "str" ;
-    linkml:definition_uri linkml:String ;
-    linkml:imported_from "linkml:types" ;
-    linkml:uri xsd:string .
 
 

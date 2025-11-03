@@ -11,8 +11,8 @@ Warning: The following errors were encountered in the schema
 @prefix linkml: <https://w3id.org/linkml/> .
 @prefix ns1: <loctype:> .
 @prefix ns2: <hyfa:> .
-@prefix ns3: <badwdt:> .
-@prefix ns4: <http://www.w3.org/ns/ssn/systems/> .
+@prefix ns3: <http://www.w3.org/ns/ssn/systems/> .
+@prefix ns4: <badwdt:> .
 @prefix ns5: <http://www.opengeospatial.org/standards/waterml2/hy_features/> .
 @prefix okn: <https://purl.org/okn/> .
 @prefix okns: <https://purl.org/okn/schema/> .
@@ -83,11 +83,11 @@ okns:http___www.opengeospatial.org_standards_waterml2_hy_features_flowpath a okn
 
 okns:http___www.w3.org_ns_ssn_systems_frequency a okns:SlotDefinition ;
     skos:inScheme okns:geoconnex ;
-    skos:mappingRelation ns4:frequency ;
+    skos:mappingRelation ns3:frequency ;
     linkml:definition_uri okns:http___www.w3.org_ns_ssn_systems_frequency ;
     linkml:inlined true ;
     linkml:range okns:Any ;
-    linkml:slot_uri ns4:frequency .
+    linkml:slot_uri ns3:frequency .
 
 okns:hyf_downstreamWaterbody a okns:SlotDefinition ;
     skos:inScheme okns:geoconnex ;
@@ -95,9 +95,9 @@ okns:hyf_downstreamWaterbody a okns:SlotDefinition ;
     linkml:any_of [ a okns:AnonymousSlotExpression ;
             linkml:range okns:SdosPlace ],
         [ a okns:AnonymousSlotExpression ;
-            linkml:range okns:HyfHYFlowPath ],
-        [ a okns:AnonymousSlotExpression ;
             linkml:range okns:HyfHYWaterBody ],
+        [ a okns:AnonymousSlotExpression ;
+            linkml:range okns:HyfHYFlowPath ],
         [ a okns:AnonymousSlotExpression ;
             linkml:range okns:uri ] ;
     linkml:definition_uri okns:hyf_downstreamWaterbody ;
@@ -111,11 +111,11 @@ okns:hyf_encompassingCatchment a okns:SlotDefinition ;
     linkml:any_of [ a okns:AnonymousSlotExpression ;
             linkml:range okns:HyfHYWaterBody ],
         [ a okns:AnonymousSlotExpression ;
+            linkml:range okns:SdosPlace ],
+        [ a okns:AnonymousSlotExpression ;
             linkml:range okns:HyfHYFlowPath ],
         [ a okns:AnonymousSlotExpression ;
-            linkml:range okns:uri ],
-        [ a okns:AnonymousSlotExpression ;
-            linkml:range okns:SdosPlace ] ;
+            linkml:range okns:uri ] ;
     linkml:definition_uri okns:hyf_encompassingCatchment ;
     linkml:inlined true ;
     linkml:range okns:Any ;
@@ -642,11 +642,11 @@ okns:hyfa_catchmentRealization a okns:SlotDefinition ;
     skos:inScheme okns:geoconnex ;
     skos:mappingRelation <https://www.opengis.net/def/appschema/hy_features/hyf/catchmentRealization> ;
     linkml:any_of [ a okns:AnonymousSlotExpression ;
-            linkml:range okns:HyfaHYCatchmentDivide ],
+            linkml:range okns:HyfaHYHydrometricNetwork ],
         [ a okns:AnonymousSlotExpression ;
             linkml:range okns:HyfaHYHydrographicNetwork ],
         [ a okns:AnonymousSlotExpression ;
-            linkml:range okns:HyfaHYHydrometricNetwork ] ;
+            linkml:range okns:HyfaHYCatchmentDivide ] ;
     linkml:definition_uri okns:hyfa_catchmentRealization ;
     linkml:domain_of okns:HyfaHYCatchment ;
     linkml:inlined true ;
@@ -802,40 +802,40 @@ okns:geoconnex a okns:SchemaDefinition ;
     rdfs:seeAlso <https://frink.apps.renci.org/geoconnex/sparql>,
         <https://frink.apps.renci.org/ldf/geoconnex> ;
     skos:definition "Geoconnex is an open, community-driven knowledge graph linking U.S. hydrologic features to enable seamless water data discovery, access, and collaborative monitoring." ;
-    sh:declare [ sh:namespace <https://www.wikidata.org/wiki/Property:> ;
-            sh:prefix "badwdt" ],
-        [ sh:namespace sf: ;
-            sh:prefix "sf" ],
-        [ sh:namespace linkml: ;
-            sh:prefix "linkml" ],
-        [ sh:namespace qudt: ;
-            sh:prefix "qudt" ],
-        [ sh:namespace dcterms: ;
-            sh:prefix "dct" ],
-        [ sh:namespace hyf: ;
+    sh:declare [ sh:namespace hyf: ;
             sh:prefix "hyf" ],
-        [ sh:namespace <https://www.opengis.net/def/appschema/hy_features/hyf/> ;
-            sh:prefix "hyfa" ],
-        [ sh:namespace geo: ;
-            sh:prefix "geo" ],
         [ sh:namespace rdfs: ;
             sh:prefix "rdfs" ],
-        [ sh:namespace owl: ;
-            sh:prefix "owl" ],
+        [ sh:namespace <https://www.wikidata.org/wiki/Property:> ;
+            sh:prefix "badwdt" ],
         [ sh:namespace okns: ;
             sh:prefix "okns" ],
+        [ sh:namespace linkml: ;
+            sh:prefix "linkml" ],
+        [ sh:namespace sf: ;
+            sh:prefix "sf" ],
+        [ sh:namespace schema: ;
+            sh:prefix "sdos" ],
+        [ sh:namespace qudt: ;
+            sh:prefix "qudt" ],
         [ sh:namespace xsd: ;
             sh:prefix "xsd" ],
+        [ sh:namespace <https://www.opengis.net/def/appschema/hy_features/hyf/> ;
+            sh:prefix "hyfa" ],
+        [ sh:namespace owl: ;
+            sh:prefix "owl" ],
+        [ sh:namespace dcterms: ;
+            sh:prefix "dct" ],
         [ sh:namespace okn: ;
             sh:prefix "okn" ],
         [ sh:namespace rdf: ;
             sh:prefix "rdf" ],
-        [ sh:namespace schema: ;
-            sh:prefix "sdos" ] ;
+        [ sh:namespace geo: ;
+            sh:prefix "geo" ] ;
     okns:default_prefix "okns" ;
     okns:metamodel_version "1.7.0" ;
     okns:source_file "geoconnex.yaml" ;
-    linkml:annotations [ skos:example [ okns:pairs [ skos:example [ ns3:P2043 [ skos:example [ schema:Place [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "badwdt:P2043" ;
+    linkml:annotations [ skos:example [ okns:pairs [ skos:example [ ns4:P2043 [ skos:example [ schema:Place [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "badwdt:P2043" ;
                                                                                             linkml:tag okns:predicate ] ;
                                                                                     okns:subject [ skos:example "https://geoconnex.us/ref/mainstems/1" ;
                                                                                             linkml:tag okns:subject ] ;
@@ -859,8 +859,8 @@ okns:geoconnex a okns:SchemaDefinition ;
                                                                                             linkml:tag okns:object ] ] ;
                                                                             linkml:tag okns:string ] ] ;
                                                             linkml:tag hyf:HY_WaterBody ] ] ;
-                                            linkml:tag ns3:P2043 ] ;
-                                    ns3:P403 [ skos:example [ schema:Place [ skos:example [ linkml:uri [ skos:example [ rdf:predicate [ skos:example "badwdt:P403" ;
+                                            linkml:tag ns4:P2043 ] ;
+                                    ns4:P403 [ skos:example [ schema:Place [ skos:example [ linkml:uri [ skos:example [ rdf:predicate [ skos:example "badwdt:P403" ;
                                                                                             linkml:tag okns:predicate ] ;
                                                                                     okns:subject [ skos:example "https://geoconnex.us/ref/mainstems/1" ;
                                                                                             linkml:tag okns:subject ] ;
@@ -884,8 +884,8 @@ okns:geoconnex a okns:SchemaDefinition ;
                                                                                             linkml:tag okns:object ] ] ;
                                                                             linkml:tag okns:uri ] ] ;
                                                             linkml:tag hyf:HY_WaterBody ] ] ;
-                                            linkml:tag ns3:P403 ] ;
-                                    ns3:P885 [ skos:example [ schema:Place [ skos:example [ linkml:uri [ skos:example [ rdf:predicate [ skos:example "badwdt:P885" ;
+                                            linkml:tag ns4:P403 ] ;
+                                    ns4:P885 [ skos:example [ schema:Place [ skos:example [ linkml:uri [ skos:example [ rdf:predicate [ skos:example "badwdt:P885" ;
                                                                                             linkml:tag okns:predicate ] ;
                                                                                     okns:subject [ skos:example "https://geoconnex.us/ref/mainstems/1" ;
                                                                                             linkml:tag okns:subject ] ;
@@ -909,7 +909,7 @@ okns:geoconnex a okns:SchemaDefinition ;
                                                                                             linkml:tag okns:object ] ] ;
                                                                             linkml:tag okns:uri ] ] ;
                                                             linkml:tag hyf:HY_WaterBody ] ] ;
-                                            linkml:tag ns3:P885 ] ;
+                                            linkml:tag ns4:P885 ] ;
                                     dcterms:conformsTo [ skos:example [ okns:untyped [ skos:example [ okns:string [ skos:example [ rdf:predicate [ skos:example "dct:conformsTo" ;
                                                                                             linkml:tag okns:predicate ] ;
                                                                                     okns:subject [ skos:example "_:B04629053c338ee93629f904aa08a6a5a" ;
@@ -4951,7 +4951,7 @@ okns:geoconnex a okns:SchemaDefinition ;
                                             linkml:tag ns1:stream ] ] ;
                             linkml:tag okns:classes ] ] ;
             linkml:tag okns:examples ],
-        [ skos:example [ okns:pairs [ skos:example [ ns3:P2043 [ skos:example [ schema:Place [ skos:example [ okns:string [ skos:example 34077 ;
+        [ skos:example [ okns:pairs [ skos:example [ ns4:P2043 [ skos:example [ schema:Place [ skos:example [ okns:string [ skos:example 34077 ;
                                                                             linkml:tag okns:string ] ] ;
                                                             linkml:tag schema:Place ] ;
                                                     hyf:HY_FlowPath [ skos:example [ okns:string [ skos:example 34077 ;
@@ -4960,8 +4960,8 @@ okns:geoconnex a okns:SchemaDefinition ;
                                                     hyf:HY_WaterBody [ skos:example [ okns:string [ skos:example 34077 ;
                                                                             linkml:tag okns:string ] ] ;
                                                             linkml:tag hyf:HY_WaterBody ] ] ;
-                                            linkml:tag ns3:P2043 ] ;
-                                    ns3:P403 [ skos:example [ schema:Place [ skos:example [ linkml:uri [ skos:example 62918 ;
+                                            linkml:tag ns4:P2043 ] ;
+                                    ns4:P403 [ skos:example [ schema:Place [ skos:example [ linkml:uri [ skos:example 62918 ;
                                                                             linkml:tag okns:uri ] ] ;
                                                             linkml:tag schema:Place ] ;
                                                     hyf:HY_FlowPath [ skos:example [ linkml:uri [ skos:example 62918 ;
@@ -4970,8 +4970,8 @@ okns:geoconnex a okns:SchemaDefinition ;
                                                     hyf:HY_WaterBody [ skos:example [ linkml:uri [ skos:example 62918 ;
                                                                             linkml:tag okns:uri ] ] ;
                                                             linkml:tag hyf:HY_WaterBody ] ] ;
-                                            linkml:tag ns3:P403 ] ;
-                                    ns3:P885 [ skos:example [ schema:Place [ skos:example [ linkml:uri [ skos:example 62920 ;
+                                            linkml:tag ns4:P403 ] ;
+                                    ns4:P885 [ skos:example [ schema:Place [ skos:example [ linkml:uri [ skos:example 62920 ;
                                                                             linkml:tag okns:uri ] ] ;
                                                             linkml:tag schema:Place ] ;
                                                     hyf:HY_FlowPath [ skos:example [ linkml:uri [ skos:example 62920 ;
@@ -4980,7 +4980,7 @@ okns:geoconnex a okns:SchemaDefinition ;
                                                     hyf:HY_WaterBody [ skos:example [ linkml:uri [ skos:example 62920 ;
                                                                             linkml:tag okns:uri ] ] ;
                                                             linkml:tag hyf:HY_WaterBody ] ] ;
-                                            linkml:tag ns3:P885 ] ;
+                                            linkml:tag ns4:P885 ] ;
                                     dcterms:conformsTo [ skos:example [ okns:untyped [ skos:example [ okns:string [ skos:example 259 ;
                                                                             linkml:tag okns:string ] ] ;
                                                             linkml:tag okns:untyped ] ;
@@ -6596,12 +6596,12 @@ okns:geoconnex a okns:SchemaDefinition ;
                                     ns1:stream [ skos:example 4040 ;
                                             linkml:tag ns1:stream ] ] ;
                             linkml:tag okns:classes ] ;
-                    linkml:slots [ skos:example [ ns3:P2043 [ skos:example 34077 ;
-                                            linkml:tag ns3:P2043 ] ;
-                                    ns3:P403 [ skos:example 62918 ;
-                                            linkml:tag ns3:P403 ] ;
-                                    ns3:P885 [ skos:example 62920 ;
-                                            linkml:tag ns3:P885 ] ;
+                    linkml:slots [ skos:example [ ns4:P2043 [ skos:example 34077 ;
+                                            linkml:tag ns4:P2043 ] ;
+                                    ns4:P403 [ skos:example 62918 ;
+                                            linkml:tag ns4:P403 ] ;
+                                    ns4:P885 [ skos:example 62920 ;
+                                            linkml:tag ns4:P885 ] ;
                                     dcterms:conformsTo [ skos:example 30190577 ;
                                             linkml:tag dcterms:conformsTo ] ;
                                     qudt:hasQuantityKind [ skos:example 30788 ;
@@ -6624,8 +6624,8 @@ okns:geoconnex a okns:SchemaDefinition ;
                                             linkml:tag geo:sfWithin ] ;
                                     rdfs:subClassOf [ skos:example 1 ;
                                             linkml:tag rdfs:subClassOf ] ;
-                                    ns4:frequency [ skos:example 31697 ;
-                                            linkml:tag ns4:frequency ] ;
+                                    ns3:frequency [ skos:example 31697 ;
+                                            linkml:tag ns3:frequency ] ;
                                     schema:about [ skos:example 2517 ;
                                             linkml:tag schema:about ] ;
                                     schema:author [ skos:example 1 ;
@@ -6817,7 +6817,7 @@ okns:geoconnex a okns:SchemaDefinition ;
         okns:SchemaGeoCoordinates,
         okns:SdosGovernmentAgency ;
     linkml:default_range okns:string ;
-    linkml:generation_date "2025-10-30T10:40:55"^^xsd:dateTime ;
+    linkml:generation_date "2025-11-03T09:17:05"^^xsd:dateTime ;
     linkml:id okns:geoconnex ;
     linkml:imports okns:adms,
         okns:dc,

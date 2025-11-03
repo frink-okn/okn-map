@@ -316,22 +316,22 @@ okns:nasa-gesdisc-kg a okns:SchemaDefinition ;
         <https://frink.apps.renci.org/nasa-gesdisc-kg/sparql>,
         <https://frink.renci.org/kg-stats/nasa-gesdisc-kg> ;
     skos:definition "The NASA Knowledge Graph Dataset is an expansive graph-based dataset designed to integrate and interconnect information about satellite datasets, scientific publications, instruments, platforms, projects, data centers, and science keywords. This knowledge graph is particularly focused on datasets managed by NASA's Distributed Active Archive Centers (DAACs), which are NASA's data repositories responsible for archiving and distributing scientific data. In addition to NASA DAACs, the graph includes datasets from 184 data providers worldwide, including various government agencies and academic institutions." ;
-    sh:declare [ sh:namespace rdfs: ;
-            sh:prefix "rdfs" ],
-        [ sh:namespace okn: ;
-            sh:prefix "okn" ],
-        [ sh:namespace time: ;
-            sh:prefix "time" ],
-        [ sh:namespace okns: ;
-            sh:prefix "okns" ],
+    sh:declare [ sh:namespace rdf: ;
+            sh:prefix "rdf" ],
         [ sh:namespace dcterms: ;
             sh:prefix "dct" ],
-        [ sh:namespace linkml: ;
-            sh:prefix "linkml" ],
+        [ sh:namespace rdfs: ;
+            sh:prefix "rdfs" ],
+        [ sh:namespace time: ;
+            sh:prefix "time" ],
         [ sh:namespace schema: ;
             sh:prefix "sdos" ],
-        [ sh:namespace rdf: ;
-            sh:prefix "rdf" ] ;
+        [ sh:namespace okns: ;
+            sh:prefix "okns" ],
+        [ sh:namespace okn: ;
+            sh:prefix "okn" ],
+        [ sh:namespace linkml: ;
+            sh:prefix "linkml" ] ;
     okns:default_prefix "okns" ;
     okns:metamodel_version "1.7.0" ;
     okns:source_file "nasa-gesdisc-kg.yaml" ;
@@ -1156,7 +1156,7 @@ okns:nasa-gesdisc-kg a okns:SchemaDefinition ;
         okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaPublication,
         okns:HttpsNasa-gesdisc.proto-okn.netKgSchemaScienceKeyword ;
     linkml:default_range okns:string ;
-    linkml:generation_date "2025-10-30T10:44:47"^^xsd:dateTime ;
+    linkml:generation_date "2025-11-03T09:21:36"^^xsd:dateTime ;
     linkml:id okns:nasa-gesdisc-kg ;
     linkml:imports okns:dc,
         okns:extended_types,
